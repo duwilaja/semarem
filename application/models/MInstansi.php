@@ -46,7 +46,7 @@ class MInstansi extends CI_Model {
             $q = $this->db->insert($this->t, $obj);
             $id = $this->db->insert_id();
             if ($this->db->affected_rows() > 0) {
-                $msg = "Success insert data to Pengajuan Cuti";
+                $msg = "Success insert data";
                 $status = 1;
             }else{
                 $msg = "Failed insert data";
