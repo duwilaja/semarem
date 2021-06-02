@@ -96,5 +96,48 @@ class MInstansi extends CI_Model {
         return [$msg,$status];
         
     }
+
+    public function dt()
+    {
+          // Definisi
+          $condition = [];
+          $data = [];
+  
+          $CI = &get_instance();
+          $CI->load->model('DataTable', 'dt');
+  
+          // Set table name
+          $CI->dt->table = $this->t;
+          // Set orderable column fields
+          $CI->dt->column_order = [null,'nama_instansi'];
+          // Set searchable column fields
+          $CI->dt->column_search = ['nama_instansi'];
+          // Set select column fields
+          $CI->dt->select = $this->see;
+          // Set default order
+          $CI->dt->order = ['id' => 'desc'];
+
+          // Fetch member's records
+          $dataTabel = $this->dt->getRows($_POST, $condition);
+  
+          $i = @$_POST['start'];
+          foreach ($dataTabel as $dt) {
+              $i++;
+              $data[] = array(
+                  $i,
+                  $dt->nama_instansi,
+              );
+          }
+  
+          $output = array(
+              "draw" => @$_POST['draw'],
+              "recordsTotal" => $this->dt->countAll($condition),
+              "recordsFiltered" => $this->dt->countFiltered(@$_POST, $condition),
+              "data" => $data,
+          );
+  
+          // Output to JSON format
+          return json_encode($output);
+    }
 	
 }

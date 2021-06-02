@@ -89,4 +89,9 @@ class Api_instansi extends CI_Controller {
 
 		echo json_encode($response);
     }
+
+    public function dt()
+    {
+        echo $this->mi->dt();
+    }
 }
