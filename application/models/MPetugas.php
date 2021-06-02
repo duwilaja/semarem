@@ -36,5 +36,47 @@ class MPetugas extends CI_Model{
         }
         return $bool;
     }
+    
+    public function in($obj='')
+    {
+        $q = [];
+        $msg = 'Object or Array is null';
+        $status = 0 ;
+        $id = 0;
+
+        if ($obj != '') {
+            $q = $this->db->insert($this->t, $obj);
+            $id = $this->db->insert_id();
+            if ($this->db->affected_rows() > 0) {
+                $msg = "Success insert data";
+                $status = 1;
+            }else{
+                $msg = "Failed insert data";
+            }
+        }
+
+        return [$msg,$status,$id];
+        
+    }
+
+    public function up($obj='',$where='')
+    {
+        $q = [];
+        $msg = 'Object or Array is null';
+        $status = 0 ;
+
+        if ($obj != '' || $where != '') {
+            $q = $this->db->update($this->t, $obj,$where);
+            if ($this->db->affected_rows() > 0) {
+                $msg = "Success update data";
+                $status = 1;
+            }else{
+                $msg = "Failed update data";
+            }
+        }
+
+        return [$msg,$status];
+        
+    }
 
 }
