@@ -99,6 +99,7 @@ class Api extends CI_Controller {
        
     }
 
+    // Profile Petugas
     public function profile_petugas($petugas_id='')
     {        
         $this->header();
