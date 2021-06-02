@@ -219,5 +219,16 @@ if (!function_exists('secondstoTime')) {
             if ($s == 2) return "Sedang Menerima Tugas";
         }
     }
+
+    if (!function_exists('setStatusPengaduan')) {
+        function setStatusPengaduan($s='')
+        {
+            if ($s == 0) return "Menuggu Konfirmasi";
+            if ($s == 1) return "Konfirmasi & Menuju Lokasi";
+            if ($s == 2) return "Tiba di Lokasi";
+            if ($s == 3) return "Di Proses";
+            if ($s == 4) return "Selesai";
+        }
+    }
     
 }

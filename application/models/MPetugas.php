@@ -25,4 +25,16 @@ class MPetugas extends CI_Model{
        return $q; 
     }
 
+    public function set_activity($petugas_id='',$activity='')
+    {
+        $bool = false;
+        if ($petugas_id != '' && $activity != '') {
+            $q = $this->db->update('petugas',['activity' => $activity],['id' => $petugas_id]);
+            if ($this->db->affected_rows() > 0) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
+
 }

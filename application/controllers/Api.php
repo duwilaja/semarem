@@ -7,7 +7,9 @@ class Api extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('MUsers','mu');        
-        $this->load->model('MPetugas','mp');        
+        $this->load->model('MPetugas','mp');
+        $this->load->model('MPengaduan','mpeng');  
+        $this->load->model('MTask','mt');        
     }
     
 
@@ -125,6 +127,95 @@ class Api extends CI_Controller {
                          $msg = "Berhasil mengambil data petugas";
                          $status = true; 
                      }
+                  }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Set Activity Petugas
+    public function set_activity_petugas()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mengubah activity petugas";
+
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                     $q = $this->mp->set_activity($this->input->post('petugas_id'), $this->input->post('activity'));
+                     if($q){
+                         $msg = "Berhasil mengubah activity petugas";
+                         $status = true; 
+                     }
+                  }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Mengambil data task
+    public function task_petugas($petugas_id='')
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mengambil data task petugas";
+
+            if (empty($petugas_id)) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                    $q = $this->mt->task_assign([
+                        'ta.id,ta.task_id,ta.pengaduan_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        ['ta.petugas_id' => $petugas_id]
+                    ]);
+                    if($q->num_rows() > 0){
+                        foreach ($q->result() as $k => $v) {
+                            $data[$k] = $v;
+                            $data[$k]->tanggal = tgl_indo($v->ctddate);
+                            $data[$k]->status = setStatusPengaduan($v->status);
+                            $data[$k]->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$v->pengaduan_id)->result();
+                        }
+                        $msg = "Berhasil mengambil data task petugas";
+                        $status = true; 
+                    }
                   }
                 } catch (Exception $error) {
                     $statusCode = 417;
