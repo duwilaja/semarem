@@ -405,7 +405,7 @@ class Api extends CI_Controller {
                             foreach ($file as $v) {
                                 $obj = [
                                     'task_done_id' => $task_done_id,
-                                    'full_file' => $v,
+                                    'img' => $v,
                                     'petugas_id' => $this->input->post('petugas_id'),
                                     'path' => 'my/img_done/',
                                     'full_file' => 'my/img_done/'.$v,
