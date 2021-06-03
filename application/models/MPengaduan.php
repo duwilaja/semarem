@@ -32,4 +32,17 @@ class MPengaduan extends CI_Model{
         return $q;
     }
 
+    public function peng_kategori($select='',$id='')
+    {
+        $q = [];
+        if ($id != '') {
+            if($select != ''){
+                $this->db->select($select);
+                $q = $this->db->get_where('peng_kategori',['id' => $id]);
+            }
+        }
+
+        return $q;
+    }
+
 }

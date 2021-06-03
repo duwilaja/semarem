@@ -228,6 +228,7 @@ if (!function_exists('secondstoTime')) {
             if ($s == 2) return "Tiba di Lokasi";
             if ($s == 3) return "Di Proses";
             if ($s == 4) return "Selesai";
+            if ($s == 5) return "Batal";
         }
     }
     
