@@ -18,7 +18,7 @@ class Api extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-    private function upload($path,$files,$types="jpg|png|jpeg")
+    private function upload($path='',$files=[],$types="jpg|png|jpeg")
     {
         $config = array(
             'upload_path'   => $path,
@@ -31,7 +31,7 @@ class Api extends CI_Controller {
 
         $this->load->library('upload', $config);
 
-        $images = array();
+        $images = [];
 
         foreach ($files['name'] as $key => $image) {
             $_FILES['images[]']['name']= $files['name'][$key];
