@@ -18,7 +18,7 @@ class Api extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-    private function upload($path,$files,$types="jpg|png|jpeg")
+    private function upload($path,$files,$types="jpg|png|jpeg|svg")
     {
         $config = array(
             'upload_path'   => $path,
@@ -363,6 +363,7 @@ class Api extends CI_Controller {
     {      
         $this->header();
         $data = [];
+        $q = false;
         if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
             $status = false;
             $statusCode = 200;
@@ -373,30 +374,39 @@ class Api extends CI_Controller {
             }else{
                 try {   
                   if ($this->cek_token()) {
-                     $q = $this->mt->form_task_done([
-                        'petugas_id' => $this->input->post('petugas_id'),
-                        'lat' => $this->input->post('lat'),
-                        'lng' => $this->input->post('lng'),
-                        'penyebab' => $this->input->post('penyebab'),
-                        'tindakan' => $this->input->post('tindakan'),
-                        'keterangan' => $this->input->post('keterangan'),
-                        'task_assign_id' => $this->input->post('task_assign_id')
-                     ]);
-                     if($q){
+                    $task_done = $this->mt->task_done([
+                        'td.id',
+                        ['td.id' => $this->input->post('task_assign_id'),'td.petugas_id' => $this->input->post('petugas_id')]
+                    ]);
+                    if($task_done->num_rows() == 0){
+                        $q = $this->mt->form_task_done([
+                            'petugas_id' => $this->input->post('petugas_id'),
+                            'lat' => $this->input->post('lat'),
+                            'lng' => $this->input->post('lng'),
+                            'penyebab' => $this->input->post('penyebab'),
+                            'tindakan' => $this->input->post('tindakan'),
+                            'keterangan' => $this->input->post('keterangan'),
+                            'task_assign_id' => $this->input->post('task_assign_id')
+                         ]);
+                        $task_done_id = $this->db->insert_id();
+                    }else{
+                        $task_done_id = $task_done->row()->id;
+                    }
+                     
                         $arr = [];
                         $msg = "Berhasil update task";
                         $status = true; 
                         
-                        $task_done_id = $this->db->insert_id();
                         $file = $this->upload('./my/img_done/',$_FILES['img']);
-                        $q = $this->mt->set_status_task_assign($this->input->post('task_assign_id'), 4,$this->input->post('lat'),$this->input->post('lng'));
+                        $this->mt->set_status_task_assign($this->input->post('task_assign_id'), 4,$this->input->post('lat'),$this->input->post('lng'));
 
                         // Insert gambar 
                         if ($file) {
                             foreach ($file as $v) {
                                 $obj = [
                                     'task_done_id' => $task_done_id,
-                                    'img' => $v,
+                                    'full_file' => $v,
+                                    'petugas_id' => $this->input->post('petugas_id'),
                                     'path' => 'my/img_done/',
                                     'full_file' => 'my/img_done/'.$v,
                                     'ctddate' => date('Y-m-d'),
@@ -407,7 +417,6 @@ class Api extends CI_Controller {
                             
                             $this->mt->in_batch_task_img($obj);
                         }
-                     }
                   }
                 } catch (Exception $error) {
                     $statusCode = 417;
@@ -508,6 +517,64 @@ class Api extends CI_Controller {
                         $status = true; 
                     }
                   }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Mengambil data task history petugas
+    public function detail_task_history_petugas()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mengambil detail task history petugas";
+
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                        $q = $this->mt->task_assign([
+                            'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.nama_pelapor,p.telp,p.mail,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                            ['ta.id' => $this->input->post('task_assign_id'),'ta.petugas_id' => $this->input->post('petugas_id')],
+                            ['ta.status' => ['4','5']]
+                        ]);
+                        if($q->num_rows() > 0){
+                                $data = $q->row();
+                                $data->tanggal = tgl_indo($data->ctddate);
+
+                                $data->status_name = setStatusPengaduan($data->status);
+                                $data->img_pengaduan = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$data->pengaduan_id)->result();
+                                $data->img_task_done = !empty($this->mt->task_img_task_assign_id('id,full_file',$data->id)) ? $this->mt->task_img_task_assign_id('id,full_file',$data->id)->result() : [];
+                                foreach ($data->img_task_done as $k => $v) {
+                                    $data->img_task[$k]->full_file = link_http().$v->full_file;
+                                }
+                                $data->penanganan = $this->mt->lama_penanganan($this->input->post('task_assign_id'));
+                                $data->task_done = $this->mt->task_done([
+                                    'id as task_done_id,penyebab,tindakan,keterangan',
+                                    ['td.id' => $this->input->post('task_assign_id'),'petugas_id' => $this->input->post('petugas_id')]
+                                ])->row();
+                        }
+                        $msg = "Berhasil mengambil detail task history petugas";
+                        $status = true; 
+                    }
                 } catch (Exception $error) {
                     $statusCode = 417;
                     $msg = $error->getMessage();

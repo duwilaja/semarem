@@ -56,6 +56,7 @@ class MTask extends CI_Model{
                     [
                         'petugas_id' => $task_assign->petugas_id,
                         'task_id' => $task_assign->task_id,
+                        'status' => $status,
                         'lat' => $lat,
                         'lng' => $lng,
                         'task_assign_id' => $task_assign->id
@@ -72,6 +73,7 @@ class MTask extends CI_Model{
         if (!empty($arr)) {
             $arr['ctddate'] = date('Y-m-d');
             $arr['ctdtime'] = date('H:i:s');
+            $arr['timestamp'] = date('Y-m-d H:i:s');
             $q = $this->db->insert('task_log',$arr);
             if ($this->db->affected_rows() > 0) {
                 $bool = true;
@@ -94,6 +96,23 @@ class MTask extends CI_Model{
         return $bool;
     }
 
+    public function task_done($arr=[])
+    {
+       if (!empty($arr)){
+            if (!empty($arr[0]) && $arr[0] != '') 
+                $this->db->select($arr[0]);
+        
+            if (!empty($arr[1])) 
+                $this->db->where($arr[1]);
+
+            if (!empty($arr[2])) 
+                $this->db->where_in($arr[2]);
+        }
+        
+       $q = $this->db->get('task_done td');
+       return $q; 
+    }
+
     public function form_task_done($obj=[])
     {
         $bool = false;
@@ -111,6 +130,76 @@ class MTask extends CI_Model{
             }
         }
         return $bool;
+    }
+
+    public function task_img_task_assign_id($select='',$task_assign_id='')
+    {
+        $q = [];
+        if ($task_assign_id != '') {
+            if($select != ''){
+                $task_done = $this->task_done([
+                    'td.id',
+                    ['td.task_assign_id' => $task_assign_id]
+                ]);
+                if ($task_done->num_rows() > 0) {
+                    $this->db->select($select);
+                    $q = $this->db->get_where('task_img',['task_done_id' => $task_done->row()->id]);
+                }
+            }
+        }
+
+        return $q;
+    }
+
+    public function task_img_id($select='',$id='')
+    {
+        $q = [];
+        if ($id != '') {
+            if($select != ''){
+                $this->db->select($select);
+                $q = $this->db->get_where('task_img',['id' => $id]);
+            }
+        }
+
+        return $q;
+    }
+
+    public function lama_penanganan($task_assign_id='')
+    {
+        $rsp = [
+            'assign_date' => '',
+            'action_date' => '',
+            'done_date' => '',
+            'calc' => 0
+        ];
+
+        $log_first = $this->db->get_where('task_log',['task_assign_id' => $task_assign_id,'status' => '0']);
+        $log_action = $this->db->get_where('task_log',['task_assign_id' => $task_assign_id,'status' => '1']);
+        $log_done = $this->db->get_where('task_log',['task_assign_id' => $task_assign_id,'status' => '4']);
+
+        if($log_first->num_rows() > 0){
+            $log_first = $log_first->first_row();
+            $rsp['assign_date'] = $log_first->timestamp;
+            $rsp['assign_time'] = $log_first->ctdtime;
+            $rsp['assign_date_name'] = tgl_indo($log_first->ctddate);
+        } 
+
+        if($log_action->num_rows() > 0){
+            $log_action = $log_action->first_row();
+            $rsp['action_date'] = $log_action->timestamp;
+            $rsp['action_time'] = $log_action->ctdtime;
+            $rsp['action_date_name'] = tgl_indo($log_action->ctddate);
+        } 
+
+        if ($log_done->num_rows() > 0) {
+            $log_done = $log_done->last_row();
+            $rsp['done_date'] = $log_done->timestamp;
+            $rsp['done_time'] = $log_done->ctdtime;
+            $rsp['done_date_name'] = tgl_indo($log_done->ctddate);
+            $rsp['calc'] = calc_minute($log_first->timestamp,$log_done->timestamp)/60;
+        }
+
+        return $rsp;
     }
 
 }
