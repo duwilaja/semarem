@@ -37,46 +37,31 @@ class MPetugas extends CI_Model{
         return $bool;
     }
     
-    public function in($obj='')
+    public function in($arr=[])
     {
-        $q = [];
-        $msg = 'Object or Array is null';
-        $status = 0 ;
-        $id = 0;
-
-        if ($obj != '') {
-            $q = $this->db->insert($this->t, $obj);
-            $id = $this->db->insert_id();
+        $bool = false;
+        if (!empty($arr)) {
+            $arr['ctddate'] = date('Y-m-d');
+            $arr['ctdtime'] = date('H:i:s');
+            $q = $this->db->insert($this->t,$arr);
             if ($this->db->affected_rows() > 0) {
-                $msg = "Success insert data";
-                $status = 1;
-            }else{
-                $msg = "Failed insert data";
+                $bool = true;
             }
         }
-
-        return [$msg,$status,$id];
+        return $bool;
         
     }
 
-    public function up($obj='',$where='')
+    public function up($arr=[],$where='')
     {
-        $q = [];
-        $msg = 'Object or Array is null';
-        $status = 0 ;
-
-        if ($obj != '' || $where != '') {
-            $q = $this->db->update($this->t, $obj,$where);
+        $bool = false;
+        if (!empty($arr)) {
+            $q = $this->db->update($this->t,$arr,$where);
             if ($this->db->affected_rows() > 0) {
-                $msg = "Success update data";
-                $status = 1;
-            }else{
-                $msg = "Failed update data";
+                $bool = true;
             }
         }
-
-        return [$msg,$status];
-        
+        return $bool;
     }
 
 }
