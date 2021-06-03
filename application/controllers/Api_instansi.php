@@ -9,8 +9,41 @@ class Api_instansi extends CI_Controller {
 		$this->load->model('MInstansi','mi');
 	}
 
+    private function token()
+    {
+        $token = @getallheaders()['Token'];
+
+        if (!$token) {
+            # jika array kosong, dia akan melempar objek Exception baru
+            throw new Exception('Header Token tidak terdeteksi');
+        }
+
+        return $token;
+    }
+
+    private function header($method="POST")
+    {
+        header("Content-Type: application/json; charset=UTF-8");
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: ".$method);
+        header("Access-Control-Allow-Headers: Content-Type, Token");
+
+        return true;
+    }
+
+    private function cek_token()
+    {
+        $bool = false;
+        $q = $this->db->get_where('token', ['token' => $this->token(),'aktif' => 1]);
+        if ($q->num_rows() > 0) 
+            $bool = true;
+
+        return $bool;
+    }
+
     public function get()
     {
+        $this->header();
         $q = $this->mi->get()->result();
 
         echo json_encode($q);
@@ -18,76 +51,129 @@ class Api_instansi extends CI_Controller {
 
     public function in()
     {
-        $msg = 'Gagal menambahkan data';
-        $status = false;
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal menambah data instansi";
 
-        $nama_intansi = $this->input->post('nama_instansi');
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {
+                    // if ($this->cek_token()) {   
+                        $nama_intansi = $this->input->post('nama_instansi');
+                        $obj = [
+                            'nama_instansi' => $nama_intansi
+                        ];
+                        $q = $this->mi->in($obj);
+                        if($q){
+                            $data = $obj;
+                            $msg = "Berhasil menambah data instansi";
+                            $status = true; 
+                        }
+                    // }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
 
-        $obj = [
-            'nama_instansi' => $nama_intansi,
-            'ctddate' => date('Y-m-d'),
-            'ctdtime' => date('H:i:s')
-        ];
-
-		$in = $this->mi->in($obj);
-        if ($in != '') {
-            $status = true;
-            $msg = "Berhasil menambahkan data";
-		}
-
-		$response = [
-			'msg' => $msg,
-			'status' => $status
-		];
-
-		echo json_encode($response);
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
     }
 
     public function up()
     {
-        $msg = 'Gagal mengupdate data';
-        $status = false;
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mengubah data instansi";
 
-		$id = $this->input->post('id');
-		$nama_intansi = $this->input->post('nama_instansi');
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {
+                    // if ($this->cek_token()) {  
+                        $id = $this->input->post('id'); 
+                        $nama_intansi = $this->input->post('nama_instansi');
+                        $obj = [
+                            'nama_instansi' => $nama_intansi
+                        ];
+                        $up = $this->mi->up($obj,['id' => $id]);
+                        if($up){
+                            $data = $obj;
+                            $msg = "Berhasil mengubah data instansi";
+                            $status = true; 
+                        }
+                    // }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
 
-        $obj = [
-            'nama_instansi' => $nama_intansi,
-        ];
-		
-		$up = $this->mi->up($obj,['id' => $id]);
-		if ($up != '') {
-            $status = true;
-            $msg = "Berhasil mengupdate data";	
-		}
-
-		$response = [
-			'msg' => $msg,
-			'status' => $status
-		];
-
-		echo json_encode($response);
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
 	}
 
     public function del()
     {
-        $msg = 'Gagal menghapus data';
-        $status = false;
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal menghapus data instansi";
 
-		$id = $this->input->post('id');
-		
-		$up = $this->mi->del(['id' => $id]);
-		if ($up != '') {
-            $status = true;
-            $msg = "Berhasil menghapus data";	
-		}
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {
+                    // if ($this->cek_token()) {  
+                        $id = $this->input->post('id');
+                        $del = $this->mi->del(['id' => $id]);
+                        if($del){
+                            // $data = $obj;
+                            $msg = "Berhasil menghapus data instansi";
+                            $status = true; 
+                        }
+                    // }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
 
-		$response = [
-			'msg' => $msg,
-			'status' => $status
-		];
-
-		echo json_encode($response);
+            $arr = [
+                // 'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
     }
 
     public function dt()
