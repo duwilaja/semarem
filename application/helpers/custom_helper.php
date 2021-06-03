@@ -231,5 +231,15 @@ if (!function_exists('secondstoTime')) {
             if ($s == 5) return "Batal";
         }
     }
+
+    if (!function_exists('http')) {
+        function link_http()
+        {
+            $link = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+            $link .= "://".$_SERVER['HTTP_HOST'];
+            $link .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']); 
+            return $link;
+        }
+    }
     
 }
