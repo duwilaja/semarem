@@ -562,8 +562,8 @@ class Api extends CI_Controller {
 
                                 $data->status_name = setStatusPengaduan($data->status);
                                 $data->img_pengaduan = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$data->pengaduan_id)->result();
-                                $data->img_task_done = $this->mt->task_img_task_assign_id('id,full_file',$data->id)->result();
-                                foreach ($data->img_task as $k => $v) {
+                                $data->img_task_done = !empty($this->mt->task_img_task_assign_id('id,full_file',$data->id)) ? $this->mt->task_img_task_assign_id('id,full_file',$data->id)->result() : [];
+                                foreach ($data->img_task_done as $k => $v) {
                                     $data->img_task[$k]->full_file = link_http().$v->full_file;
                                 }
                                 $data->penanganan = $this->mt->lama_penanganan($this->input->post('task_assign_id'));

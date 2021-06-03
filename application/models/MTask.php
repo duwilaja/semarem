@@ -140,9 +140,11 @@ class MTask extends CI_Model{
                 $task_done = $this->task_done([
                     'td.id',
                     ['td.task_assign_id' => $task_assign_id]
-                ])->row();
-                $this->db->select($select);
-                $q = $this->db->get_where('task_img',['task_done_id' => $task_done->id]);
+                ]);
+                if ($task_done->num_rows() > 0) {
+                    $this->db->select($select);
+                    $q = $this->db->get_where('task_img',['task_done_id' => $task_done->row()->id]);
+                }
             }
         }
 
