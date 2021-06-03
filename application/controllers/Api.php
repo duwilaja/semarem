@@ -54,7 +54,7 @@ class Api extends CI_Controller {
 
     private function token()
     {
-        $token = @getallheaders()['Token'];
+        $token = @getallheaders()['token'];
 
         if (!$token) {
             # jika array kosong, dia akan melempar objek Exception baru
