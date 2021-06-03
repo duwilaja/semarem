@@ -454,7 +454,8 @@ class Api extends CI_Controller {
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
                         'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
-                        ['ta.petugas_id' => $this->input->post('petugas_id'),'ta.status' => $this->input->post('status')]
+                        ['ta.petugas_id' => $this->input->post('petugas_id'),'ta.status !=' => '4'],
+                        ['ta.status',['1','2','3']]
                     ]);
                     if($q->num_rows() > 0){
                         foreach ($q->result() as $k => $v) {
