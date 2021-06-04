@@ -66,16 +66,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>
-
-<div id="container">
-	<h1>Welcome to My Apps!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by Anonym.</p>
+	<div id="container">
+		<h1>Welcome to My Apps!</h1>
+		<div id="body">
+			<p>The page you are looking at is being generated dynamically by Anonym.</p>
+		</div>
+		<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds.</p>
 	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds.</p>
-
-</div>
 </body>
 </html>
