@@ -572,9 +572,12 @@ class Api extends CI_Controller {
                                     'id as task_done_id,penyebab,tindakan,keterangan',
                                     ['td.id' => $this->input->post('task_assign_id'),'petugas_id' => $this->input->post('petugas_id')]
                                 ])->row();
+
+                                $msg = "Berhasil mengambil detail task history petugas";
+                                $status = true; 
+                        }else{
+                            $msg = "Detail task history tidak ditemukan, harap cek kembali task_assign_id atau petugas_id";
                         }
-                        $msg = "Berhasil mengambil detail task history petugas";
-                        $status = true; 
                     }
                 } catch (Exception $error) {
                     $statusCode = 417;
