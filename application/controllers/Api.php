@@ -54,7 +54,7 @@ class Api extends CI_Controller {
 
     private function token()
     {
-        $token = @getallheaders()['Token'];
+        $token = @getallheaders()['token'];
 
         if (!$token) {
             # jika array kosong, dia akan melempar objek Exception baru
@@ -405,7 +405,7 @@ class Api extends CI_Controller {
                             foreach ($file as $v) {
                                 $obj = [
                                     'task_done_id' => $task_done_id,
-                                    'full_file' => $v,
+                                    'img' => $v,
                                     'petugas_id' => $this->input->post('petugas_id'),
                                     'path' => 'my/img_done/',
                                     'full_file' => 'my/img_done/'.$v,
@@ -454,7 +454,8 @@ class Api extends CI_Controller {
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
                         'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
-                        ['ta.petugas_id' => $this->input->post('petugas_id'),'ta.status' => $this->input->post('status')]
+                        ['ta.petugas_id' => $this->input->post('petugas_id'),'ta.status !=' => '4'],
+                        ['ta.status',['1','2','3']]
                     ]);
                     if($q->num_rows() > 0){
                         foreach ($q->result() as $k => $v) {
