@@ -1,4 +1,4 @@
-<?php $template = base_url('template/cube/'); ?>
+<?php $template = base_url('template/cuba/'); ?>
 <!DOCTYPE html>
 <html lang="id">
   <?php $this->load->view('_incl/head',['template' => $template]);?>
