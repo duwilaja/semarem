@@ -14,9 +14,6 @@ class Api extends CI_Controller {
     
 	public function index()
 	{
-        $q = $this->db_sm->get('unit');
-		echo json_encode($q->result());
-        die;
         $this->load->view('welcome_message');
 	}
 
