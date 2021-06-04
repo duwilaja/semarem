@@ -9,13 +9,15 @@ class Api extends CI_Controller {
         $this->load->model('MUsers','mu');        
         $this->load->model('MPetugas','mp');
         $this->load->model('MPengaduan','mpeng');  
-        $this->load->model('MTask','mt');        
+        $this->load->model('MTask','mt');
     }
     
-
 	public function index()
 	{
-		$this->load->view('welcome_message');
+        $q = $this->db_sm->get('unit');
+		echo json_encode($q->result());
+        die;
+        $this->load->view('welcome_message');
 	}
 
     private function upload($path,$files,$types="jpg|png|jpeg|svg")
