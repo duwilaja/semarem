@@ -236,13 +236,15 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $petugas_id]
                     ]);
                     if($q->num_rows() > 0){
                         foreach ($q->result() as $k => $v) {
                             $data[$k] = $v;
                             $data[$k]->tanggal = tgl_indo($v->ctddate);
+                            $data[$k]->lat = (float)$v->lat;
+                            $data[$k]->lng = (float)$v->lng;
                             $data[$k]->status_name = setStatusPengaduan($v->status);
                             $data[$k]->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$v->pengaduan_id)->result();
                         }
@@ -285,13 +287,15 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id as task_assign_id,ta.task_id,ta.task_kategori_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id as task_assign_id,ta.task_id,ta.task_kategori_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $petugas_id,'ta.id' => $task_id]
                     ]);
                     if($q->num_rows() > 0){
                         $data = $q->row();
                         $data->task_kategori = $this->mt->task_kategori('task_kategori',$data->task_kategori_id,true);
                         $data->tanggal = tgl_indo($data->ctddate);
+                        $data->lat = (float)$data->lat;
+                        $data->lng = (float)$data->lng;
                         $data->status = setStatusPengaduan($data->status);
                         $data->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$data->pengaduan_id)->result();
 
@@ -452,7 +456,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $this->input->post('petugas_id'),'ta.status !=' => '4'],
                         ['ta.status',['1','2','3']]
                     ]);
@@ -460,6 +464,8 @@ class Api extends CI_Controller {
                         foreach ($q->result() as $k => $v) {
                             $data[$k] = $v;
                             $data[$k]->tanggal = tgl_indo($v->ctddate);
+                            $data[$k]->lat = (float)$v->lat;
+                            $data[$k]->lng = (float)$v->lng;
                             $data[$k]->status_name = setStatusPengaduan($v->status);
                             $data[$k]->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$v->pengaduan_id)->result();
                         }
@@ -502,7 +508,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $this->input->post('petugas_id')],
                         ['ta.status' => ['4','5']]
                     ]);
@@ -510,6 +516,8 @@ class Api extends CI_Controller {
                         foreach ($q->result() as $k => $v) {
                             $data[$k] = $v;
                             $data[$k]->tanggal = tgl_indo($v->ctddate);
+                            $data[$k]->lat = (float)$v->lat;
+                            $data[$k]->lng = (float)$v->lng;
                             $data[$k]->status_name = setStatusPengaduan($v->status);
                             $data[$k]->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$v->pengaduan_id)->result();
                         }
@@ -552,7 +560,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                         $q = $this->mt->task_assign([
-                            'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.nama_pelapor,p.telp,p.mail,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                            'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.nama_pelapor,p.telp,p.mail,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                             ['ta.id' => $this->input->post('task_assign_id'),'ta.petugas_id' => $this->input->post('petugas_id')],
                             ['ta.status' => ['4','5']]
                         ]);
@@ -561,6 +569,8 @@ class Api extends CI_Controller {
                                 $data->tanggal = tgl_indo($data->ctddate);
 
                                 $data->status_name = setStatusPengaduan($data->status);
+                                $data->lat = (float)$data->lat;
+                                $data->lng = (float)$data->lng;
                                 $data->img_pengaduan = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$data->pengaduan_id)->result();
                                 $data->img_task_done = !empty($this->mt->task_img_task_assign_id('id,full_file',$data->id)) ? $this->mt->task_img_task_assign_id('id,full_file',$data->id)->result() : [];
                                 foreach ($data->img_task_done as $k => $v) {
