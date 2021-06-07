@@ -243,6 +243,8 @@ class Api extends CI_Controller {
                         foreach ($q->result() as $k => $v) {
                             $data[$k] = $v;
                             $data[$k]->tanggal = tgl_indo($v->ctddate);
+                            $data[$k]->lat = (float)$v->lat;
+                            $data[$k]->lng = (float)$v->lng;
                             $data[$k]->status_name = setStatusPengaduan($v->status);
                             $data[$k]->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$v->pengaduan_id)->result();
                         }
@@ -292,6 +294,8 @@ class Api extends CI_Controller {
                         $data = $q->row();
                         $data->task_kategori = $this->mt->task_kategori('task_kategori',$data->task_kategori_id,true);
                         $data->tanggal = tgl_indo($data->ctddate);
+                        $data->lat = (float)$data->lat;
+                        $data->lng = (float)$data->lng;
                         $data->status = setStatusPengaduan($data->status);
                         $data->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$data->pengaduan_id)->result();
 
@@ -460,6 +464,8 @@ class Api extends CI_Controller {
                         foreach ($q->result() as $k => $v) {
                             $data[$k] = $v;
                             $data[$k]->tanggal = tgl_indo($v->ctddate);
+                            $data[$k]->lat = (float)$v->lat;
+                            $data[$k]->lng = (float)$v->lng;
                             $data[$k]->status_name = setStatusPengaduan($v->status);
                             $data[$k]->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$v->pengaduan_id)->result();
                         }
@@ -510,6 +516,8 @@ class Api extends CI_Controller {
                         foreach ($q->result() as $k => $v) {
                             $data[$k] = $v;
                             $data[$k]->tanggal = tgl_indo($v->ctddate);
+                            $data[$k]->lat = (float)$v->lat;
+                            $data[$k]->lng = (float)$v->lng;
                             $data[$k]->status_name = setStatusPengaduan($v->status);
                             $data[$k]->img = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$v->pengaduan_id)->result();
                         }
@@ -561,6 +569,8 @@ class Api extends CI_Controller {
                                 $data->tanggal = tgl_indo($data->ctddate);
 
                                 $data->status_name = setStatusPengaduan($data->status);
+                                $data->lat = (float)$data->lat;
+                                $data->lng = (float)$data->lng;
                                 $data->img_pengaduan = $this->mpeng->peng_img_peng_id('id,img',$pengaduan_id=$data->pengaduan_id)->result();
                                 $data->img_task_done = !empty($this->mt->task_img_task_assign_id('id,full_file',$data->id)) ? $this->mt->task_img_task_assign_id('id,full_file',$data->id)->result() : [];
                                 foreach ($data->img_task_done as $k => $v) {
