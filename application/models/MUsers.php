@@ -48,4 +48,19 @@ class MUsers extends CI_Model{
        return $q; 
     }
 
+    public function join_backoffice($arr=[])
+    {
+        $sm = $this->load->database('sm', TRUE);
+       if (!empty($arr)){
+            if (!empty($arr[0]) && $arr[0] != '') 
+                $sm->select($arr[0]);
+        
+            if (!empty($arr[1])) 
+                $sm->where($arr[1]);
+        }
+        
+       $q = $sm->get('accounts');
+       return $q; 
+    }
+
 }
