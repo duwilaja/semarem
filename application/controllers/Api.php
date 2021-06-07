@@ -10,14 +10,10 @@ class Api extends CI_Controller {
         $this->load->model('MPetugas','mp');
         $this->load->model('MPengaduan','mpeng');  
         $this->load->model('MTask','mt');
-        $this->db2 = $this->load->database('sm',TRUE);
     }
     
 	public function index()
 	{
-        $q = $this->db2->get('unit');
-        echo json_encode($q->result());
-        die;
         $this->load->view('welcome_message');
 	}
 
