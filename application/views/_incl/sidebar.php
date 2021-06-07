@@ -11,10 +11,13 @@
                   <li class="back-btn"><a href="index.html"><img class="img-fluid" src="<?=$template;?>assets/images/logo/logo-icon.png" alt=""></a>
                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                   </li>
-                  <li class="sidebar-main-title">
+                  <li class="mb-4 mt-3 d-flex justify-content-center">
                     <div>
-                      <h6 class="lan-1">General</h6>
-                      <p class="lan-2">Dashboards,widgets & layout.</p>
+                      <!-- <h6 class="lan-1">General</h6>
+                      <p class="lan-2">Dashboards,widgets & layout.</p> -->
+                      <a href="#">
+                        <button  class="btn btn-pill btn-danger btn-air-danger"><i class="icon-plus icon-white"></i> Input Pengaduan</button>
+                      </a>
                     </div>
                   </li>
                   <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="file-manager.html"><i data-feather="git-pull-request"> </i><span>File manager</span></a></li>

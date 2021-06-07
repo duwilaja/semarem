@@ -33,4 +33,6 @@
     <link id="color" rel="stylesheet" href="<?=$template;?>assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/responsive.css">
+    <!-- MY CSS -->
+    <link rel="stylesheet" type="text/css" href="<?=base_url('my/css/styles.css');?>">
   </head>
