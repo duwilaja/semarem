@@ -10,10 +10,14 @@ class Api extends CI_Controller {
         $this->load->model('MPetugas','mp');
         $this->load->model('MPengaduan','mpeng');  
         $this->load->model('MTask','mt');
+        $this->db2 = $this->load->database('sm',TRUE);
     }
     
 	public function index()
 	{
+        $q = $this->db2->get('unit');
+        echo json_encode($q->result());
+        die;
         $this->load->view('welcome_message');
 	}
 
@@ -236,7 +240,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $petugas_id]
                     ]);
                     if($q->num_rows() > 0){
@@ -285,7 +289,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id as task_assign_id,ta.task_id,ta.task_kategori_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id as task_assign_id,ta.task_id,ta.task_kategori_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $petugas_id,'ta.id' => $task_id]
                     ]);
                     if($q->num_rows() > 0){
@@ -452,7 +456,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $this->input->post('petugas_id'),'ta.status !=' => '4'],
                         ['ta.status',['1','2','3']]
                     ]);
@@ -502,7 +506,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                     $q = $this->mt->task_assign([
-                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                        'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                         ['ta.petugas_id' => $this->input->post('petugas_id')],
                         ['ta.status' => ['4','5']]
                     ]);
@@ -552,7 +556,7 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                         $q = $this->mt->task_assign([
-                            'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.judul,p.nama_pelapor,p.telp,p.mail,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                            'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.nama_pelapor,p.telp,p.mail,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
                             ['ta.id' => $this->input->post('task_assign_id'),'ta.petugas_id' => $this->input->post('petugas_id')],
                             ['ta.status' => ['4','5']]
                         ]);
