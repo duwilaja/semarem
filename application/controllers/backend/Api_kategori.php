@@ -44,8 +44,12 @@ class Api_kategori extends CI_Controller {
     public function get()
     {
         $this->header();
-        $q = $this->mk->get()->result();
-
+        $id = $this->input->get("id");
+        if ($id != '') {
+            $q = $this->mk->get($id)->result();
+        }else{
+            $q = $this->mk->get()->result();
+        }
         echo json_encode($q);
     }
 

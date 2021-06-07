@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Api_instansi extends CI_Controller {
+class Api_unit extends CI_Controller {
 	
 	public function __construct()
     {
 		parent::__construct();
-		$this->load->model('MInstansi','mi');
+		$this->load->model('MUnit','mun');
 	}
 
     private function token()
@@ -46,9 +46,9 @@ class Api_instansi extends CI_Controller {
         $this->header();
         $id = $this->input->get("id");
         if ($id != '') {
-            $q = $this->mi->get($id)->result();
+            $q = $this->mun->get($id)->result();
         }else{
-            $q = $this->mi->get()->result();
+            $q = $this->mun->get()->result();
         }
 
         echo json_encode($q);
@@ -61,7 +61,7 @@ class Api_instansi extends CI_Controller {
             $data = [];
             $status = false;
             $statusCode = 200;
-            $msg = "Gagal menambah data instansi";
+            $msg = "Gagal menambah data unit";
 
             if (empty($this->input->post())) {
                 $msg = "Tidak ada data yang dikirim";
@@ -69,14 +69,16 @@ class Api_instansi extends CI_Controller {
             }else{
                 try {
                     // if ($this->cek_token()) {   
-                        $nama_intansi = $this->input->post('nama_instansi');
+                        $unit = $this->input->post('unit');
+                        $instansi_id = $this->input->post('instansi_id');
                         $obj = [
-                            'nama_instansi' => $nama_intansi
+                            'unit' => $unit,
+                            'instansi_id' => $instansi_id
                         ];
-                        $q = $this->mi->in($obj);
+                        $q = $this->mun->in($obj);
                         if($q){
                             $data = $obj;
-                            $msg = "Berhasil menambah data instansi";
+                            $msg = "Berhasil menambah data unit";
                             $status = true; 
                         }
                     // }
@@ -104,7 +106,7 @@ class Api_instansi extends CI_Controller {
             $data = [];
             $status = false;
             $statusCode = 200;
-            $msg = "Gagal mengubah data instansi";
+            $msg = "Gagal mengubah data unit";
 
             if (empty($this->input->post())) {
                 $msg = "Tidak ada data yang dikirim";
@@ -113,14 +115,16 @@ class Api_instansi extends CI_Controller {
                 try {
                     // if ($this->cek_token()) {  
                         $id = $this->input->post('id'); 
-                        $nama_intansi = $this->input->post('nama_instansi');
+                        $unit = $this->input->post('unit');
+                        $instansi_id = $this->input->post('instansi_id');
                         $obj = [
-                            'nama_instansi' => $nama_intansi
+                            'unit' => $unit,
+                            'instansi_id' => $instansi_id
                         ];
-                        $up = $this->mi->up($obj,['id' => $id]);
+                        $up = $this->mun->up($obj,['id' => $id]);
                         if($up){
                             $data = $obj;
-                            $msg = "Berhasil mengubah data instansi";
+                            $msg = "Berhasil mengubah data unit";
                             $status = true; 
                         }
                     // }
@@ -148,7 +152,7 @@ class Api_instansi extends CI_Controller {
             $data = [];
             $status = false;
             $statusCode = 200;
-            $msg = "Gagal menghapus data instansi";
+            $msg = "Gagal menghapus data unit";
 
             if (empty($this->input->post())) {
                 $msg = "Tidak ada data yang dikirim";
@@ -157,10 +161,10 @@ class Api_instansi extends CI_Controller {
                 try {
                     // if ($this->cek_token()) {  
                         $id = $this->input->post('id');
-                        $del = $this->mi->del(['id' => $id]);
+                        $del = $this->mun->del(['id' => $id]);
                         if($del){
                             // $data = $obj;
-                            $msg = "Berhasil menghapus data instansi";
+                            $msg = "Berhasil menghapus data unit";
                             $status = true; 
                         }
                     // }
@@ -183,6 +187,6 @@ class Api_instansi extends CI_Controller {
 
     public function dt()
     {
-        echo $this->mi->dt();
+        echo $this->mun->dt();
     }
 }

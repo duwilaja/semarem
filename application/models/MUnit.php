@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MInstansi extends CI_Model {
+class MUnit extends CI_Model {
 
 
     public $see = '*';
     private $id = 'id';
-    private $t = 'instansi';
+    private $t = 'unit';
 
     public function get($id='',$where='',$query='',$limit='',$start='')
     {
@@ -83,15 +83,19 @@ class MInstansi extends CI_Model {
           $CI->load->model('DataTable', 'dt');
   
           // Set table name
-          $CI->dt->table = $this->t;
+          $CI->dt->table = $this->t.' as u';
           // Set orderable column fields
-          $CI->dt->column_order = [null,'nama_instansi'];
+          $CI->dt->column_order = [null,'unit','nama_instansi'];
           // Set searchable column fields
-          $CI->dt->column_search = ['nama_instansi'];
+          $CI->dt->column_search = ['unit','nama_instansi'];
           // Set select column fields
-          $CI->dt->select = $this->see;
+          $CI->dt->select = 'u.id as id,nama_instansi,unit,u.ctddate,u.ctdtime';
           // Set default order
-          $CI->dt->order = ['id' => 'desc'];
+          $CI->dt->order = ['u.id' => 'desc'];
+
+          //join table
+          $con = ['join','instansi i','i.id = u.instansi_id','left'];
+          array_push($condition,$con);
 
           // Fetch member's records
           $dataTabel = $this->dt->getRows($_POST, $condition);
@@ -101,6 +105,7 @@ class MInstansi extends CI_Model {
               $i++;
               $data[] = array(
                   $i,
+                  $dt->unit,
                   $dt->nama_instansi,
                   '<a href="javascript:void(0);" class="btn btn-warning" onclick="modal_edit('.$dt->id.')"><i class="fa fa-edit"></i></a>
                    <a href="javascript:void(0);" class="btn btn-danger" onclick="del('.$dt->id.')"><i class="fa fa-trash"></i></a>'

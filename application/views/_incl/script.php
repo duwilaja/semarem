@@ -19,8 +19,12 @@
     <script src="<?=$template;?>assets/js/ecommerce.js"></script>
     <script src="<?=$template;?>assets/js/product-list-custom.js"></script>
     <script src="<?=$template;?>assets/js/tooltip-init.js"></script>
+    <script src="<?=$template;?>assets/js/sweet-alert/sweetalert.min.js"></script>
+    <script src="<?=$template;?>assets/js/select2/select2.full.min.js"></script>
+    <script src="<?=$template;?>assets/js/select2/select2-custom.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="<?=$template;?>assets/js/script.js"></script>
+    <script src="<?=base_url().'my/'.$js;?>"></script>
     <!-- login js-->
     <!-- Plugin used-->

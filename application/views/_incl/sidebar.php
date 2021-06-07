@@ -11,37 +11,22 @@
                   <li class="back-btn"><a href="index.html"><img class="img-fluid" src="<?=$template;?>assets/images/logo/logo-icon.png" alt=""></a>
                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                   </li>
-                  <li class="sidebar-main-title">
+                  <!-- <li class="sidebar-main-title">
                     <div>
                       <h6 class="lan-1">General</h6>
                       <p class="lan-2">Dashboards,widgets & layout.</p>
                     </div>
-                  </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="file-manager.html"><i data-feather="git-pull-request"> </i><span>File manager</span></a></li>
+                  </li> -->
                   <li class="sidebar-list">
-                    <label class="badge badge-success">2</label><a class="sidebar-link sidebar-title" href="#"><i data-feather="home"></i><span class="lan-3">Dashboard              </span></a>
+                    <label class="badge badge-danger">4</label><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layers"></i><span class="">Data Master              </span></a>
                     <ul class="sidebar-submenu">
-                      <li><a class="lan-4" href="index.html">Default</a></li>
-                      <li><a class="lan-5" href="dashboard-02.html">Ecommerce</a></li>
+                      <li><a class="" href="<?=site_url('Main/instansi');?>">Instansi</a></li>
+                      <li><a class="" href="<?=site_url('Main/unit');?>">Unit</a></li>
+                      <li><a class="" href="<?=site_url('Main/pengaduan_kategori');?>">Pengaduan Kategori</a></li>
+                      <li><a class="" href="<?=site_url('Main/task_kategori');?>">Task Kategori</a></li>
                     </ul>
                   </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Widgets</span></a>
-                    <ul class="sidebar-submenu">
-                      <li><a href="general-widget.html">General</a></li>
-                      <li><a href="chart-widget.html">Chart</a></li>
-                    </ul>
-                  </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="#"><i data-feather="layout"></i><span class="lan-7">Page layout</span></a>
-                    <ul class="sidebar-submenu">
-                      <li><a href="box-layout.html">Boxed</a></li>
-                      <li><a href="layout-rtl.html">RTL</a></li>
-                      <li><a href="layout-dark.html">Dark Layout</a></li>
-                      <li><a href="hide-on-scroll.html">Hide Nav Scroll</a></li>
-                      <li><a href="footer-light.html">Footer Light</a></li>
-                      <li><a href="footer-dark.html">Footer Dark</a></li>
-                      <li><a href="footer-fixed.html">Footer Fixed</a></li>
-                    </ul>
-                  </li>
+                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="<?= site_url('Petugas')?>"><i data-feather="users"> </i><span>Petugas</span></a></li>
                 </ul>
               </div>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
