@@ -44,7 +44,12 @@ class Api_task_kategori extends CI_Controller {
     public function get()
     {
         $this->header();
-        $q = $this->mtk->get()->result();
+        $id = $this->input->get("id");
+        if ($id != '') {
+            $q = $this->mtk->get($id)->result();
+        }else{
+            $q = $this->mtk->get()->result();
+        }
 
         echo json_encode($q);
     }

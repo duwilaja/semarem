@@ -100,6 +100,8 @@ class MKategori extends CI_Model {
               $data[] = array(
                   $i,
                   $dt->peng_kategori,
+                  '<a href="javascript:void(0);" class="btn btn-warning" onclick="modal_edit('.$dt->id.')"><i class="fa fa-edit"></i></a>
+                   <a href="javascript:void(0);" class="btn btn-danger" onclick="del('.$dt->id.')"><i class="fa fa-trash"></i></a>'
               );
           }
   
