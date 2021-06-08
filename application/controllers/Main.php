@@ -17,7 +17,7 @@ class Main extends CI_Controller {
         $d = [
             'title' => 'List Pengaduan',
             'header' => 'Pengaduan',
-            'js' => 'pengaduan/list_pengaduan.js',
+            'js' => 'page/pengaduan/list_pengaduan.js',
             'link_view' => 'pengaduan/list_pengaduan'
         ];
         $this->load->view('_main', $d);

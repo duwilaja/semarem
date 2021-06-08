@@ -25,6 +25,6 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="<?=$template;?>assets/js/script.js"></script>
-    <script src="<?=base_url().'my/page/'.$js;?>"></script>
+    <script src="<?=base_url().'my/'.$js;?>"></script>
     <!-- login js-->
     <!-- Plugin used-->
