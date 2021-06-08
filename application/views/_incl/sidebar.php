@@ -15,9 +15,9 @@
                     <div>
                       <!-- <h6 class="lan-1">General</h6>
                       <p class="lan-2">Dashboards,widgets & layout.</p> -->
-                      <a href="#">
-                        <button  class="btn btn-pill btn-danger btn-air-danger"><i class="icon-plus icon-white"></i> Input Pengaduan</button>
-                      </a>
+                      <!-- <a href="#"> -->
+                        <button  class="btn btn-pengaduan btn-pill btn-danger btn-air-danger"><i class="icon-plus icon-white" ></i> Input Pengaduan</button>
+                      <!-- </a> -->
                     </div>
                   </li> -->
                   <li class="sidebar-list">
