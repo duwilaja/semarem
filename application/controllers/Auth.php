@@ -16,7 +16,6 @@ class Auth extends CI_Controller {
 
     public function proses_login()
     {
-        // $arr = ['u.username' => $username,'u.password' => md5($password),'p.aktif' => '1'];
         $arr = [
             "rowid,nrp,pwd",
             [

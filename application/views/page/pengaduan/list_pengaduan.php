@@ -4,161 +4,49 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h5>Individual column searching (text inputs) </h5><span>The searching functionality provided by DataTables is useful for quickly search through the information in the table - however the search is global, and you may wish to present controls that search on specific columns.</span>
+          <form action="javascript:void();" id="form-filter">
+              <div class="row g-3 select2-drpdwn">
+                  <div class="col-md-4">
+                      <label class="form-label" for="f_kategori_peng">Kategori</label>
+                      <select class="js-example-placeholder-multiple col-sm-12" id="f_kategori_peng" multiple="multiple">
+                      </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label" for="f_date_interval">Rentan Waktu</label>
+                    <input class="form-control" id="f_date_interval" type="text" name="f_date_interval" value="<?=date('Y-m-d').'-'.date('Y-m-d') ?>">
+                  </div>
+                  <div class="col-md-4">
+                      <label class="form-label" for="f_status">Status</label>
+                      <select class="js-example-placeholder-multiple col-sm-12" id="f_status" multiple="multiple">
+                        <option value="AL">Alabama</option>
+                        <option value="WY">Wyoming</option>
+                        <option value="WY">Coming</option>
+                        <option value="WY">Hanry Die</option>
+                        <option value="WY">John Doe</option>
+                      </select>
+                  </div>
+                  <div class="col-md-12">
+                    <button type="reset" class="btn btn-light">Reset</button>
+                    <button type="submit" class="btn btn-danger">Filter</button>
+                  </div>
+              </div>
+          </form>
         </div>
         <div class="card-body">
           <div class="table-responsive product-table">
-            <table class="display" id="basic-1">
+            <table class="display" id="tabel">
               <thead>
                 <tr>
-                  <th>Image</th>
-                  <th>Details</th>
-                  <th>Amount</th>
-                  <th>Stock</th>
-                  <th>Start date</th>
+                  <th>No</th>
+                  <th>Kasus</th>
+                  <th>Keterangan</th>
+                  <th>Pelapor</th>
+                  <th>Status</th>
+                  <th>Tanggal</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-1.png" alt=""></td>
-                  <td>
-                    <h6> Red Lipstick </h6><span>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</span>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-success">In Stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-2.png" alt=""></td>
-                  <td>
-                    <h6> Pink Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-primary">Low Stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-3.png" alt=""></td>
-                  <td>
-                    <h6> Gray Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-danger">out of stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-4.png" alt=""></td>
-                  <td>
-                    <h6> Green Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-primary">Low Stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-5.png" alt=""></td>
-                  <td>
-                    <h6> Black Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-success">In Stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-6.png" alt=""></td>
-                  <td>
-                    <h6> White Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-primary">Low Stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-1.png" alt=""></td>
-                  <td>
-                    <h6> light Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-danger">out of stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-2.png" alt=""></td>
-                  <td>
-                    <h6> Gliter Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-danger">out of stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-3.png" alt=""></td>
-                  <td>
-                    <h6> green Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-success">In Stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="<?=$template;?>assets/images/ecommerce/product-table-4.png" alt=""></td>
-                  <td>
-                    <h6> Yellow Lipstick </h6>
-                    <p>Interchargebla lens Digital Camera with APS-C-X Trans CMOS Sens</p>
-                  </td>
-                  <td>$10</td>
-                  <td class="font-danger">out of stock</td>
-                  <td>2011/04/25</td>
-                  <td>
-                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
