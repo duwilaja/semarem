@@ -7,6 +7,7 @@ class Api_petugas extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model('MPetugas','mp');
+		$this->load->model('MUsers','mu');
 	}
 
     private function token()
@@ -44,7 +45,12 @@ class Api_petugas extends CI_Controller {
     public function get()
     {
         $this->header();
-        $q = $this->mp->get([['p.id','nama_petugas','hp','activity','nama_instansi','unit'],['p.aktif' => 1]])->result();
+        $id = $this->input->get('id');
+        if ($id != '') {
+            $q = $this->mp->get([['p.id','nama_petugas','hp','activity','nama_instansi','unit','p.instansi_id','p.unit_id'],['p.aktif' => 1,'p.id' => $id]])->result();
+        }else{
+            $q = $this->mp->get([['p.id','nama_petugas','hp','activity','nama_instansi','unit'],['p.aktif' => 1]])->result();
+        }
 
         echo json_encode($q);
     }
@@ -68,6 +74,9 @@ class Api_petugas extends CI_Controller {
                         $hp = $this->input->post('hp');
                         $instansi_id = $this->input->post('instansi_id');
                         $unit_id = $this->input->post('unit_id');
+                        $username = $this->input->post('username');
+                        $password = $this->input->post('password');
+                        $email = $this->input->post('email');
 
                         $obj = [
                             'nama_petugas' => $nama_petugas,
@@ -76,15 +85,40 @@ class Api_petugas extends CI_Controller {
                             'instansi_id' => $instansi_id,
                             'unit_id' => $unit_id,
                             'activity' => 0,
-                            // 'ctdby' => $this->session->userdata('id')
-                            'ctdby' => 0
+                            'ctdby' => @$this->session->userdata('id')
+                            // 'ctdby' => 0
                         ];
 
-                        $in = $this->mp->in($obj);
-                        if($in){
-                            $data = $obj;
-                            $msg = "Berhasil menambah data petugas";
-                            $status = true; 
+                        $cek_usr = $this->mu->get('','',['username' => $username]);
+                        if ($cek_usr->num_rows() == 0) { 
+                            $cek_email = $this->mu->get('','',['email' => $email]);
+                            if ($cek_email->num_rows() == 0) { 
+                                $in = $this->mp->in($obj);
+                                $petugas_id = $this->db->insert_id();
+                                $v2 = [
+                                    'username' => $username,
+                                    'password' => md5($password),
+                                    'email' => $email,
+                                    'petugas_id' => $petugas_id,
+                                    'ctddate' => date('Y-m-d'),
+                                    'ctdtime' => date('H:i:s'),
+                                    'ctdBy' => @$this->session->userdata('id')
+                                ];
+                        
+                                $this->db->insert('users',$v2);
+
+                                if($in){
+                                    $data = $obj;
+                                    $msg = "Berhasil menambah data petugas";
+                                    $status = true; 
+                                }
+                            } else {
+                                $msg = "Gagal menambah data petugas, Email sudah digunakan";
+                                $status = false; 
+                            }
+                        } else {
+                            $msg = "Gagal menambah data petugas, Username sudah digunakan";
+                            $status = false; 
                         }
                     // }
                 } catch (Exception $error) {
@@ -199,5 +233,10 @@ class Api_petugas extends CI_Controller {
     public function dt()
     {
         echo $this->mp->dt();
+    }
+
+    public function tes($us)
+    {
+        echo $this->mu->get('','',['username' => $us])->num_rows();
     }
 }

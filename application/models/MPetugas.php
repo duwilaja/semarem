@@ -64,4 +64,68 @@ class MPetugas extends CI_Model{
         return $bool;
     }
 
+    public function dt()
+    {
+          // Definisi
+          $condition = [];
+          $data = [];
+  
+          $CI = &get_instance();
+          $CI->load->model('DataTable', 'dt');
+  
+          // Set table name
+          $CI->dt->table = $this->t.' as p';
+          // Set orderable column fields
+          $CI->dt->column_order = [null,'nama_petugas','unit','nama_instansi','activity'];
+          // Set searchable column fields
+          $CI->dt->column_search = ['nama_petugas','unit','nama_instansi'];
+          // Set select column fields
+          $CI->dt->select = 'p.id as id,nama_instansi,unit,p.ctddate,p.ctdtime,nama_petugas,hp,activity';
+          // Set default order
+          $CI->dt->order = ['p.id' => 'desc'];
+
+          //where
+          $con = ['where','p.aktif',1];
+          array_push($condition,$con);
+
+          //join table
+          $con = ['join','unit u','u.id = p.unit_id','left'];
+          array_push($condition,$con);
+
+          $con = ['join','instansi i','i.id = p.instansi_id','left'];
+          array_push($condition,$con);
+
+          // Fetch member's records
+          $dataTabel = $this->dt->getRows($_POST, $condition);
+  
+          $i = @$_POST['start'];
+          foreach ($dataTabel as $dt) {
+              $i++;
+              $data[] = array(
+                  $i,
+                  $dt->nama_petugas,
+                  $dt->hp,
+                  $dt->nama_instansi,
+                  $dt->unit,
+                  ($dt->activity == 0) ? 'Siap Bertugas' : (($dt->activity == 1) ? 'Istirahat' : (($dt->activity == 2) ? 'Sedang Menerima Tugas' : '')),
+                  '<div class="btn-group-wrapper">
+                    <div class="btn-group">
+                        <button class="btn btn-warning" onclick="modal_edit('.$dt->id.')"><i class="fa fa fa-edit"></i></button>
+                        <button class="btn btn-secondary" onclick="del('.$dt->id.')"><i class="fa fa-trash"></i></button>
+                    </div>
+                  </div>'
+              );
+          }
+  
+          $output = array(
+              "draw" => @$_POST['draw'],
+              "recordsTotal" => $this->dt->countAll($condition),
+              "recordsFiltered" => $this->dt->countFiltered(@$_POST, $condition),
+              "data" => $data,
+          );
+  
+          // Output to JSON format
+          return json_encode($output);
+    }
+
 }

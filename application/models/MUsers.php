@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class MUsers extends CI_Model{
     
-    private $t = 'ais_laka';
+    private $t = 'users';
     public $see = '*';
 
     function __construct() {
