@@ -32,7 +32,7 @@ function maps(){
             if (search_latlong != '') {    
                 $(".leaflet-popup-tip-container").hide();
                 $(".leaflet-popup-content-wrapper").hide();
-                notif_peringatan(title='Get Koordinat',message='Pastikan Titik Koordinat Sesuai!',type='danger');
+                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='success');
             }
         }window.CP.exitedLoop(0);
         });
@@ -49,7 +49,7 @@ function maps(){
             var search_latlong = $("#i_latlong").val();
             if (search_latlong != '') {
                 $(".leaflet-marker-icon").hide();
-                notif_peringatan(title='New Koordinat !!!',message='Pastikan Titik Koordinat Sesuai!',type='danger');
+                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='success');
             }
             document.getElementById('i_latlong').value = e.latlng
             document.getElementById('i_lat').value = e.latlng.lat;
