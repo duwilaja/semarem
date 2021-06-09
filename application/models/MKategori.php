@@ -115,5 +115,5 @@ class MKategori extends CI_Model {
           // Output to JSON format
           return json_encode($output);
     }
-	
+
 }

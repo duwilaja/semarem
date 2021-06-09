@@ -31,7 +31,6 @@
 
     <script src="<?=$template;?>assets/js/datepicker/daterange-picker/moment.min.js"></script>
     <script src="<?=$template;?>assets/js/datepicker/daterange-picker/daterangepicker.js"></script>
-    <script src="<?=$template;?>assets/js/datepicker/daterange-picker/daterange-picker.custom.js"></script>
     <!-- Plugin used-->
 
    <!-- leaflet js  -->

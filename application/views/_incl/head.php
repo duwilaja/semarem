@@ -21,12 +21,14 @@
     <!-- Feather icon-->
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/feather-icon.css">
     <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/daterange-picker.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/scrollbar.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/datatables.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/owlcarousel.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/rating.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/sweetalert2.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/select2.css">
+    
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/bootstrap.css">

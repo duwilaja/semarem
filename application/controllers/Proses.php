@@ -13,6 +13,7 @@ class Proses extends CI_Controller {
 		}
 	}
 
+    // Insert pengaduan back office
     public function insert_pengaduan()
     {
         $query = $this->mp->insert_pengaduan();
