@@ -78,7 +78,7 @@
                                     <hr>
                                     <div class="mb-3 draggable">
                                     <label for="i_lat">Lat & Long (*)</label>
-                                    <input class="form-control btn-square" type="text" id="i_latlong" placeholder="Lattitude & Longtitude">
+                                    <input class="form-control btn-square" type="text" id="i_latlong" placeholder="Lattitude & Longtitude" readonly>
                                     <input class="form-control btn-square" type="hidden" id="i_lat" name="i_lat" placeholder="Lattitude">
                                     <input class="form-control btn-square" type="hidden" id="i_lng" name="i_lng" placeholder="Longtitude">
                                     <p class="help-block">Wajib Diisi (*)</p>
