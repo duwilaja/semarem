@@ -45,4 +45,24 @@ class MPengaduan extends CI_Model{
         return $q;
     }
 
+    public function insert_pengaduan()
+    {
+        date_default_timezone_set("Asia/Jakarta");
+        $data = array(
+            'kategori_peng_id' => $this->input->post('kasus'),
+            'nama_pelapor' => $this->input->post('pelapor'),
+            'telp' => $this->input->post('nohp'),
+            'keterangan' => $this->input->post('ket'),
+            'lat' => $this->input->post('lat'),
+            'lng' => $this->input->post('lng'),
+            'alamat' => $this->input->post('alamat'),
+            'ctddate' => date('Y-m-d'),
+            'ctdtime' => date('H:i:s'),
+            'ctdby' => $this->session->userdata('id'),
+            'status' => 0
+        );
+        $this->db->insert('pengaduan',$data);
+        return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
 }

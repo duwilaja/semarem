@@ -22,9 +22,17 @@
     <script src="<?=$template;?>assets/js/sweet-alert/sweetalert.min.js"></script>
     <script src="<?=$template;?>assets/js/select2/select2.full.min.js"></script>
     <script src="<?=$template;?>assets/js/select2/select2-custom.js"></script>
+    <script src="<?=$template;?>assets/js/notify/bootstrap-notify.min.js"></script>
+    <script src="<?=$template;?>assets/js/notify/notify-script.js"></script>
+    <!-- Plugins JS Ends-->
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="<?=$template;?>assets/js/script.js"></script>
     <script src="<?=base_url().'my/'.$js;?>"></script>
     <!-- login js-->
     <!-- Plugin used-->
+
+   <!-- leaflet js  -->
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""></script>
