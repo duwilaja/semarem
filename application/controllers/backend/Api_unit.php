@@ -45,8 +45,12 @@ class Api_unit extends CI_Controller {
     {
         $this->header();
         $id = $this->input->get("id");
+        $instansi_id = $this->input->get("instansi_id");
+        $where = ['instansi_id' => $instansi_id];
         if ($id != '') {
             $q = $this->mun->get($id)->result();
+        }else if($instansi_id != ''){
+            $q = $this->mun->get('',$where)->result();
         }else{
             $q = $this->mun->get()->result();
         }
