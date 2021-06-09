@@ -1,5 +1,12 @@
     <style>
         /* ukuran peta */
+        th, td {
+        border: 1px solid black;
+        
+        }
+        #tblmap{
+            overflow: scroll;
+        }
         #mapid {
             height: 100%;
         }
