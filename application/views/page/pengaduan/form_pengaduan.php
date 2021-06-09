@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         </div>
-                        <div class="col-lg-4 col-xl-4 " style="background-color: #f7f7f7;">
+                        <div class="col-lg-5 col-xl-5 " style="background-color: #f7f7f7;">
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-input" role="tabpanel" aria-labelledby="pills-input-tab">
                                 <form class="theme-form" action="javascript:void(0);" method="post">
@@ -73,21 +73,32 @@
                                     <select class="form-control btn-square" id="i_kasus" name="i_kasus">
                                         <option value="-Pilih-">-Pilih-</option>
                                     </select>
-                                    <p class="help-block">Wajib Diisi (*)</p>
+                                    <!-- <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
                                     <hr>
                                     <div class="mb-3 draggable">
-                                    <label for="i_lat">Lat & Long (*)</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <label for="i_lat">Lattitude (*)</label>
+                                            <input class="form-control btn-square" type="text" id="i_lat" name="i_lat" placeholder="Lattitude" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <label for="i_lat">Longtitude(*)</label>
+                                            <input class="form-control btn-square" type="text" id="i_lng" name="i_lng" placeholder="Longtitude" readonly>
+                                            </div>
+                                        </div>
+                                        <!-- <p class="help-block">Wajib Diisi (*)</p>     -->
+                                    <!-- <label for="i_lat">Lat & Long (*)</label>
                                     <input class="form-control btn-square" type="text" id="i_latlong" placeholder="Lattitude & Longtitude" readonly>
                                     <input class="form-control btn-square" type="hidden" id="i_lat" name="i_lat" placeholder="Lattitude">
                                     <input class="form-control btn-square" type="hidden" id="i_lng" name="i_lng" placeholder="Longtitude">
-                                    <p class="help-block">Wajib Diisi (*)</p>
+                                    <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
                                     <hr>
                                     <div class="mb-3 draggable">
                                     <label for="i_alamat">Alamat/Jalan (*)</label>
-                                    <textarea class="form-control" id="i_alamat" name="i_alamat" rows="3"></textarea>
-                                    <p class="help-block">Wajib Diisi (*)</p>
+                                    <textarea class="form-control" id="i_alamat" name="i_alamat" rows="6"></textarea>
+                                    <!-- <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
                                     <hr>
                                 <!-- </form> -->
@@ -97,19 +108,19 @@
                                     <div class="mb-3 draggable">
                                     <label for="i_pelapor">Nama Pelapor </label>
                                     <input class="form-control btn-square" id="i_pelapor" name="i_pelapor" type="text" placeholder="Nama Pelapor">
-                                    <p class="help-block">Wajib Diisi (*)</p>
+                                    <!-- <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
                                     <hr>
                                     <div class="mb-3 draggable">
                                     <label for="i_nohp">No HP </label>
                                     <input class="form-control btn-square" id="i_nohp" name="i_nohp" type="text" placeholder="No HP">
-                                    <p class="help-block">Wajib Diisi (*)</p>
+                                    <!-- <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
                                     <hr>
                                     <div class="mb-3 draggable">
                                     <label for="i_ket">Keterangan </label>
                                     <textarea class="form-control" id="i_ket" name="i_ket" rows="3"></textarea>
-                                    <p class="help-block">Wajib Diisi (*)</p>
+                                    <!-- <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
                                     </hr>
                                 </form>
@@ -120,7 +131,7 @@
                               </div>
                             </div>
                         </div>
-                        <div class="col-lg-8 col-xl-8 lg-mt">
+                        <div class="col-lg-7 col-xl-7 lg-mt">
                             <div id="mapid">
                             </div>
                         </div>

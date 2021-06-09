@@ -9,11 +9,12 @@ $( document ).ready(function() {
 function maps(){
     // buat fungsi Cari lokasi
     var map = L.map('mapid', {
-        center: [-7.550676, 110.828316],
+        center: [-7.56986, 110.82819],
         zoom: 13 });
         L.control.scale().addTo(map);
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' }).
+        // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
+        }).
         addTo(map);
         var popup = L.popup();
         var searchControl = new L.esri.Controls.Geosearch().addTo(map);
@@ -25,14 +26,14 @@ function maps(){
             results.addLayer(L.marker(data.results[i].latlng)
             .bindPopup(data.results[i].text));
             document.getElementById('i_alamat').value = data.results[i].text;
-            document.getElementById('i_latlong').value = data.results[i].latlng;
+            // document.getElementById('i_latlong').value = data.results[i].latlng;
             document.getElementById('i_lat').value = data.results[i].latlng.lat;
             document.getElementById('i_lng').value = data.results[i].latlng.lng;  
-            var search_latlong = $("#i_latlong").val();
-            if (search_latlong != '') {    
+            var search_latlong = $("#i_lat").val();
+            if (search_latlong != '') {   
                 $(".leaflet-popup-tip-container").hide();
                 $(".leaflet-popup-content-wrapper").hide();
-                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='success');
+                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='danger');
             }
         }window.CP.exitedLoop(0);
         });
@@ -40,20 +41,24 @@ function maps(){
 
         // buat fungsi popup saat map diklik
         function onMapClick(e) {
-            popup
+            $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+e.latlng.lat+'&lon='+e.latlng.lng+'', function(data){
+                popup
                 .setLatLng(e.latlng)
-                .setContent("Titik Koordinat Baru:  " + e.latlng
+                .setContent("Alamat : "+data.address.road+" <br>Titik Koordinat:  " + e.latlng
                     .toString()
                     ) 
                 .openOn(map);               
-            var search_latlong = $("#i_latlong").val();
+            var search_latlong = $("#i_lat").val();
             if (search_latlong != '') {
                 $(".leaflet-marker-icon").hide();
-                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='success');
+                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='danger');
             }
-            document.getElementById('i_latlong').value = e.latlng
+            // document.getElementById('i_latlong').value = e.latlng;
+            document.getElementById('i_alamat').value = data.address.road;
             document.getElementById('i_lat').value = e.latlng.lat;
-            document.getElementById('i_lng').value = e.latlng.lng;  
+            document.getElementById('i_lng').value = e.latlng.lng; 
+
+            }); 
         }
         map.on('click', onMapClick);
 
