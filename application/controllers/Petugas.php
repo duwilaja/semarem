@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class petugas extends CI_Controller {
+class Petugas extends CI_Controller {
 
 	public function __construct()
     {
