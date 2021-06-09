@@ -3,6 +3,18 @@
         #mapid {
             height: 100%;
         }
+        #mapSearchContainer{
+        position:fixed;
+        top:20px;
+        right: 40px;
+        height:30px;
+        width:180px;
+        z-index:110;
+        font-size:10pt;
+        color:#5d5d5d;
+        border:solid 1px #bbb;
+        background-color:#f8f8f8;
+        }
         .form-builder
         .nav-danger
         .nav-link.active,
@@ -65,20 +77,16 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3 draggable">
+                                    <label for="i_lat">Lat & Long (*)</label>
+                                    <input class="form-control btn-square" type="text" id="i_latlong" placeholder="Lattitude & Longtitude">
+                                    <input class="form-control btn-square" type="hidden" id="i_lat" name="i_lat" placeholder="Lattitude">
+                                    <input class="form-control btn-square" type="hidden" id="i_lng" name="i_lng" placeholder="Longtitude">
+                                    <p class="help-block">Wajib Diisi (*)</p>
+                                    </div>
+                                    <hr>
+                                    <div class="mb-3 draggable">
                                     <label for="i_alamat">Alamat/Jalan (*)</label>
-                                    <input class="form-control btn-square" id="i_alamat" name="i_alamat" value="" type="text" placeholder="Alamat">
-                                    <p class="help-block">Wajib Diisi (*)</p>
-                                    </div>
-                                    <hr>
-                                    <div class="mb-3 draggable">
-                                    <label for="i_lat">Lat (*)</label>
-                                    <input class="form-control btn-square" type="text" id="i_lat" name="i_lat" placeholder="Lattitude">
-                                    <p class="help-block">Wajib Diisi (*)</p>
-                                    </div>
-                                    <hr>
-                                    <div class="mb-3 draggable">
-                                    <label for="i_lng">Lng (*)</label>
-                                    <input class="form-control btn-square" type="text" id="i_lng" name="i_lng" placeholder="Longtitude">
+                                    <textarea class="form-control" id="i_alamat" name="i_alamat" rows="3"></textarea>
                                     <p class="help-block">Wajib Diisi (*)</p>
                                     </div>
                                     <hr>
