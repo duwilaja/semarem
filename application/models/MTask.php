@@ -178,11 +178,12 @@ class MTask extends CI_Model{
         $log_done = $this->db->get_where('task_log',['task_assign_id' => $task_assign_id,'status' => '4']);
 
         if ($log_done->num_rows() > 0 && $log_first->num_rows() > 0) {
+            $log_firstx = $log_first->first_row();
             $log_done = $log_done->last_row();
             $rsp['done_date'] = $log_done->timestamp;
             $rsp['done_time'] = $log_done->ctdtime;
             $rsp['done_date_name'] = tgl_indo($log_done->ctddate);
-            $rsp['calc'] = calc_minute($log_first->timestamp,$log_done->timestamp)/60;
+            $rsp['calc'] = calc_minute($log_firstx->timestamp,$log_done->timestamp)/60;
         }
 
         if($log_first->num_rows() > 0){
