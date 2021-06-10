@@ -7,6 +7,9 @@ class Api_pengaduan extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model('MPengaduan','mp');
+        $this->load->model('MPelapor','mpel');
+        $this->load->model('MKategori','mpengkateg');
+
 	}
 
     private function upload($path,$files,$types="jpg|png|jpeg|svg")
@@ -88,7 +91,7 @@ class Api_pengaduan extends CI_Controller {
         echo json_encode($q);
     }
 
-    public function in()
+    public function kirim_laporan()
     {      
         $this->header();
         $data = [];
@@ -156,6 +159,100 @@ class Api_pengaduan extends CI_Controller {
                     $statusCode = 417;
                     $msg = $error->getMessage();
                 }
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    public function simpan_data_diri()
+    {      
+        $this->header();
+        $data = [];
+        $q = false;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal menyimpan data diri";
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                    $nama = $this->input->post('nama');
+                    $telp = $this->input->post('telp');
+                    $email = $this->input->post('email');
+                    $obj = [
+                        'nama' => $nama,
+                        'telp' => $telp,
+                        'email' => $email,
+                        'aktif' => 1,
+                    ];
+                    $cek_nomor = $this->mpel->pelapor_where('*',['telp' => $obj['telp']]);
+                    if ($cek_nomor->num_rows() > 0) {
+                        $data = $cek_nomor->result();
+                        $msg = "Menampilkan data dari nomor telepon yang dimasukan";
+                        $status = true;
+                    }else{
+                        $this->mpel->in($obj);
+                        $obj['id'] = $this->db->insert_id();
+                        $data = $obj;
+                        $msg = "Berhasil menyimpan data diri";
+                        $status = true; 
+                    }
+                  }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Profile Petugas
+    public function kategori_pengaduan()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mendapatkan data kategori pengaduan";
+
+            try {   
+              if ($this->cek_token()) {
+                 $q = $this->mpengkateg->get('',['priority' => 1]);
+                 if($q->num_rows() > 0){
+                     $data = $q->result();
+                     $msg = "Berhasil mengambil data kategori pengaduan";
+                     $status = true; 
+                 }else{
+                    $msg = "Gagal mengambil data kategori pengaduan";
+                    $status = false; 
+                 }
+              }
+            } catch (Exception $error) {
+                $statusCode = 417;
+                $msg = $error->getMessage();
             }
 
             $arr = [
