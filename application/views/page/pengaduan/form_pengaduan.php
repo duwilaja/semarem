@@ -4,8 +4,10 @@
         border: 1px solid black;
         
         }
-        #tblmap{
-            overflow: scroll;
+        #dis_name{
+            height: 100px;       /* Just for the demo          */
+            overflow-y: auto;    /* Trigger vertical scroll    */
+            overflow-x: hidden;  /* Hide the horizontal scroll */
         }
         #mapid {
             height: 100%;
@@ -65,7 +67,7 @@
                             <div>
                                 <nav class="navbar navbar-expand-md p-0">
                                     <form class="form-inline">
-                                        <a href="<?php echo base_url('Main/pengaduan');?>" class="btn btn-danger copy-btn" id="copy-to-clipboard" type="submit" data-clipboard-text="testing">Data Pengaduan</a>
+                                        <a href="<?php echo base_url('Pengaduan/list_pengaduan');?>" class="btn btn-danger copy-btn" id="copy-to-clipboard" type="submit" data-clipboard-text="testing">Data Pengaduan</a>
                                     </form>
                                 </nav>
                             </div>
@@ -103,8 +105,9 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3 draggable">
-                                    <label for="i_alamat">Alamat/Jalan (*)</label>
-                                    <textarea class="form-control" id="i_alamat" name="i_alamat" rows="6"></textarea>
+                                    <label for="i_alamat">Alamat&Detail (*)</label>
+                                    <textarea class="form-control" id="i_alamat" name="i_alamat" rows="6" contenteditable="true">
+                                    </textarea>
                                     <!-- <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
                                     <hr>
