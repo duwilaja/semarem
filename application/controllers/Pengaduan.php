@@ -22,4 +22,17 @@ class Pengaduan extends CI_Controller {
         $this->load->view('_main', $d);
     }
 
+    public function eksekusi($id='')
+    {
+        if ($id != '') {
+            $d = [
+                'title' => 'Eksekusi Pengaduan',
+                'header' => 'Eksekusi',
+                'js' => 'page/pengaduan/eksekusi.js',
+                'link_view' => 'pengaduan/eksekusi'
+            ];
+            $this->load->view('_main', $d);
+        }
+    }
+
 }

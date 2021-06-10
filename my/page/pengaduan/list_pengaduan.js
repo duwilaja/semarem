@@ -122,7 +122,7 @@ function eksekusi(id='') {
         },
       }).then((isConfirm) => {
         if (isConfirm) {         
-           
+            window.location.assign('../Pengaduan/eksekusi/'+id);
         }
       })
 }
