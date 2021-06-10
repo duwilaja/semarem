@@ -118,9 +118,9 @@
                                 <!-- Chat right side ends-->
                             </div>
                         </div>
-                        <!-- <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: block;">
-                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
+                        <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: block;">
+                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:10px!important;">
+                                <li class="nav-item"><a class="nav-link" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
                                     <div class="material-border"></div>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" id="profile-info-tab" data-bs-toggle="tab" href="#info-profile" role="tab" aria-selected="false">STATUS</a>
@@ -131,7 +131,7 @@
                                 </li>
                             </ul>
                             <div class="tab-content" id="info-tabContent">
-                                <div class="tab-pane fade show active" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
+                                <div class="tab-pane fade" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
                                     <div class="people-list">
                                         <ul class="list">
                                             <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/4.jpg" alt="">
@@ -245,7 +245,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>

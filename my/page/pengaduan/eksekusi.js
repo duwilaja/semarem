@@ -57,6 +57,7 @@ async function postData(url = '', data = {},token='') {
                   <div class="about">
                     <div class="name">${e.vehiclename}</div>
                     <div class="status">${e.vehiclegroup}</div>
+                    <a href="#" class="btn btn-success" style="padding: .2rem .2rem!important; margin-right:3px!important;"><i class="fa fa-plus"></i></a>
                   </div>
                 </li>`);
             });
