@@ -20,6 +20,7 @@
                       </a>
                     </div>
                   </li> 
+                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="<?= site_url('Dashboard')?>"><i data-feather="airplay"> </i><span>Dashboard</span></a></li>
                   <li class="sidebar-list">
                     <label class="badge badge-danger">4</label><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layers"></i><span class="">Data Master</span></a>
                     <ul class="sidebar-submenu">

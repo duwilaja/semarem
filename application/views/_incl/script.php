@@ -43,3 +43,8 @@
    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-8216c69d01441f36c0ea791ae2d4469f0f8ff5326f00ae2d00e4bb7d20e24edb.js"></script>
 
+   <!-- apex js -->
+   <script src="<?=$template;?>assets/js/chart/apex-chart/apex-chart.js"></script>
+   <script src="<?=$template;?>assets/js/chart/apex-chart/stock-prices.js"></script>
+   <script src="<?=$template;?>assets/js/chart/apex-chart/chart-custom.js"></script>
+

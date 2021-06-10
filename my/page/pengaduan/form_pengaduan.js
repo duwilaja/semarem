@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+    $(".leaflet-marker-icon").show();
     maps();
     get_kategori();
     $("#inp_pengaduan").click(function(){
@@ -24,9 +25,10 @@ function maps(){
         results.clearLayers();
         for (var i = data.results.length - 1; i >= 0; i--) {if (window.CP.shouldStopExecution(0)) break;
             results.addLayer(L.marker(data.results[i].latlng)
-            .bindPopup(data.results[i].text));
-            document.getElementById('i_alamat').value = data.results[i].text;
-            // document.getElementById('i_latlong').value = data.results[i].latlng;
+            .bindPopup("<table><tr><th>Alamat</th><th>"+data.results[i].text+"</th></tr><tr><td>Detail</td><td id='dis_name'>"+data.results[i].city+"</td></tr><tr><td>Koordinat</td><td>("+data.results[i].latlng.lat+","+data.results[i].latlng.lng+")</td></tr></table>"));
+            // .bindPopup(data.results[i].text));
+            var alamat = "Alamat : "+data.results[i].text+"\nDetail : "+data.results[i].city ;
+            document.getElementById('i_alamat').value = alamat;
             document.getElementById('i_lat').value = data.results[i].latlng.lat;
             document.getElementById('i_lng').value = data.results[i].latlng.lng;  
             var search_latlong = $("#i_lat").val();
@@ -34,6 +36,10 @@ function maps(){
                 $(".leaflet-popup-tip-container").hide();
                 $(".leaflet-popup-content-wrapper").hide();
                 notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='danger');
+                
+            }
+            if (data.results[i].city != '') {
+                notif_peringatan(title='',message='Harap Lengkapi Detail Alamat!',type='danger');
             }
         }window.CP.exitedLoop(0);
         });
@@ -44,28 +50,22 @@ function maps(){
             $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+e.latlng.lat+'&lon='+e.latlng.lng+'', function(data){
                 popup
                 .setLatLng(e.latlng)
-                // .setContent(
-                //     "Lokasi : "+data.address.road+
-                //     "</hr><br>Detail : "+data.display_name+
-                //     "</hr><br>Titik Koordinat:  " + e.latlng
-                //     .toString()
-                //     ) 
                 .setContent(
-                    "<table id='tblmap'><tr><th>Lokasi</th><th>"+data.address.road+"</th></tr><tr><td>Detail</td><td>"+data.display_name+"</td></tr><tr><td>Koordinat</td><td>("+e.latlng.lat+","+e.latlng.lng+")</td></tr></table>"
+                    "<table><tr><th>Alamat</th><th>"+data.address.road+"</th></tr><tr><td>Detail</td><td id='dis_name'>"+data.display_name+"</td></tr><tr><td>Koordinat</td><td>("+e.latlng.lat+","+e.latlng.lng+")</td></tr></table>"
                     .toString()
                 ) 
                 .openOn(map);               
             var search_latlong = $("#i_lat").val();
             if (search_latlong != '') {
-                $(".leaflet-marker-icon").hide();
                 notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='danger');
             }
-            // document.getElementById('i_latlong').value = e.latlng;
-            // document.getElementById('i_alamat').value = data.address.road;
-            document.getElementById('i_alamat').value = data.display_name;
+            if (typeof(data.address.road) == 'undefined') {
+                notif_peringatan(title='',message='Alamat Undefined! Harap di input Manual !!!',type='danger');
+            }
+            var alamat = "Alamat : "+data.address.road+"\nDetail : "+data.display_name;
+            document.getElementById('i_alamat').value = alamat ;
             document.getElementById('i_lat').value = e.latlng.lat;
             document.getElementById('i_lng').value = e.latlng.lng; 
-            console.log(data);
 
             }); 
         }
@@ -104,7 +104,7 @@ function maps(){
 // }
 
 function inp_pengaduan() {
-    var url = "../Main/pengaduan";
+    var url = "../Pengaduan/list_pengaduan ";
     var i_kasus = $("#i_kasus").val();
     var i_alamat= $("#i_alamat").val();
     var i_lat = $("#i_lat").val();
