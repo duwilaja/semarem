@@ -65,4 +65,32 @@ class MPengaduan extends CI_Model{
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 
+    public function in($arr=[])
+    {
+        $bool = false;
+        if (!empty($arr)) {
+            $arr['ctddate'] = date('Y-m-d');
+            $arr['ctdtime'] = date('H:i:s');
+            $q = $this->db->insert('pengaduan',$arr);
+            if ($this->db->affected_rows() > 0) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
+
+    public function in_peng_img($obj=[])
+    {
+        $bool = false;
+        if (!empty($obj)) {
+            $obj['ctddate'] = date('Y-m-d');
+            $obj['ctdtime'] = date('H:i:s');
+            $this->db->insert('peng_img',$obj);
+            if ($this->db->affected_rows() > 0) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
+
 }
