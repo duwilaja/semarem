@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class Data_master extends CI_Controller {
 	
 	public function __construct()
     {
@@ -11,17 +11,6 @@ class Main extends CI_Controller {
             redirect('Auth/login');
 		}
 	}
-
-    public function pengaduan()
-    {
-        $d = [
-            'title' => 'List Pengaduan',
-            'header' => 'Pengaduan',
-            'js' => 'page/pengaduan/list_pengaduan.js',
-            'link_view' => 'pengaduan/list_pengaduan'
-        ];
-        $this->load->view('_main', $d);
-    }
 
     public function pengaduan_kategori()
     {

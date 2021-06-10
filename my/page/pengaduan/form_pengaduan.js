@@ -5,36 +5,103 @@ $( document ).ready(function() {
         inp_pengaduan();
    });
 });
-        
+     
 function maps(){
-            var mymap = L.map('mapid').setView([-7.550676, 110.828316], 12);   
-            mymap.removeControl( mymap.zoomControl ); 
-            //setting maps menggunakan api mapbox bukan google maps, daftar dan dapatkan token      
-            L.tileLayer(
-                'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFiaWxjaGVuIiwiYSI6ImNrOWZzeXh5bzA1eTQzZGxpZTQ0cjIxZ2UifQ.1YMI-9pZhxALpQ_7x2MxHw', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 20,
-                    id: 'mapbox/streets-v11',
-                    tileSize: 512,
-                    zoomOffset: -1,
-                    accessToken: 'your.mapbox.access.token'
-                }).addTo(mymap);
+    // buat fungsi Cari lokasi
+    var map = L.map('mapid', {
+        center: [-7.56986, 110.82819],
+        zoom: 13 });
+        L.control.scale().addTo(map);
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' 
+        }).
+        addTo(map);
+        var popup = L.popup();
+        var searchControl = new L.esri.Controls.Geosearch().addTo(map);
 
-            var popup = L.popup();
+        var results = new L.LayerGroup().addTo(map);
+        searchControl.on('results', function (data) {
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {if (window.CP.shouldStopExecution(0)) break;
+            results.addLayer(L.marker(data.results[i].latlng)
+            .bindPopup(data.results[i].text));
+            document.getElementById('i_alamat').value = data.results[i].text;
+            // document.getElementById('i_latlong').value = data.results[i].latlng;
+            document.getElementById('i_lat').value = data.results[i].latlng.lat;
+            document.getElementById('i_lng').value = data.results[i].latlng.lng;  
+            var search_latlong = $("#i_lat").val();
+            if (search_latlong != '') {   
+                $(".leaflet-popup-tip-container").hide();
+                $(".leaflet-popup-content-wrapper").hide();
+                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='danger');
+            }
+        }window.CP.exitedLoop(0);
+        });
+        setTimeout(function () {$('.pointer').fadeOut('slow');}, 3400);
 
-            function onMapClick(e) {
+        // buat fungsi popup saat map diklik
+        function onMapClick(e) {
+            $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+e.latlng.lat+'&lon='+e.latlng.lng+'', function(data){
                 popup
                 .setLatLng(e.latlng)
-                .setContent("koordinatnya adalah " + e.latlng.toString()) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
-                .openOn(mymap);
-
-                // document.getElementById('latlong').value = e.latlng;
-                document.getElementById('i_lat').value = e.latlng.lat;
-                document.getElementById('i_lng').value = e.latlng.lng;  
+                // .setContent(
+                //     "Lokasi : "+data.address.road+
+                //     "</hr><br>Detail : "+data.display_name+
+                //     "</hr><br>Titik Koordinat:  " + e.latlng
+                //     .toString()
+                //     ) 
+                .setContent(
+                    "<table id='tblmap'><tr><th>Lokasi</th><th>"+data.address.road+"</th></tr><tr><td>Detail</td><td>"+data.display_name+"</td></tr><tr><td>Koordinat</td><td>("+e.latlng.lat+","+e.latlng.lng+")</td></tr></table>"
+                    .toString()
+                ) 
+                .openOn(map);               
+            var search_latlong = $("#i_lat").val();
+            if (search_latlong != '') {
+                $(".leaflet-marker-icon").hide();
+                notif_peringatan(title='',message='Pastikan Titik Koordinat Sesuai !!!',type='danger');
             }
-            mymap.on('click', onMapClick); //jalankan fungsi
+            // document.getElementById('i_latlong').value = e.latlng;
+            // document.getElementById('i_alamat').value = data.address.road;
+            document.getElementById('i_alamat').value = data.display_name;
+            document.getElementById('i_lat').value = e.latlng.lat;
+            document.getElementById('i_lng').value = e.latlng.lng; 
+            console.log(data);
 
+            }); 
+        }
+        map.on('click', onMapClick);
+
+        
 }
+// function maps(){
+//             var mymap = L.map('mapid').setView([-7.550676, 110.828316], 12);   
+//             mymap.removeControl( mymap.zoomControl ); 
+//             //setting maps menggunakan api mapbox bukan google maps, daftar dan dapatkan token      
+//             L.tileLayer(
+//                 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmFiaWxjaGVuIiwiYSI6ImNrOWZzeXh5bzA1eTQzZGxpZTQ0cjIxZ2UifQ.1YMI-9pZhxALpQ_7x2MxHw', {
+//                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//                     maxZoom: 20,
+//                     id: 'mapbox/streets-v11',
+//                     tileSize: 512,
+//                     zoomOffset: -1,
+//                     accessToken: 'your.mapbox.access.token'
+//                 }).addTo(mymap);
+
+//             var popup = L.popup();
+
+//             function onMapClick(e) {
+//                 popup
+//                 .setLatLng(e.latlng)
+//                 .setContent("koordinatnya adalah " + e.latlng.toString()) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
+//                 .openOn(mymap);
+
+//                 // document.getElementById('latlong').value = e.latlng;
+//                 document.getElementById('i_lat').value = e.latlng.lat;
+//                 document.getElementById('i_lng').value = e.latlng.lng;  
+//             }
+//             mymap.on('click', onMapClick); //jalankan fungsi
+
+// }
 
 function inp_pengaduan() {
     var url = "../Main/pengaduan";

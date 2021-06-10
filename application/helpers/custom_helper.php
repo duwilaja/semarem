@@ -232,6 +232,19 @@ if (!function_exists('secondstoTime')) {
         }
     }
 
+    if (!function_exists('setStatusPengaduan2')) {
+        function setStatusPengaduan2($s='')
+        {
+            if ($s == 0){ return "Menuggu Konfirmasi";}
+            else if ($s == 1){ return "Sudah di Konfirmasi";}
+            else if ($s == 2){ return "Ditangani"; }
+            else if ($s == 3){ return "Selesai"; }
+            else if ($s == 4){ return "Batal"; }
+            else{ return "Menunggu Konfirmasi"; }
+        }
+    }
+    
+
     if (!function_exists('http')) {
         function link_http()
         {

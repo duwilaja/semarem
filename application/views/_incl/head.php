@@ -21,12 +21,14 @@
     <!-- Feather icon-->
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/feather-icon.css">
     <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/daterange-picker.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/scrollbar.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/datatables.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/owlcarousel.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/rating.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/sweetalert2.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/select2.css">
+    
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/bootstrap.css">
@@ -39,7 +41,10 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url('my/css/styles.css');?>">
 
     <!-- leaflet maps cdn -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
+        crossorigin="" /> -->
+    <!--leaflet maps cdn new  -->
+    <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.2/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
   </head>

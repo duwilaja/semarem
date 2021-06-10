@@ -19,16 +19,17 @@
                         <button  class="btn btn-pengaduan btn-pill btn-danger btn-air-danger"><i class="icon-plus icon-white" ></i> Input Pengaduan</button>
                       </a>
                     </div>
-                  </li> -->
+                  </li> 
                   <li class="sidebar-list">
-                    <label class="badge badge-danger">4</label><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layers"></i><span class="">Data Master              </span></a>
+                    <label class="badge badge-danger">4</label><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="layers"></i><span class="">Data Master</span></a>
                     <ul class="sidebar-submenu">
-                      <li><a class="" href="<?=site_url('Main/instansi');?>">Instansi</a></li>
-                      <li><a class="" href="<?=site_url('Main/unit');?>">Unit</a></li>
-                      <li><a class="" href="<?=site_url('Main/pengaduan_kategori');?>">Pengaduan Kategori</a></li>
-                      <li><a class="" href="<?=site_url('Main/task_kategori');?>">Task Kategori</a></li>
+                      <li><a class="" href="<?=site_url('Data_master/instansi');?>">Instansi</a></li>
+                      <li><a class="" href="<?=site_url('Data_master/unit');?>">Unit</a></li>
+                      <li><a class="" href="<?=site_url('Data_master/pengaduan_kategori');?>">Pengaduan Kategori</a></li>
+                      <li><a class="" href="<?=site_url('Data_master/task_kategori');?>">Task Kategori</a></li>
                     </ul>
                   </li>
+                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="<?= site_url('Pengaduan/list_pengaduan')?>"><i data-feather="alert-circle"> </i><span>Pengaduan</span></a></li>
                   <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="<?= site_url('Petugas')?>"><i data-feather="users"> </i><span>Petugas</span></a></li>
                 </ul>
               </div>
