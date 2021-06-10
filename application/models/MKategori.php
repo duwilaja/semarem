@@ -8,6 +8,26 @@ class MKategori extends CI_Model {
     private $id = 'id';
     private $t = 'peng_kategori';
 
+    public function __construct()
+    {
+        parent::__construct();
+        
+    }
+    
+
+    public function peng_kate_where($select='',$where='')
+    {
+        $q = [];
+        if (isset($where)) {
+            if($select != ''){
+                $this->db->select($select);
+                $q = $this->db->get_where('peng_kategori',$where);
+            }
+        }
+
+        return $q;
+    }
+
     public function get($id='',$where='',$query='',$limit='',$start='')
     {
         $q = false;
