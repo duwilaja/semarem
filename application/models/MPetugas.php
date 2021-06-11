@@ -36,6 +36,18 @@ class MPetugas extends CI_Model{
         }
         return $bool;
     }
+
+    public function set_lokasi($petugas_id='',$lat='',$lng='')
+    {
+        $bool = false;
+        if ($petugas_id != '' && $lat != '' && $lng != '') {
+            $q = $this->db->update('petugas',['lat' => $lat,'lng' => $lng],['id' => $petugas_id]);
+            if ($this->db->affected_rows() > 0) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
     
     public function in($arr=[])
     {

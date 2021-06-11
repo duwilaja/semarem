@@ -219,6 +219,46 @@ class Api extends CI_Controller {
        
     }
 
+    // Set Activity Petugas
+    public function set_lokasi_petugas()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mengubah lokasi petugas";
+
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                     $q = $this->mp->set_lokasi($this->input->post('petugas_id'), $this->input->post('lat'),$this->input->post('lng'));
+                     if($q){
+                         $msg = "Berhasil mengubah lokasi petugas";
+                         $status = true; 
+                     }
+                  }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'data' => $data,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
     // Mengambil data task petugas
     public function task_petugas($petugas_id='')
     {        
