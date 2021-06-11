@@ -48,5 +48,11 @@ class MDashboard extends CI_Model {
 		
         return $series;
     }
+    public function get_peng_kategori($start='',$end='')
+    {
+        $sql = "SELECT fk.peng_kategori as kategori ,COUNT(pk.kategori_peng_id) as total FROM pengaduan as pk LEFT join peng_kategori as fk on pk.kategori_peng_id=fk.id where ctddate >= '$start' and ctddate <= '$end'  GROUP by pk.kategori_peng_id order by total DESC LIMIT 3";
+        $dt = $this->db->query($sql)->result();
+        return $dt;
+    }
 	
 }

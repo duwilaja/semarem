@@ -2,6 +2,7 @@ $(document).ready(function() {
   $('[data-toggle="tooltip"]').tooltip();  
     total();
     vendor();
+    peng_kategori();
     grafik_pengaduan();
 });
 
@@ -59,9 +60,31 @@ function total() {
       }
   }); 
 }
-// function kategori() {
-  
-// }
+function peng_kategori() {
+  var postData = {
+    "start" : '',
+    "end" : '',
+  };
+  $.ajax({
+      url : "http://localhost/intan/Dashboard/kategori",
+      method : "POST",
+      async : true,
+      data: postData, 
+      dataType : 'json',
+      success: function(response){  
+            $.each(response, function(index) {
+                    $('#kategori').append(`<div class="col-xl-12 p-0 left_side_earning">
+                    <h3><span class="badge badge-secondary">${response[index].kategori}</span></h3>
+                    <p class="font-roboto">${response[index].total} Info Pengaduan</p>
+                    <hr>
+                  </div>`);
+
+            });
+            $('#kategori').append(`<div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">View All</a></div>`);
+            
+      }
+  }); 
+}
 function vendor() {
   var postData = {
     "start" : '',

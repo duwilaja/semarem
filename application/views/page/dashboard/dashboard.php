@@ -61,8 +61,8 @@
                   <div class="card-body p-0">
                     <div class="row m-0">
                       <div class="col-xl-3 earning-content p-0">
-                        <div class="row m-0 chart-left">
-                          <div class="col-xl-12 p-0 left_side_earning">
+                        <div class="row m-0 chart-left" id="kategori">
+                          <!-- <div class="col-xl-12 p-0 left_side_earning">
                             <h3><span class="badge badge-secondary">Kecelakaan</span></h3>
                             <p class="font-roboto">35 Info Pengaduan</p>
                             <hr>
@@ -76,8 +76,8 @@
                           <h3><span class="badge badge-warning">Demonstrasi</span></h3>
                             <p class="font-roboto"> 2 Info Pengaduan</p>
                             <hr>
-                          </div>
-                          <div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">View All</a></div>
+                          </div> -->
+                          <!-- <div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">View All</a></div> -->
                         </div>
                       </div>
                       <div class="col-xl-9 p-0">
