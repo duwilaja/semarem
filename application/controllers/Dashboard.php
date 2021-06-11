@@ -57,6 +57,13 @@ class Dashboard extends CI_Controller {
         $res_vendor =  $this->md->get_vendor($get_start,$get_end);
         echo json_encode($res_vendor);
 	}
+    public function kategori($start='',$end='')
+    {
+        $get_start =  date("Y-m-d", strtotime("-7 day"));
+        $get_end = 	  date("Y-m-d");
+        $res_kategori =  $this->md->get_peng_kategori($get_start,$get_end);
+        echo json_encode($res_kategori);
+    }
     public function grafik_pengaduan($start='',$end='')
 	{
 		// $post_start= $this->input->post('start');
