@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-sm-6 col-xl-3 col-lg-6">
         <div class="card o-hidden">
-            <div class="bg-secondary b-r-4 card-body">
+            <div class="bg-secondary b-r-4 card-body" data-toggle="tooltip" data-placement="top" title="Total Pengaduan Masuk">
             <div class="media static-top-widget">
                 <div class="align-self-center text-center"><i data-feather="inbox"></i></div>
                 <div class="media-body"><span class="m-0">Masuk</span>
-                <h4 class="mb-0 counter">5</h4><i class="icon-bg" data-feather="inbox"></i>
+                <h4 class="mb-0 counter" id="masuk"></h4><i class="icon-bg" data-feather="inbox"></i>
                 </div>
             </div>
             </div>
@@ -14,11 +14,11 @@
         </div>
         <div class="col-sm-6 col-xl-3 col-lg-6">
         <div class="card o-hidden">
-            <div class="bg-info b-r-4 card-body">
+            <div class="bg-info b-r-4 card-body"  data-toggle="tooltip" data-placement="top" title="Total Pengaduan Menunggu Konfirmasi">
             <div class="media static-top-widget">
                 <div class="align-self-center text-center"><i data-feather="info"></i></div>
                 <div class="media-body"><span class="m-0">Konfirmasi</span>
-                <h4 class="mb-0 counter">3</h4><i class="icon-bg" data-feather="info"></i>
+                <h4 class="mb-0 counter" id="konfirmasi"></h4><i class="icon-bg" data-feather="info"></i>
                 </div>
             </div>
             </div>
@@ -26,11 +26,11 @@
         </div>
         <div class="col-sm-6 col-xl-3 col-lg-6">
         <div class="card o-hidden">
-            <div class="bg-warning b-r-4 card-body">
+            <div class="bg-warning b-r-4 card-body"  data-toggle="tooltip" data-placement="top" title="Total Pengaduan Diproses">
             <div class="media static-top-widget">
                 <div class="align-self-center text-center"><i data-feather="cpu"></i></div>
                 <div class="media-body"><span class="m-0">Proses</span>
-                <h4 class="mb-0 counter">2</h4><i class="icon-bg" data-feather="cpu"></i>
+                <h4 class="mb-0 counter" id="proses"></h4><i class="icon-bg" data-feather="cpu"></i>
                 </div>
             </div>
             </div>
@@ -38,11 +38,11 @@
         </div>
         <div class="col-sm-6 col-xl-3 col-lg-6">
         <div class="card o-hidden">
-            <div class="bg-success b-r-4 card-body">
+            <div class="bg-success b-r-4 card-body"  data-toggle="tooltip" data-placement="top" title="Total Pengaduan Selesai">
             <div class="media static-top-widget">
                 <div class="align-self-center text-center"><i data-feather="check-square"></i></div>
                 <div class="media-body"><span class="m-0">Selesai</span>
-                <h4 class="mb-0 counter">1</h4><i class="icon-bg" data-feather="check-square"></i>
+                <h4 class="mb-0 counter" id="selesai"></h4><i class="icon-bg" data-feather="check-square"></i>
                 </div>
             </div>
             </div>
@@ -52,12 +52,17 @@
             <div class="card earning-card">
                 <div class="card-header">
                 <h5>Grafik Pengaduan</h5>
+                    <div class="inner-top-right">
+                      <ul class="d-flex list-unstyled justify-content-end">
+                          <li>2021-06-11</li>
+                      </ul>
+                    </div>
                 </div>
                   <div class="card-body p-0">
                     <div class="row m-0">
                       <div class="col-xl-3 earning-content p-0">
-                        <div class="row m-0 chart-left">
-                          <div class="col-xl-12 p-0 left_side_earning">
+                        <div class="row m-0 chart-left" id="kategori">
+                          <!-- <div class="col-xl-12 p-0 left_side_earning">
                             <h3><span class="badge badge-secondary">Kecelakaan</span></h3>
                             <p class="font-roboto">35 Info Pengaduan</p>
                             <hr>
@@ -71,8 +76,8 @@
                           <h3><span class="badge badge-warning">Demonstrasi</span></h3>
                             <p class="font-roboto"> 2 Info Pengaduan</p>
                             <hr>
-                          </div>
-                          <div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">View All</a></div>
+                          </div> -->
+                          <!-- <div class="col-xl-12 p-0 left-btn"><a class="btn btn-gradient">View All</a></div> -->
                         </div>
                       </div>
                       <div class="col-xl-9 p-0">
@@ -92,7 +97,7 @@
                               <div class="inner-top-right">
                                 <ul class="d-flex list-unstyled justify-content-end">
                                   <li>Realtime</li>
-                                  <!-- <li>Store</li> -->
+                                  <!-- <li>2021-06-11</li> -->
                                 </ul>
                               </div>
                             </div>
@@ -113,7 +118,7 @@
                               <div class="media-left"><i class="icofont icofont-crown"></i></div>
                               <div class="media-body">
                                 <h6>Solo Destination</h6>
-                                <p>1001 Pengaduan</p>
+                                <p id="vend_1"></p>
                               </div>
                             </div>
                           </div>
@@ -122,7 +127,7 @@
                               <div class="media-left bg-secondary"><i class="icofont icofont-heart-alt"></i></div>
                               <div class="media-body">
                                 <h6>Pengaduan Masyarakat</h6>
-                                <p>1002 Pengaduan</p>
+                                <p id="vend_2"></p>
                               </div>
                             </div>
                           </div>
@@ -131,7 +136,7 @@
                               <div class="media-left"><i class="icofont icofont-cur-dollar"></i></div>
                               <div class="media-body">
                                 <h6>Backoffice</h6>
-                                <p>1003 Pengaduan</p>
+                                <p id="vend_0"></p>
                               </div>
                             </div>
                           </div>
