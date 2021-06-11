@@ -16,7 +16,7 @@
                     <ul class="nav nav-pills" id="pills-icontab" role="tablist">
                       <li class="nav-item"><a class="nav-link btn btn-success" id="pills-person-pill" data-bs-toggle="pill" href="#pills-person" role="tab" aria-controls="pills-person" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-users-alt-2" style="margin-right: 0px !important;"></i></a></li>
                       <li class="nav-item"><a class="nav-link btn btn-secondary" id="pills-instansi-pill" data-bs-toggle="pill" href="#pills-instansi" role="tab" aria-controls="pills-instansi" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-ui-home" style="margin-right: 0px !important;"></i></a></li>
-                      <li class="nav-item"><a class="nav-link btn btn-primary" id="pills-kendaraan-tab" data-bs-toggle="pill" href="#pills-kendaraan" role="tab" aria-controls="pills-kendaraan" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-car-alt-4" style="margin-right: 0px !important;"></i></a></li>
+                      <li class="nav-item active"><a class="nav-link btn btn-primary" id="pills-kendaraan-tab" data-bs-toggle="pill" href="#pills-kendaraan" role="tab" aria-controls="pills-kendaraan" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-car-alt-4" style="margin-right: 0px !important;"></i></a></li>
                     </ul>
                     <div class="tab-content" id="pills-icontabContent" style="overflow:hidden;height:90%;">
                       <div class="tab-pane fade" id="pills-person" role="tabpanel" aria-labelledby="pills-person-tab">                       
@@ -43,7 +43,7 @@
                            
                           </ul> -->
                       </div>
-                      <div class="tab-pane fade" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
+                      <div class="tab-pane fade show active" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
                           <div class="search">
                             <form class="theme-form">
                               <div class="mb-3">
@@ -52,8 +52,21 @@
                             </form>
                           </div>
                           <ul class="list" id="list_realtime_car">
-                           
                           </ul>
+                          <!-- <ul class="list" id="">
+                            <li class="clearfix"><img class="rounded-circle user-image" src="../../template/cuba/assets/images/user/12.png" alt="">
+                                <div class="status-circle offline"></div>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <div class="name">Sabhara K41</div>
+                                        <div class="status">Korlantas</div>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                          </ul> -->
                       </div>
                     </div>
                     </div>
@@ -66,7 +79,7 @@
         <div class="col call-chat-body">
             <div class="card">
                 <div class="card-body p-0" style="overflow: hidden;">
-                    <div class="row chat-box">
+                    <div class="row chat-box" >
                         <!-- Chat right side start-->
                         <div class="col pe-0 chat-right-aside" style="max-width :100%!important;flex: 0 0 100%!important;">
                             <!-- chat start-->
@@ -83,9 +96,9 @@
                                     <ul class="list-inline float-start float-sm-end chat-menu-icons">
                                         <!-- <li class="list-inline-item"><a href="#"><i class="icon-search"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-clip"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i class="icon-headphone-alt"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-video-camera"></i></a></li> -->
-                                        <li class="list-inline-item toogle-bar"><a href="#"><i class="icon-menu"></i></a></li>
+                                        <li class="list-inline-item me-4"><a href="#" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-warning">Update</a></li>
+                                        <li class="list-inline-item me-4"><a href="#" onclick="tes()"><i class="icon-menu"></i></a></li>
                                     </ul>
                                 </div>
                                 <!-- chat-header end-->
@@ -118,8 +131,8 @@
                                 <!-- Chat right side ends-->
                             </div>
                         </div>
-                        <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: none;">
-                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:10px!important;">
+                        <div class="col ps-0 chat-menu d-none" style="position: absolute;background: #FFF;right:0;top:13%;" id="tes">
+                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:0px!important;">
                                 <li class="nav-item"><a class="nav-link" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
                                     <div class="material-border"></div>
                                 </li>
@@ -253,3 +266,36 @@
     </div>
 </div>
 <!-- Container-fluid Ends-->
+
+<!-- Modal Update-->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="form_add">
+            <div class="mb-3">
+                <label for="Status" class="form-label">Status</label>
+                <select name="status" class="form-control" id="status" required>
+                    <option value="">--Pilih Status--</option>
+                    <option value="1">Done</option>
+                    <option value="2">Pending</option>
+                    <option value="3">Cancel</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="Keterangan" class="form-label">Keterangan</label>
+                <textarea name="ket" id="" cols="30" rows="5" class="form-control"></textarea>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
