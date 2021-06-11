@@ -13,16 +13,49 @@
                       </div>
                     </div>
                     <div class="people-list" id="people-list">
-                      <div class="search">
-                        <form class="theme-form">
-                          <div class="mb-3">
-                            <input class="form-control" onkeyup="filter_realtime_car(this.value)" type="text" placeholder="Search"><i class="fa fa-search"></i>
+                    <ul class="nav nav-pills" id="pills-icontab" role="tablist">
+                      <li class="nav-item"><a class="nav-link btn btn-success" id="pills-person-pill" data-bs-toggle="pill" href="#pills-person" role="tab" aria-controls="pills-person" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-users-alt-2" style="margin-right: 0px !important;"></i></a></li>
+                      <li class="nav-item"><a class="nav-link btn btn-secondary" id="pills-instansi-pill" data-bs-toggle="pill" href="#pills-instansi" role="tab" aria-controls="pills-instansi" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-ui-home" style="margin-right: 0px !important;"></i></a></li>
+                      <li class="nav-item"><a class="nav-link btn btn-primary" id="pills-kendaraan-tab" data-bs-toggle="pill" href="#pills-kendaraan" role="tab" aria-controls="pills-kendaraan" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-car-alt-4" style="margin-right: 0px !important;"></i></a></li>
+                    </ul>
+                    <div class="tab-content" id="pills-icontabContent" style="overflow:hidden;height:90%;">
+                      <div class="tab-pane fade" id="pills-person" role="tabpanel" aria-labelledby="pills-person-tab">                       
+                          <div class="search">
+                            <form class="theme-form">
+                              <div class="mb-3">
+                                <input class="form-control" onkeyup="" type="text" placeholder="Search"><i class="fa fa-search"></i>
+                              </div>
+                            </form>
                           </div>
-                        </form>
+                          <!-- <ul class="list" id="list_realtime_car">
+                           
+                          </ul> -->
                       </div>
-                      <ul class="list" id="list_realtime_car">
-                       
-                      </ul>
+                      <div class="tab-pane fade" id="pills-instansi" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
+                          <div class="search">
+                            <form class="theme-form">
+                              <div class="mb-3">
+                                <input class="form-control" onkeyup="" type="text" placeholder="Search"><i class="fa fa-search"></i>
+                              </div>
+                            </form>
+                          </div>
+                          <!-- <ul class="list" id="list_realtime_car">
+                           
+                          </ul> -->
+                      </div>
+                      <div class="tab-pane fade" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
+                          <div class="search">
+                            <form class="theme-form">
+                              <div class="mb-3">
+                                <input class="form-control" onkeyup="filter_realtime_car(this.value)" type="text" placeholder="Search"><i class="fa fa-search"></i>
+                              </div>
+                            </form>
+                          </div>
+                          <ul class="list" id="list_realtime_car">
+                           
+                          </ul>
+                      </div>
+                    </div>
                     </div>
                   </div>
                   <!-- Chat left side Ends-->
@@ -35,20 +68,23 @@
                 <div class="card-body p-0" style="overflow: hidden;">
                     <div class="row chat-box">
                         <!-- Chat right side start-->
-                        <div class="col pe-0 chat-right-aside">
+                        <div class="col pe-0 chat-right-aside" style="max-width :100%!important;flex: 0 0 100%!important;">
                             <!-- chat start-->
                             <div class="chat">
                                 <!-- chat-header start-->
-                                <div class="chat-header clearfix"><img class="rounded-circle" src="<?=$template;?>assets/images/user/8.jpg" alt="">
+                                <div class="chat-header clearfix">
                                     <div class="about">
-                                        <div class="name">Kori Thomas  <span class="font-primary f-12">Typing...</span></div>
-                                        <div class="status">Last Seen 3:55 PM</div>
+                                        <div class="name">Kecelakaan Beruntun</div>
+                                        <div>
+                                            <span class="badge badge-danger">#Kecelakaan</span>
+                                            <span class="badge badge-warning">On Progress</span>
+                                        </div>
                                     </div>
                                     <ul class="list-inline float-start float-sm-end chat-menu-icons">
-                                        <li class="list-inline-item"><a href="#"><i class="icon-search"></i></a></li>
+                                        <!-- <li class="list-inline-item"><a href="#"><i class="icon-search"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-clip"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-headphone-alt"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i class="icon-video-camera"></i></a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="icon-video-camera"></i></a></li> -->
                                         <li class="list-inline-item toogle-bar"><a href="#"><i class="icon-menu"></i></a></li>
                                     </ul>
                                 </div>
@@ -82,9 +118,9 @@
                                 <!-- Chat right side ends-->
                             </div>
                         </div>
-                        <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: block;">
-                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
+                        <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: none;">
+                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:10px!important;">
+                                <li class="nav-item"><a class="nav-link" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
                                     <div class="material-border"></div>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" id="profile-info-tab" data-bs-toggle="tab" href="#info-profile" role="tab" aria-selected="false">STATUS</a>
@@ -95,7 +131,7 @@
                                 </li>
                             </ul>
                             <div class="tab-content" id="info-tabContent">
-                                <div class="tab-pane fade show active" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
+                                <div class="tab-pane fade" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
                                     <div class="people-list">
                                         <ul class="list">
                                             <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/4.jpg" alt="">

@@ -32,7 +32,7 @@ class Auth extends CI_Controller {
             );
             
             $this->session->set_userdata( $array );
-            redirect('Main/pengaduan');
+            redirect('Dashboard');
         }else{
         $this->session->set_flashdata('gagal', 'Username atau Password salah. mohon cek kembali username dan password yang anda masukan.');
         redirect('Auth/login');
