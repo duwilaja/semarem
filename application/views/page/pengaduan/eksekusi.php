@@ -27,11 +27,11 @@
                               </div>
                             </form>
                           </div>
-                          <!-- <ul class="list" id="list_realtime_car">
+                          <ul class="list" id="list_petugas">
                            
-                          </ul> -->
+                          </ul>
                       </div>
-                      <div class="tab-pane fade" id="pills-instansi" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
+                      <div class="tab-pane fade" id="pills-instansi" role="tabpanel" aria-labelledby="pills-instansi-tab">                       
                           <div class="search">
                             <form class="theme-form">
                               <div class="mb-3">
@@ -39,9 +39,9 @@
                               </div>
                             </form>
                           </div>
-                          <!-- <ul class="list" id="list_realtime_car">
+                          <ul class="list" id="list_instansi">
                            
-                          </ul> -->
+                          </ul>
                       </div>
                       <div class="tab-pane fade" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
                           <div class="search">
