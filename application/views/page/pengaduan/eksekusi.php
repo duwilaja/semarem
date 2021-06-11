@@ -118,7 +118,7 @@
                                 <!-- Chat right side ends-->
                             </div>
                         </div>
-                        <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: block;">
+                        <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: none;">
                             <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:10px!important;">
                                 <li class="nav-item"><a class="nav-link" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
                                     <div class="material-border"></div>
