@@ -8,8 +8,8 @@
                   <div class="chat-left-aside">
                     <div class="media"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/12.png" alt="">
                       <div class="about">
-                        <div class="name f-w-600">Mark Jecno</div>
-                        <div class="status">Status...</div>
+                        <div class="name f-w-600"><?= $this->session->userdata('nama');?></div>
+                        <div class="status"><?= $this->session->userdata('pangkat');?></div>
                       </div>
                     </div>
                     <div class="people-list" id="people-list">
@@ -53,20 +53,6 @@
                           </div>
                           <ul class="list" id="list_realtime_car">
                           </ul>
-                          <!-- <ul class="list" id="">
-                            <li class="clearfix"><img class="rounded-circle user-image" src="../../template/cuba/assets/images/user/12.png" alt="">
-                                <div class="status-circle offline"></div>
-                                <div class="row">
-                                    <div class="col-9">
-                                        <div class="name">Sabhara K41</div>
-                                        <div class="status">Korlantas</div>
-                                    </div>
-                                    <div class="col-2">
-                                        <a href="#" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                          </ul> -->
                       </div>
                     </div>
                     </div>
@@ -98,7 +84,7 @@
                                         <li class="list-inline-item"><a href="#"><i class="icon-clip"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-video-camera"></i></a></li> -->
                                         <li class="list-inline-item me-4"><a href="#" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-warning">Update</a></li>
-                                        <li class="list-inline-item me-4"><a href="#" onclick="tes()"><i class="icon-menu"></i></a></li>
+                                        <li class="list-inline-item me-4"><a href="#" onclick="list_detail()"><i class="icon-menu"></i></a></li>
                                     </ul>
                                 </div>
                                 <!-- chat-header end-->
@@ -131,20 +117,20 @@
                                 <!-- Chat right side ends-->
                             </div>
                         </div>
-                        <div class="col ps-0 chat-menu d-none" style="position: absolute;background: #FFF;right:0;top:13%;" id="tes">
+                        <div class="col ps-0 chat-menu d-none" style="position: absolute;background: #FFF;right:0;top:13%;" id="list_detail">
                             <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:0px!important;">
-                                <li class="nav-item"><a class="nav-link" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
+                                <li class="nav-item"><a class="nav-link active" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">ASSIGN</a>
                                     <div class="material-border"></div>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" id="profile-info-tab" data-bs-toggle="tab" href="#info-profile" role="tab" aria-selected="false">STATUS</a>
                                     <div class="material-border"></div>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" id="contact-info-tab" data-bs-toggle="tab" href="#info-contact" role="tab" aria-selected="false">PROFILE</a>
+                                <li class="nav-item"><a class="nav-link" id="contact-info-tab" data-bs-toggle="tab" href="#info-contact" role="tab" aria-selected="false">DETAIL</a>
                                     <div class="material-border"></div>
                                 </li>
                             </ul>
                             <div class="tab-content" id="info-tabContent">
-                                <div class="tab-pane fade" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
+                                <div class="tab-pane fade show active" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
                                     <div class="people-list">
                                         <ul class="list">
                                             <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/4.jpg" alt="">
@@ -202,43 +188,26 @@
                                 <div class="tab-pane fade" id="info-profile" role="tabpanel" aria-labelledby="profile-info-tab">
                                     <div class="people-list">
                                         <div class="search">
-                                            <form class="theme-form">
-                                                <div class="mb-3">
-                                                    <input class="form-control" type="text" placeholder="Write Status..."><i class="fa fa-pencil"></i>
-                                                </div>
-                                            </form>
+                                            <div class="my-3 text-center">
+                                                <h4><span class="badge badge-primary">Statusnya</span></h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="status">
-                                        <p class="font-dark">Active</p>
-                                        <hr>
-                                        <p>
-                                            Established fact that a reader will be
-                                            distracted  <i class="icofont icofont-emo-heart-eyes font-danger f-20"></i><i class="icofont icofont-emo-heart-eyes font-danger f-20 m-l-5"></i>
-                                        </p>
-                                        <hr>
-                                        <p>Dolore magna aliqua  <i class="icofont icofont-emo-rolling-eyes font-success f-20"></i></p>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="info-contact" role="tabpanel" aria-labelledby="contact-info-tab">
                                     <div class="user-profile">
                                         <div class="image">
-                                            <div class="avatar text-center"><img alt="" src="<?=$template;?>assets/images/user/2.png"></div>
-                                            <div class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div>
+                                            <!-- <div class="avatar text-center"><img alt="" src="<?=$template;?>assets/images/user/2.png"></div>
+                                            <div class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div> -->
+                                        </div>
+                                        <div class="text-end mt-2">
+                                            <h6 class="">14-06-2021</h6>
                                         </div>
                                         <div class="user-content text-center">
-                                            <h5 class="text-uppercase">mark jenco</h5>
-                                            <div class="social-media">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-rss"></i></a></li>
-                                                </ul>
-                                            </div>
+                                            <h5 class="text-uppercase"><span class="badge badge-secondary">Kecelakaan</span></h5>
+                                            <h6 class="text-uppercase text-muted">Diva Wardana</h6>
                                             <hr>
-                                            <div class="follow text-center">
+                                            <!-- <div class="follow text-center">
                                                 <div class="row">
                                                     <div class="col border-right"><span>Following</span>
                                                         <div class="follow-num">236k</div>
@@ -248,11 +217,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
+                                            <hr> -->
                                             <div class="text-center">
-                                                <p class="mb-0">Mark.jecno23@gmail.com</p>
-                                                <p class="mb-0">+91 365 - 658 - 1236</p>
-                                                <p class="mb-0">Fax: 123-4560</p>
+                                                <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque sed odio soluta temporibus sequi impedit consequatur quae, voluptatem placeat excepturi hic, itaque officiis iusto earum optio, doloremque ut eaque animi.</p>
                                             </div>
                                         </div>
                                     </div>
