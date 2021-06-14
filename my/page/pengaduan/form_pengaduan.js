@@ -25,7 +25,7 @@ function maps(){
         results.clearLayers();
         for (var i = data.results.length - 1; i >= 0; i--) {if (window.CP.shouldStopExecution(0)) break;
             results.addLayer(L.marker(data.results[i].latlng)
-            .bindPopup("<table><tr><th>Alamat</th><th>"+data.results[i].text+"</th></tr><tr><td>Detail</td><td id='dis_name'>"+data.results[i].city+"</td></tr><tr><td>Koordinat</td><td>("+data.results[i].latlng.lat+","+data.results[i].latlng.lng+")</td></tr></table>"));
+            .bindPopup("<table style='margin-left:-3%;'><tr><th>Alamat</th><th>"+data.results[i].text+"</th></tr><tr><td>Detail</td><td id='dis_name'>"+data.results[i].city+"</td></tr><tr><td>Koordinat</td><td>("+data.results[i].latlng.lat+","+data.results[i].latlng.lng+")</td></tr></table>"));
             // .bindPopup(data.results[i].text));
             var alamat = "Alamat : "+data.results[i].text+"\nDetail : "+data.results[i].city ;
             document.getElementById('i_alamat').value = alamat;
@@ -51,7 +51,7 @@ function maps(){
                 popup
                 .setLatLng(e.latlng)
                 .setContent(
-                    "<table><tr><th>Alamat</th><th>"+data.address.road+"</th></tr><tr><td>Detail</td><td id='dis_name'>"+data.display_name+"</td></tr><tr><td>Koordinat</td><td>("+e.latlng.lat+","+e.latlng.lng+")</td></tr></table>"
+                    "<table style='margin-left:-3%;'><tr><th>Alamat</th><th>"+data.address.road+"</th></tr><tr><td>Detail</td><td id='dis_name'>"+data.display_name+"</td></tr><tr><td>Koordinat</td><td>("+e.latlng.lat+","+e.latlng.lng+")</td></tr></table>"
                     .toString()
                 ) 
                 .openOn(map);               

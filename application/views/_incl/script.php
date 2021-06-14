@@ -47,4 +47,5 @@
    <script src="<?=$template;?>assets/js/chart/apex-chart/apex-chart.js"></script>
    <script src="<?=$template;?>assets/js/chart/apex-chart/stock-prices.js"></script>
    <script src="<?=$template;?>assets/js/chart/apex-chart/chart-custom.js"></script>
+   
 
