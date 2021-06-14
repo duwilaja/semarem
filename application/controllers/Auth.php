@@ -17,9 +17,9 @@ class Auth extends CI_Controller {
     public function proses_login()
     {
         $arr = [
-            "rowid,nrp,pwd",
+            "a.rowid,a.nrp,a.pwd,p.nama,pangkat",
             [
-                'nrp' => $this->input->post('username'),
+                'a.nrp' => $this->input->post('username'),
                 'pwd' => md5($this->input->post('password'))
             ]
         ];
@@ -28,7 +28,9 @@ class Auth extends CI_Controller {
             $u = $q->row();
             $array = array(
                 'id' => $u->rowid,
-                'nrp' => $u->nrp
+                'a.nrp' => $u->nrp,
+                'nama' => $u->nama,
+                'pangkat' => $u->pangkat
             );
             
             $this->session->set_userdata( $array );

@@ -59,7 +59,8 @@ class MUsers extends CI_Model{
                 $sm->where($arr[1]);
         }
         
-       $q = $sm->get('accounts');
+        $sm->join('persons p', 'p.nrp = a.nrp', 'inner');
+       $q = $sm->get('accounts a');
        return $q; 
     }
 

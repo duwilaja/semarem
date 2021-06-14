@@ -5,11 +5,11 @@ $(document).ready(function () {
     realtime_car();
 });
 
-function tes(){
-  if($('#tes').hasClass('d-none')){
-    $('#tes').removeClass('d-none');
+function list_detail(){
+  if($('#list_detail').hasClass('d-none')){
+    $('#list_detail').removeClass('d-none');
   }else {
-    $('#tes').addClass('d-none');
+    $('#list_detail').addClass('d-none');
   }
 }
 
@@ -68,7 +68,7 @@ async function postData(url = '', data = {},token='') {
                             <div class="status">${e.vehiclegroup}</div>
                         </div>
                         <div class="col-2">
-                            <a href="#" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+                            <a href="javascript:void(0);" onclick="assign()" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
                 </li>`);
@@ -84,11 +84,16 @@ async function postData(url = '', data = {},token='') {
      arr.forEach(e => {
         $('#list_realtime_car').append(`
         <li class="clearfix"><img class="rounded-circle user-image" src="../../template/cuba/assets/images/user/12.png" alt="">
-          <div class="status-circle ${e.speed > 0 ? 'online' : 'offline'}"></div>
-          <div class="about">
-            <div class="name">${e.vehiclename}</div>
-            <div class="status">${e.vehiclegroup}</div>
-          </div>
+            <div class="status-circle ${e.speed > 0 ? 'online' : 'offline'}"></div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="name">${e.vehiclename}</div>
+                    <div class="status">${e.vehiclegroup}</div>
+                </div>
+                <div class="col-2">
+                    <a href="javascript:void(0);" onclick="assign()" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+                </div>
+            </div>
         </li>`);
     });
   }
@@ -96,4 +101,44 @@ async function postData(url = '', data = {},token='') {
   function filter(arr,query) {
     return arr.filter( (x) => x.vehiclename.toLowerCase().indexOf(query.toLowerCase()) !== -1)
   }
+
+  function assign()
+ {
+    swal({
+        title: "Apakah anda yakin ?",
+        text: "Anda tidak akan dapat mengembalikan ini!",
+        icon: "warning",
+        buttons: {
+            cancel:true,
+            confirmButtonText: "Ya!",
+            },
+      }).then((isConfirm) => {
+        if (isConfirm) {         
+            var link = ''; 
+            $.ajax({
+                type: "POST",
+                url: link,
+                data : {'id' : id},
+                dataType: "json",
+                success: function (r) {
+                    if (r.status) {
+                        swal({
+                            title:'Berhasil',
+                            text:r.msg,
+                            icon:'success'
+                          });
+                        dt();
+                    }else{
+                        swal({
+                            title:'Gagal',
+                            text:r.msg,
+                            icon:'error'
+                          });
+                    }
+                    
+                }
+            });
+        }
+      })
+ }
   
