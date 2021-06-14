@@ -8,15 +8,15 @@
                   <div class="chat-left-aside">
                     <div class="media"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/12.png" alt="">
                       <div class="about">
-                        <div class="name f-w-600">Mark Jecno</div>
-                        <div class="status">Status...</div>
+                        <div class="name f-w-600"><?= $this->session->userdata('nama');?></div>
+                        <div class="status"><?= $this->session->userdata('pangkat');?></div>
                       </div>
                     </div>
                     <div class="people-list" id="people-list">
                     <ul class="nav nav-pills" id="pills-icontab" role="tablist">
                       <li class="nav-item"><a class="nav-link btn btn-success" id="pills-person-pill" data-bs-toggle="pill" href="#pills-person" role="tab" aria-controls="pills-person" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-users-alt-2" style="margin-right: 0px !important;"></i></a></li>
                       <li class="nav-item"><a class="nav-link btn btn-secondary" id="pills-instansi-pill" data-bs-toggle="pill" href="#pills-instansi" role="tab" aria-controls="pills-instansi" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-ui-home" style="margin-right: 0px !important;"></i></a></li>
-                      <li class="nav-item"><a class="nav-link btn btn-primary" id="pills-kendaraan-tab" data-bs-toggle="pill" href="#pills-kendaraan" role="tab" aria-controls="pills-kendaraan" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-car-alt-4" style="margin-right: 0px !important;"></i></a></li>
+                      <li class="nav-item active"><a class="nav-link btn btn-primary" id="pills-kendaraan-tab" data-bs-toggle="pill" href="#pills-kendaraan" role="tab" aria-controls="pills-kendaraan" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-car-alt-4" style="margin-right: 0px !important;"></i></a></li>
                     </ul>
                     <div class="tab-content" id="pills-icontabContent" style="overflow:hidden;height:90%;">
                       <div class="tab-pane fade" id="pills-person" role="tabpanel" aria-labelledby="pills-person-tab">                       
@@ -43,7 +43,7 @@
                            
                           </ul> -->
                       </div>
-                      <div class="tab-pane fade" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
+                      <div class="tab-pane fade show active" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
                           <div class="search">
                             <form class="theme-form">
                               <div class="mb-3">
@@ -52,7 +52,6 @@
                             </form>
                           </div>
                           <ul class="list" id="list_realtime_car">
-                           
                           </ul>
                       </div>
                     </div>
@@ -66,7 +65,7 @@
         <div class="col call-chat-body">
             <div class="card">
                 <div class="card-body p-0" style="overflow: hidden;">
-                    <div class="row chat-box">
+                    <div class="row chat-box" >
                         <!-- Chat right side start-->
                         <div class="col pe-0 chat-right-aside" style="max-width :100%!important;flex: 0 0 100%!important;">
                             <!-- chat start-->
@@ -83,9 +82,9 @@
                                     <ul class="list-inline float-start float-sm-end chat-menu-icons">
                                         <!-- <li class="list-inline-item"><a href="#"><i class="icon-search"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-clip"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i class="icon-headphone-alt"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-video-camera"></i></a></li> -->
-                                        <li class="list-inline-item toogle-bar"><a href="#"><i class="icon-menu"></i></a></li>
+                                        <li class="list-inline-item me-4"><a href="#" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-warning">Update</a></li>
+                                        <li class="list-inline-item me-4"><a href="#" onclick="list_detail()"><i class="icon-menu"></i></a></li>
                                     </ul>
                                 </div>
                                 <!-- chat-header end-->
@@ -118,20 +117,20 @@
                                 <!-- Chat right side ends-->
                             </div>
                         </div>
-                        <div class="col ps-0 chat-menu" style="position: absolute;background: #FFF;right:0;display: none;">
-                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:10px!important;">
-                                <li class="nav-item"><a class="nav-link" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">CALL</a>
+                        <div class="col ps-0 chat-menu d-none" style="position: absolute;background: #FFF;right:0;top:13%;" id="list_detail">
+                            <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist" style="margin-bottom:0px!important;">
+                                <li class="nav-item"><a class="nav-link active" id="info-home-tab" data-bs-toggle="tab" href="#info-home" role="tab" aria-selected="true">ASSIGN</a>
                                     <div class="material-border"></div>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" id="profile-info-tab" data-bs-toggle="tab" href="#info-profile" role="tab" aria-selected="false">STATUS</a>
                                     <div class="material-border"></div>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" id="contact-info-tab" data-bs-toggle="tab" href="#info-contact" role="tab" aria-selected="false">PROFILE</a>
+                                <li class="nav-item"><a class="nav-link" id="contact-info-tab" data-bs-toggle="tab" href="#info-contact" role="tab" aria-selected="false">DETAIL</a>
                                     <div class="material-border"></div>
                                 </li>
                             </ul>
                             <div class="tab-content" id="info-tabContent">
-                                <div class="tab-pane fade" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
+                                <div class="tab-pane fade show active" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
                                     <div class="people-list">
                                         <ul class="list">
                                             <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/4.jpg" alt="">
@@ -189,43 +188,26 @@
                                 <div class="tab-pane fade" id="info-profile" role="tabpanel" aria-labelledby="profile-info-tab">
                                     <div class="people-list">
                                         <div class="search">
-                                            <form class="theme-form">
-                                                <div class="mb-3">
-                                                    <input class="form-control" type="text" placeholder="Write Status..."><i class="fa fa-pencil"></i>
-                                                </div>
-                                            </form>
+                                            <div class="my-3 text-center">
+                                                <h4><span class="badge badge-primary">Statusnya</span></h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="status">
-                                        <p class="font-dark">Active</p>
-                                        <hr>
-                                        <p>
-                                            Established fact that a reader will be
-                                            distracted  <i class="icofont icofont-emo-heart-eyes font-danger f-20"></i><i class="icofont icofont-emo-heart-eyes font-danger f-20 m-l-5"></i>
-                                        </p>
-                                        <hr>
-                                        <p>Dolore magna aliqua  <i class="icofont icofont-emo-rolling-eyes font-success f-20"></i></p>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="info-contact" role="tabpanel" aria-labelledby="contact-info-tab">
                                     <div class="user-profile">
                                         <div class="image">
-                                            <div class="avatar text-center"><img alt="" src="<?=$template;?>assets/images/user/2.png"></div>
-                                            <div class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div>
+                                            <!-- <div class="avatar text-center"><img alt="" src="<?=$template;?>assets/images/user/2.png"></div>
+                                            <div class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div> -->
+                                        </div>
+                                        <div class="text-end mt-2">
+                                            <h6 class="">14-06-2021</h6>
                                         </div>
                                         <div class="user-content text-center">
-                                            <h5 class="text-uppercase">mark jenco</h5>
-                                            <div class="social-media">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-rss"></i></a></li>
-                                                </ul>
-                                            </div>
+                                            <h5 class="text-uppercase"><span class="badge badge-secondary">Kecelakaan</span></h5>
+                                            <h6 class="text-uppercase text-muted">Diva Wardana</h6>
                                             <hr>
-                                            <div class="follow text-center">
+                                            <!-- <div class="follow text-center">
                                                 <div class="row">
                                                     <div class="col border-right"><span>Following</span>
                                                         <div class="follow-num">236k</div>
@@ -235,11 +217,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
+                                            <hr> -->
                                             <div class="text-center">
-                                                <p class="mb-0">Mark.jecno23@gmail.com</p>
-                                                <p class="mb-0">+91 365 - 658 - 1236</p>
-                                                <p class="mb-0">Fax: 123-4560</p>
+                                                <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque sed odio soluta temporibus sequi impedit consequatur quae, voluptatem placeat excepturi hic, itaque officiis iusto earum optio, doloremque ut eaque animi.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -253,3 +233,36 @@
     </div>
 </div>
 <!-- Container-fluid Ends-->
+
+<!-- Modal Update-->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post" id="form_add">
+            <div class="mb-3">
+                <label for="Status" class="form-label">Status</label>
+                <select name="status" class="form-control" id="status" required>
+                    <option value="">--Pilih Status--</option>
+                    <option value="1">Done</option>
+                    <option value="2">Pending</option>
+                    <option value="3">Cancel</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="Keterangan" class="form-label">Keterangan</label>
+                <textarea name="ket" id="" cols="30" rows="5" class="form-control"></textarea>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
