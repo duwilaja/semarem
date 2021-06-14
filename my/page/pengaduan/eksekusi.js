@@ -1,8 +1,15 @@
 var indicarKey = [];
 var arr_realtime_car = [];
+var arr_instansi = [];
+var arr_petugas = [];
+
+var peng_lat = "-7.560908240809835";
+var peng_lng = "110.8146920770371"; 
 
 $(document).ready(function () {
     realtime_car();
+    petugas();
+    instansi();
 });
 
 function tes(){
@@ -11,6 +18,24 @@ function tes(){
   }else {
     $('#tes').addClass('d-none');
   }
+}
+
+function getDistanceFromLatLngInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
 }
 
 async function getData(url = '', data = {}) {
@@ -50,6 +75,7 @@ async function postData(url = '', data = {},token='') {
     return response.json(); // parses JSON response into native JavaScript objects
   }
 
+  // Kendaraan realtime
   function realtime_car() { 
     getData('../../indicar/Api/get_token')
     .then(key => {
@@ -79,7 +105,7 @@ async function postData(url = '', data = {},token='') {
   }
 
   function filter_realtime_car(v) {
-     let arr =  filter(arr_realtime_car,v);
+     let arr = arr_realtime_car.filter( (x) => x.vehiclename.toLowerCase().indexOf(v.toLowerCase()) !== -1)
      $('#list_realtime_car').html('');
      arr.forEach(e => {
         $('#list_realtime_car').append(`
@@ -93,7 +119,111 @@ async function postData(url = '', data = {},token='') {
     });
   }
 
-  function filter(arr,query) {
-    return arr.filter( (x) => x.vehiclename.toLowerCase().indexOf(query.toLowerCase()) !== -1)
+  // Petugas
+  function petugas() { 
+    getData('../../backend/Api_petugas/get')
+      .then(data => {
+          arr_petugas = [];
+          arr_petugas = data;
+          data.forEach(e => {
+              $('#list_petugas').append(`
+              <li class="clearfix"><img class="rounded-circle user-image" src="../../template/cuba/assets/images/user/12.png" alt="">
+                  <div class="status-circle ${e.activity == 0 ? 'online' : 'offline'}"></div>
+                  <div class="row">
+                      <div class="col-8">
+                          <div class="name">${e.nama_instansi} - ${e.nama_petugas}</div>
+                          <div class="status">${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
+                      </div>
+                      <div class="col-2">
+                          <a href="#" class="btn btn-success" onclick="assign_petugas(${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+                      </div>
+                  </div>
+              </li>`);
+          });
+
+      });  
+  }
+
+  function filter_petugas(v) {
+    let arr = arr_petugas.filter( (x) => x.nama_instansi.toLowerCase().indexOf(v.toLowerCase()) !== -1)
+     $('#list_petugas').html('');
+     arr.forEach(e => {
+        $('#list_petugas').append(`
+        <li class="clearfix"><img class="rounded-circle user-image" src="../../template/cuba/assets/images/user/12.png" alt="">
+        <div class="status-circle ${e.activity == 0 ? 'online' : 'offline'}"></div>
+        <div class="row">
+            <div class="col-8">
+                <div class="name">${e.nama_petugas}</div>
+                <div class="status">${e.nama_instansi} - ${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
+            </div>
+            <div class="col-2">
+                <a href="#" class="btn btn-success" onclick="assign_petugas(${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+            </div>
+        </div>
+      </li>`);
+    });
+  }
+
+  // Intsnasi
+  function instansi() { 
+    getData('../../backend/Api_lokasi/get_priority')
+      .then(data => {
+          arr_instansi = [];
+          arr_instansi = data;
+          data.forEach(e => {
+            debugger;
+              $('#list_instansi').append(`
+              <li class="clearfix"><img class="rounded-circle user-image" src="../../template/cuba/assets/images/user/12.png" alt="">
+              <div class="status-circle online"></div>
+              <div class="row">
+                  <div class="col-8">
+                      <div class="name">${e.nama_lokasi}</div>
+                      <div class="status">${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
+                  </div>
+                  <div class="col-2">
+                      <a href="#" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+                  </div>
+              </div>
+            </li>`);
+          });
+
+      });  
+  }
+
+  function filter_instansi(v) {
+    let arr = arr_instansi.filter( (x) => x.nama_instansi.toLowerCase().indexOf(v.toLowerCase()) !== -1)
+     $('#list_instansi').html('');
+     arr.forEach(e => {
+        $('#list_instansi').append(`
+        <li class="clearfix"><img class="rounded-circle user-image" src="../../template/cuba/assets/images/user/12.png" alt="">
+        <div class="status-circle online></div>
+        <div class="row">
+            <div class="col-8">
+                <div class="name">${e.nama_lokasi}</div>
+                <div class="status">${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
+            </div>
+            <div class="col-2">
+                <a href="#" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+            </div>
+        </div>
+      </li>`);
+    });
+  }
+
+  // Assign Petugas
+  function assign_petugas(petugas_id='') {
+    swal({
+      title: "Konfirmasi",
+      text: "Apakah anda yakin ingin menugaskan?",
+      icon: "warning",
+      buttons: {
+          cancel:true,
+          confirmButtonText: "Ya",
+      },
+    }).then((isConfirm) => {
+      if (isConfirm) {         
+        // Post data assign petugas
+      }
+    })
   }
   

@@ -23,7 +23,7 @@
                           <div class="search">
                             <form class="theme-form">
                               <div class="mb-3">
-                                <input class="form-control" onkeyup="" type="text" placeholder="Search"><i class="fa fa-search"></i>
+                                <input class="form-control" onkeyup="filter_petugas(this.value)" type="text" placeholder="Search"><i class="fa fa-search"></i>
                               </div>
                             </form>
                           </div>
@@ -35,7 +35,7 @@
                           <div class="search">
                             <form class="theme-form">
                               <div class="mb-3">
-                                <input class="form-control" onkeyup="" type="text" placeholder="Search"><i class="fa fa-search"></i>
+                                <input class="form-control" onkeyup="filter_instansi(this.value)" type="text" placeholder="Search"><i class="fa fa-search"></i>
                               </div>
                             </form>
                           </div>
