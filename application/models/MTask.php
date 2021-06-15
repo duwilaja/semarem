@@ -31,7 +31,7 @@ class MTask extends CI_Model{
             if($select != ''){
                 $this->db->select($select);
                 if($return){
-                    $q = $this->db->get_where('task_kategori',['id' => $id])->row()->task_kategori;
+                    $q = @$this->db->get_where('task_kategori',['id' => $id])->row()->task_kategori;
                 }else{
                     $q = $this->db->get_where('task_kategori',['id' => $id]);
                 }
