@@ -14,6 +14,11 @@ $(document).ready(function () {
     pengaduan();
 });
 
+function refresh() {
+  list_assign();
+  pengaduan(); 
+}
+
 function list_detail(){
   if($('#list_detail').hasClass('d-none')){
     $('#list_detail').removeClass('d-none');
