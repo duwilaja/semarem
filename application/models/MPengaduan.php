@@ -5,6 +5,19 @@ class MPengaduan extends CI_Model{
     function __construct() {
       
     }
+
+    public function pengaduan_id($select='',$pengaduan_id='')
+    {
+        $q = [];
+        if ($pengaduan_id != '') {
+            if($select != ''){
+                $this->db->select($select);
+                $q = $this->db->get_where('pengaduan',['id' => $pengaduan_id]);
+            }
+        }
+
+        return $q;
+    }
     
     public function peng_img_peng_id($select='',$pengaduan_id='')
     {
@@ -165,6 +178,18 @@ class MPengaduan extends CI_Model{
             $arr['ctddate'] = date('Y-m-d');
             $arr['ctdtime'] = date('H:i:s');
             $q = $this->db->insert('pengaduan',$arr);
+            if ($this->db->affected_rows() > 0) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
+
+    public function up($arr=[],$where=[])
+    {
+        $bool = false;
+        if (!empty($arr)) {
+            $q = $this->db->update('pengaduan',$arr,$where);
             if ($this->db->affected_rows() > 0) {
                 $bool = true;
             }

@@ -48,3 +48,42 @@
    <script src="<?=$template;?>assets/js/chart/apex-chart/stock-prices.js"></script>
    <script src="<?=$template;?>assets/js/chart/apex-chart/chart-custom.js"></script>
 
+   <script src="<?=base_url('my/js/socket_io.js')?>"></script>
+
+   <script>
+   const socket = io.connect('http://localhost:3000/');
+   console.log(Notification.permission);
+   if (Notification.permission === "granted") {
+      console.log('notif masuk');
+   } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(permission => {
+         console.log(permission);
+      });
+   }
+
+socket.emit('register',<?=$this->session->userdata('id');?>);
+socket.on('chat message', function(msg){
+  var options = {
+      title: "Notifikasi Ticketing",
+      options: {
+        body: msg,
+        lang: 'id',
+      }
+    };
+
+  $("#easyNotify").easyNotify(options);
+
+});
+
+socket.on('notif', function(data){
+  toastr.info(data.msg);
+var options = {
+    title: "Notifikasi Ticketing",
+    options: {
+      body: data.msg,
+      lang: 'id',
+    }
+  };
+});
+
+</script>

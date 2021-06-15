@@ -47,9 +47,9 @@ class Api_petugas extends CI_Controller {
         $this->header();
         $id = $this->input->get('id');
         if ($id != '') {
-            $q = $this->mp->get([['p.id','nama_petugas','hp','activity','nama_instansi','unit','p.instansi_id','p.unit_id'],['p.aktif' => 1,'p.id' => $id]])->result();
+            $q = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit','p.instansi_id','p.unit_id'],['p.aktif' => 1,'p.id' => $id]])->result();
         }else{
-            $q = $this->mp->get([['p.id','nama_petugas','hp','activity','nama_instansi','unit'],['p.aktif' => 1]])->result();
+            $q = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit'],['p.aktif' => 1]])->result();
         }
 
         echo json_encode($q);

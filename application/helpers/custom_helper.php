@@ -34,6 +34,27 @@ if (!function_exists('kordinat')) {
   	}
 }
 
+if (!function_exists('getDistanceFromLatLngInKm')) {
+function getDistanceFromLatLngInKm($lat1,$lon1,$lat2,$lon2) {
+     $R = 6371; // Radius of the earth in km
+     $dLat = deg2rad($lat2-$lat1);  // deg2rad below
+     $dLon = deg2rad($lon2-$lon1); 
+     $a = 
+      sin($dLat/2) * sin($dLat/2) +
+      cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * 
+      sin($dLon/2) * sin($dLon/2); 
+     $c = 2 * atan2(sqrt($a), sqrt(1-$a)); 
+     $d = $R * $c; // Distance in km
+    return $d;
+  }
+}
+
+if (!function_exists('deg2rad')){
+  function deg2rad($deg) {
+    return $deg * (pi()/180);
+  }
+}
+
 if (!function_exists('tgl_indo')) {
 	function tgl_indo($tanggal){
         $bulan = array (

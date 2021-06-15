@@ -17,18 +17,18 @@ class Auth extends CI_Controller {
     public function proses_login()
     {
         $arr = [
-            "a.rowid,a.nrp,a.pwd,p.nama,pangkat",
+            "p.rowid,uid,upwd,p.nama,pangkat",
             [
-                'a.nrp' => $this->input->post('username'),
-                'pwd' => md5($this->input->post('password'))
+                'a.uid' => $this->input->post('username'),
+                'a.upwd' => md5($this->input->post('password'))
             ]
         ];
         $q = $this->mu->join_backoffice($arr);
+
         if ($q->num_rows() > 0) {
             $u = $q->row();
             $array = array(
                 'id' => $u->rowid,
-                'a.nrp' => $u->nrp,
                 'nama' => $u->nama,
                 'pangkat' => $u->pangkat
             );
@@ -36,8 +36,8 @@ class Auth extends CI_Controller {
             $this->session->set_userdata( $array );
             redirect('Dashboard');
         }else{
-        $this->session->set_flashdata('gagal', 'Username atau Password salah. mohon cek kembali username dan password yang anda masukan.');
-        redirect('Auth/login');
+            $this->session->set_flashdata('gagal', 'Username atau Password salah. mohon cek kembali username dan password yang anda masukan.');
+            redirect('Auth/login');
         }
     }
 

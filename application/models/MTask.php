@@ -67,6 +67,57 @@ class MTask extends CI_Model{
         return $bool;
     }
 
+    public function task_where($where)
+    {
+        $q = $this->db->get_where('task', $where);
+        return $q;
+    }
+
+    public function in_task($arr=[])
+    {
+        $bool = false;
+        if (!empty($arr)) {
+            $arr['ctddate'] = date('Y-m-d');
+            $arr['ctdtime'] = date('H:i:s');
+            $q = $this->db->insert('task',$arr);
+            if ($this->db->affected_rows() > 0) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
+
+    public function task_assign_where($select='ta.*',$where=[])
+    {
+        $this->db->select($select);
+        $this->db->join('petugas p', 'p.id = ta.petugas_id', 'left');
+        $this->db->join('instansi i', 'i.id = p.instansi_id', 'left');
+        $q = $this->db->get_where('task_assign ta', $where);
+        return $q;
+    }
+
+    public function in_task_assign($arr=[])
+    {
+        $bool = false;
+        if (!empty($arr)) {
+            $arr['ctddate'] = date('Y-m-d');
+            $arr['ctdtime'] = date('H:i:s');
+            $q = $this->db->insert('task_assign',$arr);
+            if ($this->db->affected_rows() > 0) {
+                $bool = true;
+                $this->in_task_log(
+                    [
+                        'petugas_id' => $arr['petugas_id'],
+                        'task_id' => $arr['task_id'],
+                        'status' => 0,
+                        'task_assign_id' => $this->db->insert_id()
+                    ]
+                );
+            }
+        }
+        return $bool;
+    }
+
     public function in_task_log($arr=[])
     {
         $bool = false;
@@ -80,6 +131,16 @@ class MTask extends CI_Model{
             }
         }
         return $bool;
+    }
+
+    public function task_assign_log($task_id='')
+    {
+        $this->db->select('ta.petugas_id,ta.task_assign_id,p.nama_petugas,i.nama_instansi,p.instansi_id,ta.status,ta.ctddate,ta.ctdtime');
+        $this->db->join('petugas p', 'p.id = ta.petugas_id', 'left');
+        $this->db->join('instansi i', 'i.id = p.instansi_id', 'left');
+        $this->db->order_by('ta.id', 'desc');
+        $q = $this->db->get_where('task_log ta', ['ta.task_id' => $task_id]);
+        return $q;
     }
 
     public function in_batch_task_img($obj=[])

@@ -22,8 +22,9 @@ class Pengaduan extends CI_Controller {
         $this->load->view('_main', $d);
     }
 
-    public function eksekusi($id='')
+    public function eksekusi()
     {
+        $id = $this->input->get('id');
         if ($id != '') {
             $d = [
                 'title' => 'Eksekusi Pengaduan',

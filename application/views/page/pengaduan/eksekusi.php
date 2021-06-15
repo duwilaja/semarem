@@ -1,3 +1,11 @@
+<style>
+.activity-timeline .media .activity-line {
+    margin: 0 auto;
+    left: 21px;
+}
+</style>
+<input type="hidden" name="pengaduan_id" id="pengaduan_id" value="<?=$this->input->get('id');?>">
+<input type="hidden" name="task_id" id="task_id">
 <div class="container-fluid">
     <div class="row">
         <div class="col call-chat-sidebar col-sm-12">
@@ -73,10 +81,10 @@
                                 <!-- chat-header start-->
                                 <div class="chat-header clearfix">
                                     <div class="about">
-                                        <div class="name">Kecelakaan Beruntun</div>
+                                        <div class="name" id="judul">-</div>
                                         <div>
-                                            <span class="badge badge-danger">#Kecelakaan</span>
-                                            <span class="badge badge-warning">On Progress</span>
+                                            <span class="badge badge-danger" id="kategori">-</span>
+                                            <span class="badge badge-light text-secondary" id="status"></span>
                                         </div>
                                     </div>
                                     <ul class="list-inline float-start float-sm-end chat-menu-icons">
@@ -132,65 +140,15 @@
                             <div class="tab-content" id="info-tabContent">
                                 <div class="tab-pane fade show active" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
                                     <div class="people-list">
-                                        <ul class="list">
-                                            <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/4.jpg" alt="">
-                                                <div class="about">
-                                                    <div class="name">Erica Hughes</div>
-                                                    <div class="status"><i class="fa fa-share font-success"></i>  5 May, 4:40 PM</div>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><img class="rounded-circle user-image mt-0" src="<?=$template;?>assets/images/user/1.jpg" alt="">
-                                                <div class="about">
-                                                    <div class="name">Vincent Porter
-                                                        <div class="status"><i class="fa fa-reply font-danger"></i>  5 May, 5:30 PM</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/8.jpg" alt="">
-                                                <div class="about">
-                                                    <div class="name">Kori Thomas</div>
-                                                    <div class="status"><i class="fa fa-share font-success"></i>  1 Feb, 6:56 PM</div>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/2.png" alt="">
-                                                <div class="about">
-                                                    <div class="name">Aiden Chavez</div>
-                                                    <div class="status"><i class="fa fa-reply font-danger"></i>  3 June, 1:22 PM</div>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/4.jpg" alt="">
-                                                <div class="about">
-                                                    <div class="name">Erica Hughes</div>
-                                                    <div class="status"><i class="fa fa-share font-success"></i>  5 May, 4:40 PM</div>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><img class="rounded-circle user-image mt-0" src="<?=$template;?>assets/images/user/1.jpg" alt="">
-                                                <div class="about">
-                                                    <div class="name">Vincent Porter</div>
-                                                    <div class="status"><i class="fa fa-share font-success"></i>  5 May, 5:30 PM</div>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/8.jpg" alt="">
-                                                <div class="about">
-                                                    <div class="name">Kori Thomas</div>
-                                                    <div class="status"><i class="fa fa-reply font-danger"></i>                                                                      1 Feb, 6:56 PM</div>
-                                                </div>
-                                            </li>
-                                            <li class="clearfix"><img class="rounded-circle user-image" src="<?=$template;?>assets/images/user/4.jpg" alt="">
-                                                <div class="about">
-                                                    <div class="name">Erica Hughes</div>
-                                                    <div class="status"><i class="fa fa-share font-success"></i>  5 May, 4:40 PM</div>
-                                                </div>
-                                            </li>
+                                        <ul class="list" id="list_assign">
+                                            
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="info-profile" role="tabpanel" aria-labelledby="profile-info-tab">
-                                    <div class="people-list">
-                                        <div class="search">
-                                            <div class="my-3 text-center">
-                                                <h4><span class="badge badge-primary">Statusnya</span></h4>
-                                            </div>
+                                  <div class="timelines pt-4" style="height: 400px;overflow:auto;">
+                                        <div class="activity-timeline" id="status_timeline">
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -200,26 +158,15 @@
                                             <!-- <div class="avatar text-center"><img alt="" src="<?=$template;?>assets/images/user/2.png"></div>
                                             <div class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div> -->
                                         </div>
-                                        <div class="text-end mt-2">
-                                            <h6 class="">14-06-2021</h6>
+                                        <div class="text-center mt-2">
+                                            <h6 id="tanggal_pengaduan" style="font-size: 14px;">-</h6>
                                         </div>
                                         <div class="user-content text-center">
-                                            <h5 class="text-uppercase"><span class="badge badge-secondary">Kecelakaan</span></h5>
-                                            <h6 class="text-uppercase text-muted">Diva Wardana</h6>
+                                            <h5 class="text-uppercase"><span class="badge badge-secondary" id="kategori_pengaduan">-</span></h5>
+                                            <h6 class="text-uppercase text-muted" id="nama_pelapor">-</h6>
                                             <hr>
-                                            <!-- <div class="follow text-center">
-                                                <div class="row">
-                                                    <div class="col border-right"><span>Following</span>
-                                                        <div class="follow-num">236k</div>
-                                                    </div>
-                                                    <div class="col"><span>Follower</span>
-                                                        <div class="follow-num">3691k</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr> -->
-                                            <div class="text-center">
-                                                <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque sed odio soluta temporibus sequi impedit consequatur quae, voluptatem placeat excepturi hic, itaque officiis iusto earum optio, doloremque ut eaque animi.</p>
+                                            <div class="text-center" style="height: 10hv;height: 300px;overflow: auto;">
+                                                <p id="keterangan_pengaduan" class="mb-4" style="font-size:14px;">-</p>
                                             </div>
                                         </div>
                                     </div>
