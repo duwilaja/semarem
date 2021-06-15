@@ -98,6 +98,7 @@ function dt() {
                 'f_status' : $('#f_status').val(),
                 'f_kategori_peng' : $('#f_kategori_peng').val(),
                 'f_date_interval' : $('#f_date_interval').val(),
+                'operator' : $('#operator').val()
             }
         },
         //Set column definition initialisation properties

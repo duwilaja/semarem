@@ -48,7 +48,7 @@
    <script src="<?=$template;?>assets/js/chart/apex-chart/stock-prices.js"></script>
    <script src="<?=$template;?>assets/js/chart/apex-chart/chart-custom.js"></script>
 
-   <script src="<?=base_url('my/js/socket_io.js')?>"></script>
+   <!-- <script src="<?=base_url('my/js/socket_io.js')?>"></script>
 
    <script>
    const socket = io.connect('http://202.134.4.215:3000/');
@@ -86,4 +86,4 @@ var options = {
   };
 });
 
-</script>
+</script> -->

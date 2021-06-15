@@ -30,7 +30,14 @@
                       <li><a class="" href="<?=site_url('Data_master/task_kategori');?>">Task Kategori</a></li>
                     </ul>
                   </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="<?= site_url('Pengaduan/list_pengaduan')?>"><i data-feather="alert-circle"> </i><span>Pengaduan</span></a></li>
+                  
+                  <li class="sidebar-list">
+                    <label class="badge badge-danger">2</label><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="alert-circle"></i><span class="">Pengaduan</span></a>
+                    <ul class="sidebar-submenu">
+                      <li><a href="<?=site_url('Pengaduan/list_pengaduan');?>">All</a></li>
+                      <li><a href="<?= site_url('Pengaduan/list_pengaduan?my=ya')?>">My Task</a></li>
+                    </ul>
+                  </li>
                   <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="<?= site_url('Petugas')?>"><i data-feather="users"> </i><span>Petugas</span></a></li>
                 </ul>
               </div>

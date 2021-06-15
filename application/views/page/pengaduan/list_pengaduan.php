@@ -1,3 +1,4 @@
+<input type="hidden" name="operator" id="operator" value="<?=$this->input->get('my') ? $this->session->userdata('id') : '';?>">
 <div class="container-fluid">
   <div class="row">
     <!-- Individual column searching (text inputs) Starts-->
@@ -13,7 +14,7 @@
                   </div>
                   <div class="col-md-4">
                     <label class="form-label" for="f_date_interval">Rentan Waktu</label>
-                    <input class="form-control" id="f_date_interval" type="text" name="f_date_interval" value="<?=date('Y-m-d').'-'.date('Y-m-d') ?>">
+                    <input class="form-control" id="f_date_interval" type="text" name="f_date_interval" value="<?=date('Y/m/d').' - '.date('Y/m/d') ?>">
                   </div>
                   <div class="col-md-4">
                       <label class="form-label" for="f_status">Status</label>
