@@ -36,7 +36,7 @@
                               </div>
                             </form>
                           </div>
-                          <ul class="list" id="list_petugas">
+                          <ul class="list" id="list_petugas" style="height:400px;">
                            
                           </ul>
                       </div>
@@ -48,7 +48,7 @@
                               </div>
                             </form>
                           </div>
-                          <ul class="list" id="list_instansi">
+                          <ul class="list" id="list_instansi" style="height:400px;">
                            
                           </ul>
                       </div>
@@ -60,7 +60,7 @@
                               </div>
                             </form>
                           </div>
-                          <ul class="list" id="list_realtime_car">
+                          <ul class="list" id="list_realtime_car" style="height:400px;">
                           </ul>
                       </div>
                     </div>
@@ -196,9 +196,11 @@
                 <label for="Status" class="form-label">Status</label>
                 <select name="status" class="form-control" id="status" required>
                     <option value="">--Pilih Status--</option>
-                    <option value="1">Done</option>
-                    <option value="2">Pending</option>
-                    <option value="3">Cancel</option>
+                    <option value="0">Menunggu Konfirmasi</option>
+                    <option value="1">Sudah Dikonfirmasi</option>
+                    <option value="2">Ditangani</option>
+                    <option value="3">Selesai</option>
+                    <option value="4">Batal</option>
                 </select>
             </div>
             <div class="mb-3">
@@ -211,6 +213,22 @@
         <button type="button" class="btn btn-primary">Update</button>
       </div>
         </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detail-->
+<div class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailLabel">Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div id="content-detail">
+          </div>
+      </div>
     </div>
   </div>
 </div>

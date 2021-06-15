@@ -115,10 +115,10 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
                 <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
                     <div class="status-circle ${e.speed > 0 ? 'online' : 'offline'}"></div>
                     <div class="row">
-                        <div class="col-8">
+                        <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car',${e.id})">
                             <div class="name">${e.vehiclename}</div>
                             <div class="status">${e.vehiclegroup}</div>
-                        </div>
+                        </a>
                         <div class="col-2">
                             <a href="javascript:void(0);" onclick="assign()" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
                         </div>
@@ -138,10 +138,10 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
         <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
             <div class="status-circle ${e.speed > 0 ? 'online' : 'offline'}"></div>
             <div class="row">
-                <div class="col-8">
+                <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car',${e.id})">
                     <div class="name">${e.vehiclename}</div>
                     <div class="status">${e.vehiclegroup}</div>
-                </div>
+                </a>
                 <div class="col-2">
                     <a href="javascript:void(0);" onclick="assign()" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
                 </div>
@@ -162,10 +162,10 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
               <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
                   <div class="status-circle ${e.activity == 0 ? 'online' : 'offline'}"></div>
                   <div class="row">
-                      <div class="${e.activity == 0 ? 'col-8' : 'col-12'}">
+                      <a href="javascript:void(0)" style="color:black;" onclick="detail('petugas',${e.id})" class="${e.activity == 0 ? 'col-8' : 'col-12'}">
                           <div class="name">${e.nama_instansi} - ${e.nama_petugas}</div>
                           <div class="status">${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
-                      </div>
+                      </a>
                       ${e.activity == 0 ? `<div class="col-2">
                       <a href="#" class="btn btn-success" onclick="assign_petugas(${$('#pengaduan_id').val()},${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
                   </div>` : ''} 
@@ -184,10 +184,10 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
         <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
         <div class="status-circle ${e.activity == 0 ? 'online' : 'offline'}"></div>
         <div class="row">
-            <div class="col-8">
+            <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('petugas',${e.id})">
                 <div class="name">${e.nama_petugas}</div>
                 <div class="status">${e.nama_instansi} - ${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
-            </div>
+            </a>
             <div class="col-2">
                 <a href="#" class="btn btn-success" onclick="assign_petugas(${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
             </div>
@@ -239,6 +239,61 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
         </div>
       </li>`);
     });
+  }
+
+  //Detail detail
+  function detail(type,id) {
+    $('#detail').modal('show'); // show modal
+    $('#content-detail').html('');
+    if (type == 'petugas') {
+      $.ajax({
+        type: "GET",
+        url: "../backend/Api_petugas/get?id="+id,
+        dataType: "json",
+        success: function (r) {
+            r.forEach(v => {
+              $('#content-detail').append(`
+                <div class ="row">
+                  <div class="col-5">
+                    <p>Nama Petugas</p>
+                  </div>
+                  <div class="col-1">
+                    <p>:</p>
+                  </div>
+                  <div class="col-6">
+                    <p>${v.nama_petugas}</p>
+                  </div>
+                </div>
+                <div class ="row">
+                  <div class="col-5">
+                    <p>Nama Instansi</p>
+                  </div>
+                  <div class="col-1">
+                    <p>:</p>
+                  </div>
+                  <div class="col-6">
+                    <p>${v.nama_instansi}</p>
+                  </div>
+                </div>
+                <div class ="row">
+                  <div class="col-5">
+                    <p>Status</p>
+                  </div>
+                  <div class="col-1">
+                    <p>:</p>
+                  </div>
+                  <div class="col-6">
+                    <p>${v.activity == 0 ? 'Siap Bertugas' : (v.activity == 1 ? 'Istirahat' : 'Sedang Menerima Tugas')}</p>
+                  </div>
+                </div>
+              `);
+            });
+        }
+    });
+    }
+    if (type == 'car') {
+      console.log(type);
+    }
   }
 
   // Assign Petugas
