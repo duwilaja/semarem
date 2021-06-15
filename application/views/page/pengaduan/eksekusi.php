@@ -22,13 +22,13 @@
                     </div>
                     <div class="people-list" id="people-list">
                     <ul class="nav nav-pills" id="pills-icontab" role="tablist">
-                      <li class="nav-item"><a class="nav-link btn btn-success" id="pills-person-pill" data-bs-toggle="pill" href="#pills-person" role="tab" aria-controls="pills-person" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-users-alt-2" style="margin-right: 0px !important;"></i></a></li>
+                      <li class="nav-item active"><a class="nav-link btn btn-success" id="pills-person-pill" data-bs-toggle="pill" href="#pills-person" role="tab" aria-controls="pills-person" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-users-alt-2" style="margin-right: 0px !important;"></i></a></li>
                       <li class="nav-item"><a class="nav-link btn btn-secondary" id="pills-instansi-pill" data-bs-toggle="pill" href="#pills-instansi" role="tab" aria-controls="pills-instansi" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-ui-home" style="margin-right: 0px !important;"></i></a></li>
-                      <li class="nav-item active"><a class="nav-link btn btn-primary" id="pills-kendaraan-tab" data-bs-toggle="pill" href="#pills-kendaraan" role="tab" aria-controls="pills-kendaraan" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-car-alt-4" style="margin-right: 0px !important;"></i></a></li>
-                      <li class="nav-item active"><a class="nav-link btn btn-warning" onclick="refresh()" data-bs-toggle="pill" href="#pills-kendaraans" role="tab" aria-controls="pills-kendaraans" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-refresh" style="margin-right: 0px !important;"></i></a></li>
+                      <li class="nav-item"><a class="nav-link btn btn-primary" id="pills-kendaraan-tab" data-bs-toggle="pill" href="#pills-kendaraan" role="tab" aria-controls="pills-kendaraan" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-car-alt-4" style="margin-right: 0px !important;"></i></a></li>
+                      <li class="nav-item"><a class="nav-link btn btn-warning" onclick="refresh()" data-bs-toggle="pill" href="#pills-kendaraans" role="tab" aria-controls="pills-kendaraans" aria-selected="true" style="padding: .5rem 1rem!important; margin-right:3px!important;"><i class="icofont icofont-refresh" style="margin-right: 0px !important;"></i></a></li>
                     </ul>
                     <div class="tab-content" id="pills-icontabContent" style="overflow:hidden;height:90%;">
-                      <div class="tab-pane fade" id="pills-person" role="tabpanel" aria-labelledby="pills-person-tab">                       
+                      <div class="tab-pane fade show active" id="pills-person" role="tabpanel" aria-labelledby="pills-person-tab">                       
                           <div class="search">
                             <form class="theme-form">
                               <div class="mb-3">
@@ -52,7 +52,7 @@
                            
                           </ul>
                       </div>
-                      <div class="tab-pane fade show active" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
+                      <div class="tab-pane fade" id="pills-kendaraan" role="tabpanel" aria-labelledby="pills-kendaraan-tab">                       
                           <div class="search">
                             <form class="theme-form">
                               <div class="mb-3">
