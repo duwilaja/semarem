@@ -52,7 +52,7 @@
    <script src="<?=base_url('my/js/socket_io.js')?>"></script>
 
    <script>
-   const socket = io.connect('http://localhost:3000/');
+   const socket = io.connect('http://36.66.191.181:3000/');
    console.log(Notification.permission);
    if (Notification.permission === "granted") {
       console.log('notif masuk');
