@@ -162,13 +162,13 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
               <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
                   <div class="status-circle ${e.activity == 0 ? 'online' : 'offline'}"></div>
                   <div class="row">
-                      <div class="col-8">
+                      <div class="${e.activity == 0 ? 'col-8' : 'col-12'}">
                           <div class="name">${e.nama_instansi} - ${e.nama_petugas}</div>
                           <div class="status">${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
                       </div>
-                      <div class="col-2">
-                          <a href="#" class="btn btn-success" onclick="assign_petugas(${$('#pengaduan_id').val()},${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
-                      </div>
+                      ${e.activity == 0 ? `<div class="col-2">
+                      <a href="#" class="btn btn-success" onclick="assign_petugas(${$('#pengaduan_id').val()},${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
+                  </div>` : ''} 
                   </div>
               </li>`);
           });
