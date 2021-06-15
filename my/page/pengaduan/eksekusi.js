@@ -102,6 +102,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
 
   // Kendaraan realtime
   function realtime_car() { 
+    $('#list_realtime_car').html('');
     getData('../indicar/Api/get_token')
     .then(key => {
       indicarKey = key;
@@ -151,6 +152,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
 
   // Petugas
   function petugas() { 
+    $('#list_petugas').html('');
     getData('../backend/Api_petugas/get')
       .then(data => {
           arr_petugas = [];
