@@ -54,7 +54,12 @@
                 <h5>Grafik Pengaduan</h5>
                     <div class="inner-top-right">
                       <ul class="d-flex list-unstyled justify-content-end">
-                          <li>2021-06-11</li>
+                          <li><?php
+                          $date = date('Y-m-d');
+                          $date = strtotime($date);
+                          $date = strtotime("-7 day", $date);
+                          
+                          echo date('Y-m-d',$date)." s.d. ".date('Y-m-d');?></li>
                       </ul>
                     </div>
                 </div>
