@@ -47,12 +47,11 @@
    <script src="<?=$template;?>assets/js/chart/apex-chart/apex-chart.js"></script>
    <script src="<?=$template;?>assets/js/chart/apex-chart/stock-prices.js"></script>
    <script src="<?=$template;?>assets/js/chart/apex-chart/chart-custom.js"></script>
-   
 
    <script src="<?=base_url('my/js/socket_io.js')?>"></script>
 
    <script>
-   const socket = io.connect('http://36.66.191.181:3000/');
+   const socket = io.connect('http://202.134.4.215:3000/');
    console.log(Notification.permission);
    if (Notification.permission === "granted") {
       console.log('notif masuk');
