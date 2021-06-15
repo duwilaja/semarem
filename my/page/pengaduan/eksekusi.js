@@ -17,6 +17,8 @@ $(document).ready(function () {
 function refresh() {
   list_assign();
   pengaduan(); 
+  realtime_car();
+  petugas();
 }
 
 function list_detail(){
