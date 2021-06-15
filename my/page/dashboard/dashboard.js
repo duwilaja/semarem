@@ -39,7 +39,7 @@ function total() {
       "end" : '',
   };
   $.ajax({
-      url : "http://localhost/intan/Dashboard/total",
+      url : "./total",
       method : "POST",
       async : true,
       data: postData, 
@@ -66,7 +66,7 @@ function peng_kategori() {
     "end" : '',
   };
   $.ajax({
-      url : "http://localhost/intan/Dashboard/kategori",
+      url : "./kategori",
       method : "POST",
       async : true,
       data: postData, 
@@ -91,7 +91,7 @@ function vendor() {
     "end" : '',
   };
   $.ajax({
-      url : "http://localhost/intan/Dashboard/vendor",
+      url : "./vendor",
       method : "POST",
       async : true,
       data: postData, 
@@ -117,7 +117,7 @@ function grafik_pengaduan() {
         "end" : '',
     };
     $.ajax({
-        url : "http://localhost/intan/Dashboard/grafik_pengaduan",
+        url : "./grafik_pengaduan",
         method : "POST",
         async : true,
         dataType : 'json',
