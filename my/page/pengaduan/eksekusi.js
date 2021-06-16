@@ -12,6 +12,7 @@ $(document).ready(function () {
     instansi();
     list_assign();
     pengaduan();
+    up_pengaduan();
 });
 
 function refresh() {
@@ -294,6 +295,38 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
     if (type == 'car') {
       console.log(type);
     }
+  }
+
+  // Update pengaduan
+  function up_pengaduan() {
+    $('#form_update').submit(function (e) { 
+      e.preventDefault();
+      $.ajax({
+        type: "post",
+        url: "../backend/Api_pengaduan/upsts_peng",
+        data : $(this).serialize(),
+        dataType: "json",
+        success: function (r) {
+              if(r.status == 1){
+                  $('#updateModal').modal('hide');
+                  swal({
+                      title:'Berhasil',
+                      text:r.msg,
+                      icon:'success'
+                    });
+                    pengaduan();
+              }else{
+                  $('#updateModal').modal('hide');
+                  swal({
+                      title:'Gagal',
+                      text:r.msg,
+                      icon:'error'
+                    });
+                    pengaduan();
+              }
+          }
+      }); 
+  });
   }
 
   // Assign Petugas

@@ -231,4 +231,28 @@ class Api_pengaduan extends CI_Controller {
 
         return $rsp;
     }
+
+    public function upsts_peng()
+    {
+        $rsp = [
+            'status' => false,
+            'msg' => 'Gagal update status'
+        ];
+        
+        $pengaduan_id = $this->input->post('pengaduan_id');
+        $status = $this->input->post('status');
+
+        $tw = $this->mt->task_where([
+            'pengaduan_id' => $pengaduan_id
+        ]);
+
+        if ($tw->num_rows() != 0) {
+            
+            $this->mp->up(['status' => $status],['id' => $pengaduan_id]);
+            $this->db->update('task',['status' => $status],['pengaduan_id' => $pengaduan_id]);
+                $rsp['status'] = true;
+                $rsp['msg'] = "Berhasil update status";
+        }
+        echo json_encode($rsp);
+    } 
 }
