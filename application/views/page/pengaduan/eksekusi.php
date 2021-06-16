@@ -98,7 +98,7 @@
                                 </div>
                                 <!-- chat-header end-->
                                 <div class="chat-history chat-msg-box custom-scrollbar p-0" style="overflow-y:hidden;height:548px;">
-                                    <iframe src="http://localhost/sm-bi/welcome/simulasi2"
+                                    <iframe src="../../sm-bi/welcome/simulasi2"
                                     frameborder="0" 
                                     marginheight="0" 
                                     marginwidth="0" 
