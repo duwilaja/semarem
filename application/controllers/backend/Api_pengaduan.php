@@ -17,7 +17,8 @@ class Api_pengaduan extends CI_Controller {
             'kategori' => $this->input->post('f_kategori_peng'),
             'start_date' => date("Y-m-d", strtotime($date[0])),
             'end_date' => date("Y-m-d", strtotime($date[1])),
-            'status' => $this->input->post('f_status')
+            'status' => $this->input->post('f_status'),
+            'operator' => $this->input->post('operator')
         ];
         
         echo $this->mp->dt_pengaduan($filter);
@@ -54,7 +55,7 @@ class Api_pengaduan extends CI_Controller {
                 'status' => 0,
                 'operator' => $this->session->userdata('id')
             ]);
-            $this->mp->up(['task_id' => $this->db->insert_id()],['id' => $pengaduan_id]);
+            $this->mp->up(['task_id' => $this->db->insert_id(),'operator' => $this->session->userdata('id')],['id' => $pengaduan_id]);
             if ($t) {
                 $rsp['status'] = true;
                 $rsp['msg'] = "Berhasil mengeksekusi pengaduan";

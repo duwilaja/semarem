@@ -77,7 +77,7 @@ class MPengaduan extends CI_Model{
           // Set default order
           $CI->dt->order = ['p.id' => 'desc'];
 
-          if (isset($filter['kategori'])) {
+          if (isset($filter['kategori']) && $filter['kategori'] != '' ) {
                 $con = ['where_in','kategori_peng_id',$filter['kategori']];
                 array_push($condition,$con);              
           }
@@ -90,8 +90,13 @@ class MPengaduan extends CI_Model{
             array_push($condition,$con);   
           }
 
-          if (isset($filter['status'])) {
+          if (isset($filter['status']) && $filter['status'] != '' ) {
             $con = ['where_in','status',$filter['status']];
+            array_push($condition,$con);              
+          }
+
+          if (isset($filter['operator']) && $filter['operator'] != '' ) {
+            $con = ['where','operator',$filter['operator']];
             array_push($condition,$con);              
           }
           //join table

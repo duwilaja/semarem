@@ -39,7 +39,7 @@ function total() {
       "end" : '',
   };
   $.ajax({
-      url : "./total",
+      url : "./Dashboard/total",
       method : "POST",
       async : true,
       data: postData, 
@@ -66,7 +66,7 @@ function peng_kategori() {
     "end" : '',
   };
   $.ajax({
-      url : "./kategori",
+      url : "./Dashboard/kategori",
       method : "POST",
       async : true,
       data: postData, 
@@ -74,7 +74,7 @@ function peng_kategori() {
       success: function(response){  
             $.each(response, function(index) {
                     $('#kategori').append(`<div class="col-xl-12 p-0 left_side_earning">
-                    <h3><span class="badge badge-secondary">${response[index].kategori}</span></h3>
+                    <h3 style="font-size:16px;"><span class="badge badge-secondary">${response[index].kategori}</span></h3>
                     <p class="font-roboto">${response[index].total} Info Pengaduan</p>
                     <hr>
                   </div>`);
@@ -91,7 +91,7 @@ function vendor() {
     "end" : '',
   };
   $.ajax({
-      url : "./vendor",
+      url : "./Dashboard/vendor",
       method : "POST",
       async : true,
       data: postData, 
@@ -117,7 +117,7 @@ function grafik_pengaduan() {
         "end" : '',
     };
     $.ajax({
-        url : "./grafik_pengaduan",
+        url : "./Dashboard/grafik_pengaduan",
         method : "POST",
         async : true,
         dataType : 'json',
