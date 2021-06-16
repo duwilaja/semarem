@@ -191,10 +191,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post" id="form_add">
+        <form action="" method="post" id="form_update">
+        <input type="hidden" name="pengaduan_id" id="" value="<?=$this->input->get('id');?>">
             <div class="mb-3">
                 <label for="Status" class="form-label">Status</label>
-                <select name="status" class="form-control" id="status" required>
+                <select name="status" class="form-control" id="ustatus" required>
                     <option value="">--Pilih Status--</option>
                     <option value="0">Menunggu Konfirmasi</option>
                     <option value="1">Sudah Dikonfirmasi</option>
@@ -203,14 +204,14 @@
                     <option value="4">Batal</option>
                 </select>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="Keterangan" class="form-label">Keterangan</label>
                 <textarea name="ket" id="" cols="30" rows="5" class="form-control"></textarea>
-            </div>
+            </div> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Update</button>
       </div>
         </form>
     </div>
