@@ -326,10 +326,10 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
         </div>
         <div class="mb-3">
           <label for="buktiPelapor" class="form-label">Bukti Pelapor</label>
-          <div class="row my-gallery gallery" id="aniimated-thumbnials" itemscope="">
-            <figure class="col-md-3 col-6 img-hover hover-1" itemprop="associatedMedia" itemscope=""><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" itemprop="contentUrl" data-size="1600x950">
-                <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" itemprop="thumbnail" alt="Image description"></div></a>
-              <figcaption itemprop="caption description">Image caption  1</figcaption>
+          <div class="row my-gallery gallery" id="" >
+            <figure class="col-md-3 col-6 img-hover hover-1" ><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" data-size="1600x950">
+                <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" alt="Image description"></div></a>
+              <figcaption>Image caption  1</figcaption>
             </figure>
           </div>
         </div>
@@ -360,10 +360,10 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
         </div>
         <div class="mb-3">
           <label for="buktiPenanganan" class="form-label">Bukti Penanganan</label>
-          <div class="row my-gallery gallery" id="aniimated-thumbnials" itemscope="">
-            <figure class="col-md-3 col-6 img-hover hover-1" itemprop="associatedMedia" itemscope=""><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" itemprop="contentUrl" data-size="1600x950">
-                <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" itemprop="thumbnail" alt="Image description"></div></a>
-              <figcaption itemprop="caption description">Image caption  1</figcaption>
+          <div class="row my-gallery gallery" id="" >
+            <figure class="col-md-3 col-6 img-hover hover-1" ><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" data-size="1600x950">
+                <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" alt="Image description"></div></a>
+              <figcaption>Image caption  1</figcaption>
             </figure>
           </div>
         </div>
@@ -386,6 +386,9 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
           </div>
         </div>
       `);
+      let imported = document.createElement('script');
+      imported.src = `${base_url}template/cuba/assets/js/photoswipe/photoswipe.js`;
+      document.head.appendChild(imported);
     }
   }
 
