@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/rating.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/sweetalert2.css">
     <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="<?=$template;?>assets/css/vendors/photoswipe.css">
     
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->

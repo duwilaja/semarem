@@ -295,6 +295,98 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
     if (type == 'car') {
       console.log(type);
     }
+    if (type == "assign") {
+      $('#content-detail').append(`
+        <div class="row">
+          <div class="col-5">
+            <span>Kategori</span>
+          </div>
+          <div class="col-1">
+            <p>:</p>
+          </div>
+          <div class="col-6">
+            <p class="badge badge-secondary">Kecelakaan</p>
+          </div>
+        </div>
+        <span class="text-muted">
+          <i class="fa fa-clock-o text-success"></i>&nbsp;&nbsp;10 Juni 2021
+        </span>
+        <br>
+        <span class="text-muted">
+          <i class="fa fa-map-marker text-success"></i>&nbsp;&nbsp;Jl. blabla
+        </span>
+        <br>
+        <br>
+        <div class="mb-3">
+          <label for="Pelapor" class="form-label">Pelapor</label>
+          <div class="p-2" style="background-color:#E0EE92;">
+            Yudi
+            <br> 082144556754
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="buktiPelapor" class="form-label">Bukti Pelapor</label>
+          <div class="row my-gallery gallery" id="aniimated-thumbnials" itemscope="">
+            <figure class="col-md-3 col-6 img-hover hover-1" itemprop="associatedMedia" itemscope=""><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" itemprop="contentUrl" data-size="1600x950">
+                <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" itemprop="thumbnail" alt="Image description"></div></a>
+              <figcaption itemprop="caption description">Image caption  1</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="Penanganan" class="form-label">Penanganan</label>
+          <div class="row">
+            <div class="col-5">
+              <span class="text-muted">Status</span>
+            </div>
+            <div class="col-1">
+              <p>:</p>
+            </div>
+            <div class="col-6">
+              <p class="badge badge-success">Selesai</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <span class="text-muted">Lama Penanganan</span>
+            </div>
+            <div class="col-1">
+              <p>:</p>
+            </div>
+            <div class="col-6">
+              <p class="badge badge-warning">23 detik</p>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="buktiPenanganan" class="form-label">Bukti Penanganan</label>
+          <div class="row my-gallery gallery" id="aniimated-thumbnials" itemscope="">
+            <figure class="col-md-3 col-6 img-hover hover-1" itemprop="associatedMedia" itemscope=""><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" itemprop="contentUrl" data-size="1600x950">
+                <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" itemprop="thumbnail" alt="Image description"></div></a>
+              <figcaption itemprop="caption description">Image caption  1</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="Penyebab" class="form-label">Penyebab</label>
+          <div>
+          -
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="Tindakan" class="form-label">Tindakan</label>
+          <div>
+          -
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="Keterangan" class="form-label">Keterangan</label>
+          <div>
+          -
+          </div>
+        </div>
+      `);
+    }
   }
 
   // Update pengaduan
@@ -358,10 +450,10 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
       .then(d => {
           d.data.forEach(e => {
               $('#list_assign').append(`<li class="clearfix mt-2 mb-2"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
-              <div class="about">
+              <a href="javascript:void(0);" class="about" onclick="detail('assign','')">
                   <div class="name">${e.nama_instansi} - ${e.nama_petugas}</div>
                   <div class="status"><i class="fa fa-share font-success"></i>  ${e.status_static}</div>
-              </div>
+              </a>
           </li>`);
           });
 

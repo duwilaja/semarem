@@ -16,12 +16,15 @@
     <script src="<?=$template;?>assets/js/rating/jquery.barrating.js"></script>
     <script src="<?=$template;?>assets/js/rating/rating-script.js"></script>
     <script src="<?=$template;?>assets/js/owlcarousel/owl.carousel.js"></script>
+    <script src="<?=$template;?>assets/js/notify/notify-script.js"></script>
+    <script src="<?=$template;?>assets/js/photoswipe/photoswipe.min.js"></script>
+    <script src="<?=$template;?>assets/js/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="<?=$template;?>assets/js/photoswipe/photoswipe.js"></script>
     <script src="<?=$template;?>assets/js/tooltip-init.js"></script>
     <script src="<?=$template;?>assets/js/sweet-alert/sweetalert.min.js"></script>
     <script src="<?=$template;?>assets/js/select2/select2.full.min.js"></script>
     <script src="<?=$template;?>assets/js/select2/select2-custom.js"></script>
     <script src="<?=$template;?>assets/js/notify/bootstrap-notify.min.js"></script>
-    <script src="<?=$template;?>assets/js/notify/notify-script.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
