@@ -646,4 +646,79 @@ class Api extends CI_Controller {
         }
        
     }
+
+    // Kirim data panic button
+    public function send_data_panic_button()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mengirimkan data";
+
+            // POST
+            $nama_pelapor = $this->input->post('nama_pelapor');
+            $telp = $this->input->post('telp');
+            $lat = $this->input->post('lat');
+            $lng = $this->input->post('lng');
+
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                        if($nama_pelapor == ''){
+                            $msg = "Nama Pelapor tidak boleh kosong";
+                        }else if($telp == ''){
+                            $msg = "Nomor telepon tidak boleh kosong";
+                        }else if($lat == ''){
+                            $msg = "Lat tidak boleh kosong";
+                        }else if($lng == ''){
+                            $msg = "Lng tidak boleh kosong";
+                        }else{
+                            $ctddate = date('Y-m-d');
+                            $ctdtime = date('H:i:s');
+
+                            $seleksi_date = $this->db->get_where('panic_data', ['nama_pelapor'=> $nama_pelapor,'telp' => $telp,'ctddate' => $ctddate,'ctdtime' => $ctdtime]);
+                            if ($seleksi_date->num_rows() ==  0) {
+                                $q = $this->db->insert('panic_data',[
+                                    'nama_pelapor' => $nama_pelapor,
+                                    'telp' => $telp,
+                                    'lat' => $lat,
+                                    'lng' => $lng,
+                                    'type_pb' => 1,
+                                    'ctddate' => $ctddate,
+                                    'ctdtime' => $ctdtime,
+                                    'status' => 0
+                                ]);
+                                $xx =  $this->db->affected_rows();
+                                if ($xx > 0) {
+                                    $msg = "Berhasil menambahkan data";
+                                    $status = true;  
+                                }
+                            }else{
+                                $msg = "Data ini sudah terinput sebelumnya";
+                            }
+                        }
+                    }else{
+                        $msg = "Token tidak valid";
+                    }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
 }
