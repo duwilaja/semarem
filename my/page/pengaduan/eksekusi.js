@@ -116,7 +116,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
                 <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
                     <div class="status-circle ${e.speed > 0 ? 'online' : 'offline'}"></div>
                     <div class="row">
-                        <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car',${e.id})">
+                        <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car','${e.nopol}')">
                             <div class="name">${e.vehiclename}</div>
                             <div class="status">${e.vehiclegroup}</div>
                         </a>
@@ -139,7 +139,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
         <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
             <div class="status-circle ${e.speed > 0 ? 'online' : 'offline'}"></div>
             <div class="row">
-                <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car',${e.id})">
+                <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car','${e.nopol}')">
                     <div class="name">${e.vehiclename}</div>
                     <div class="status">${e.vehiclegroup}</div>
                 </a>
@@ -293,7 +293,78 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
     });
     }
     if (type == 'car') {
-      console.log(type);
+      console.log(id);
+      getData('../indicar/Api/get_token')
+      .then(key => {
+        indicarKey = key;
+        data = `nopols=${id}`;
+        postData('https://www.indicar.id/platform/public/index.php/sysapi/vehicles/detailbynopol',{nopols:id})
+          .then(data => {
+            console.log(data);
+              arr_realtime_car = [];
+              arr_realtime_car = data.dataset;
+              data.dataset.forEach(e => {
+                  $('#content-detail').append(`
+                  <div class ="row">
+                    <div class="col-5">
+                      <p>Nama Kendaraan</p>
+                    </div>
+                    <div class="col-1">
+                      <p>:</p>
+                    </div>
+                    <div class="col-6">
+                      <p>${e.vehiclename}</p>
+                    </div>
+                  </div>
+                  <div class ="row">
+                    <div class="col-5">
+                      <p>No Polisi</p>
+                    </div>
+                    <div class="col-1">
+                      <p>:</p>
+                    </div>
+                    <div class="col-6">
+                      <p>${e.nopol}</p>
+                    </div>
+                  </div>
+                  <div class ="row">
+                    <div class="col-5">
+                      <p>Nama Instansi</p>
+                    </div>
+                    <div class="col-1">
+                      <p>:</p>
+                    </div>
+                    <div class="col-6">
+                      <p>${e.vehiclegroup}</p>
+                    </div>
+                  </div>
+                  <div class ="row">
+                    <div class="col-5">
+                      <p>Merk Kendaraan</p>
+                    </div>
+                    <div class="col-1">
+                      <p>:</p>
+                    </div>
+                    <div class="col-6">
+                      <p>${e.merkname}</p>
+                    </div>
+                  </div>
+                  <div class ="row">
+                    <div class="col-5">
+                      <p>Status</p>
+                    </div>
+                    <div class="col-1">
+                      <p>:</p>
+                    </div>
+                    <div class="col-6">
+                      <p>${e.activity == 0 ? '<span class="badge badge-success">online</span>' : '<span class="badge badge-danger">offline</span>'}</p>
+                    </div>
+                  </div>
+                `);
+              });
+
+          });  
+      });
     }
     if (type == "assign") {
       $('#content-detail').append(`
