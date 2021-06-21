@@ -148,13 +148,34 @@ class Api_pengaduan extends CI_Controller {
             'msg' => 'Gagal mendapatkan data daftar delegasi dari pengaduan '.$pengaduan_id
         ];
 
-        $taw = $this->mt->task_assign_where('p.nama_petugas,p.instansi_id,i.nama_instansi,ta.status',['pengaduan_id' => $pengaduan_id]);
+        $taw = $this->mt->task_assign_where('ta.id as tid,p.nama_petugas,p.instansi_id,i.nama_instansi,ta.status',['pengaduan_id' => $pengaduan_id]);
         if ($taw->num_rows() > 0 ) {
             $rsp['data'] = $taw->result();
             foreach ($rsp['data'] as $k => $v) {
                 $rsp['data'][$k]->status_static = setStatusPengaduan($v->status);
             }
             $rsp['msg'] = "Berhasil mendapatkan data daftar petugas yang didelegasikan";
+            $rsp['status'] = true;
+        }
+
+        echo json_encode($rsp);
+    }
+
+    public function peng_assign_where()
+    { 
+        $id = $this->input->get('id');
+        $rsp = [
+            'status' => false,
+            'msg' => 'Gagal mendapatkan data'.$id
+        ];
+
+        $taw = $this->mt->task_assign_where('ta.id as tid,p.nama_petugas,p.instansi_id,i.nama_instansi,ta.status',['ta.id' => $id]);
+        if ($taw->num_rows() > 0 ) {
+            $rsp['data'] = $taw->result();
+            foreach ($rsp['data'] as $k => $v) {
+                $rsp['data'][$k]->status_static = setStatusPengaduan($v->status);
+            }
+            $rsp['msg'] = "Berhasil mendapatkan data petugas";
             $rsp['status'] = true;
         }
 
