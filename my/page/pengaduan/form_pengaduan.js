@@ -5,6 +5,7 @@ $( document ).ready(function() {
     $("#inp_pengaduan").click(function(){
         inp_pengaduan();
    });
+   
    $('#i_kasus').select2({
      placeholder: "Select Kategori Kasus",
     });

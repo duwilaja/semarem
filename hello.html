@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script src="my/js/socket_io.js"></script>
+    <script>
+
+const socket = io.connect('http://localhost:3000/');
+   console.log(Notification.permission);
+   if (Notification.permission === "granted") {
+      console.log('notif masuk');
+   } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(permission => {
+         console.log(permission);
+      });
+   }
+
+socket.on('chat message', function(msg){
+  var options = {
+      title: "Notifikasi Ticketing",
+      options: {
+        body: msg,
+        lang: 'id',
+      }
+    };
+
+  $("#easyNotify").easyNotify(options);
+
+});
+
+socket.on('notif', function(data){
+  toastr.info(data.msg);
+var options = {
+    title: "Notifikasi Ticketing",
+    options: {
+      body: data.msg,
+      lang: 'id',
+    }
+  };
+});
+    </script>
+</body>
+</html>
