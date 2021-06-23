@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 class Api_pengaduan extends CI_Controller {
     
     public function __construct()
@@ -130,6 +131,33 @@ class Api_pengaduan extends CI_Controller {
                 if ($t) {
                     $rsp['status'] = true;
                     $rsp['msg'] = "Berhasil mendelegasikan pengaduan ke petugas";
+
+                    $arr = [
+                        'info' => 'Notif penugasan',
+                        'msg' => 'Ada tugas baru menanti',
+                        'from_user' => @$this->session->userdata('id'),
+                        'to_user' => $petugas_id,
+                        'from_app' => 'SM',
+                        'to_app' => 'INTAN',
+                        'ctddate' => date('Y-m-d'),
+                        'ctdtime' => date('H:i:s'),
+                        'read' => 0
+                    ];
+
+                    // print_r($arr);die();
+
+                    $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+                    $channel = $connection->channel();
+
+                    $channel->queue_declare('hello', false, false, false, false);
+
+                    $msg = new AMQPMessage(json_encode($arr));
+                    $channel->basic_publish($msg, '', 'hello');
+
+                    // echo " [x] Sent 'Hello World!'\n";
+
+                    $channel->close();
+                    $connection->close();
                 }
             }else{
                 $rsp['status'] = false;
