@@ -1,11 +1,18 @@
+
 var app = require('express')();
 var http = require('http').createServer(app);
-const io = require('socket.io')(http, {
-    cors: {
-      origin: '*',
-    }
-  });
+const io = require('socket.io')(http,{
+      cors: {
+        origin: "https://smartcity.matrik.co.id",
+        methods: ["GET", "POST"],
+        transports: ['websocket', 'polling'],
+        credentials: true
+    },
+    allowEIO3: true
+});
 var connectedUsers = {};
+
+
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/notif.html');
