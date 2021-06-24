@@ -71,7 +71,7 @@ class Api_pengaduan extends CI_Controller {
             'msg' => "Gagal"
         ];
         
-        $peng = $this->mp->pengaduan_id('id,keterangan,judul,task_id,nama_pelapor,mail,telp,kategori_peng_id,status,ctddate,ctdtime',$id);
+        $peng = $this->mp->pengaduan_id('id,keterangan,judul,task_id,nama_pelapor,mail,lat,lng,telp,kategori_peng_id,status,ctddate,ctdtime',$id);
         if ($peng->num_rows() > 0) {
             $peng = $peng->row();
             $peng_kategori = $this->mp->peng_kategori('peng_kategori',$peng->kategori_peng_id);

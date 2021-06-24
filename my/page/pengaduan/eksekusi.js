@@ -6,6 +6,8 @@ var arr_petugas = [];
 var peng_lat = "-7.560908240809835";
 var peng_lng = "110.8146920770371"; 
 
+var url_satupeta = "../../satupeta";
+
 $(document).ready(function () {
     realtime_car();
     petugas();
@@ -14,6 +16,10 @@ $(document).ready(function () {
     pengaduan();
     up_pengaduan();
 });
+
+function frame(url='') {
+  document.getElementById('frame').src = url;
+}
 
 function refresh() {
   list_assign();
@@ -154,18 +160,19 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
   // Petugas
   function petugas() { 
     $('#list_petugas').html('');
-    getData('../backend/Api_petugas/get')
+    getData('../backend/Api_petugas/get?lokasi_pengaduan='+peng_lat+','+peng_lng)
       .then(data => {
           arr_petugas = [];
+          data.sort((a, b) => a.jarak - b.jarak);
           arr_petugas = data;
-          data.forEach(e => {
+          arr_petugas.forEach(e => {
               $('#list_petugas').append(`
               <li class="clearfix"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
                   <div class="status-circle ${e.activity == 0 ? 'online' : 'offline'}"></div>
                   <div class="row">
                       <a href="javascript:void(0)" style="color:black;" onclick="detail('petugas',${e.id})" class="${e.activity == 0 ? 'col-8' : 'col-12'}">
                           <div class="name">${e.nama_instansi} - ${e.nama_petugas}</div>
-                          <div class="status">${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
+                          <div class="status">${e.jarak.toFixed(2)} Km</div>
                       </a>
                       ${e.activity == 0 ? `<div class="col-2">
                       <a href="#" class="btn btn-success" onclick="assign_petugas(${$('#pengaduan_id').val()},${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
@@ -187,7 +194,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
         <div class="row">
             <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('petugas',${e.id})">
                 <div class="name">${e.nama_petugas}</div>
-                <div class="status">${e.nama_instansi} - ${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
+                <div class="status">${e.jarak.toFixed(2)} Km</div>
             </a>
             <div class="col-2">
                 <a href="#" class="btn btn-success" onclick="assign_petugas(${e.id})" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
@@ -197,11 +204,12 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
     });
   }
 
-  // Intsnasi
+  // Instansi
   function instansi() { 
-    getData('../backend/Api_lokasi/get_priority')
+    getData('../backend/Api_lokasi/get_priority?lokasi_pengaduan='+peng_lat+','+peng_lng)
       .then(data => {
           arr_instansi = [];
+          data.sort((a, b) => a.jarak - b.jarak);
           arr_instansi = data;
           data.forEach(e => {
               $('#list_instansi').append(`
@@ -210,7 +218,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
               <div class="row">
                   <div class="col-8">
                       <div class="name">${e.nama_lokasi}</div>
-                      <div class="status">${getDistanceFromLatLngInKm(e.lat,e.lng,peng_lat,peng_lng).toFixed(2)} Km</div>
+                      <div class="status">${e.jarak.toFixed(2)} Km</div>
                   </div>
                   <div class="col-2">
                       <a href="#" class="btn btn-success" style="padding: .2rem .4rem!important;"><i class="fa fa-plus"></i></a>
@@ -303,6 +311,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
               arr_realtime_car = [];
               arr_realtime_car = data.dataset;
               data.dataset.forEach(e => {
+                  frame(url_satupeta+'?lokasi='+peng_lat+','+peng_lng+'&nopol='+e.nopol);
                   $('#content-detail').append(`
                   <div class ="row">
                     <div class="col-5">
@@ -601,11 +610,15 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
          $('#task_id').text(d.task_id);
          $('#keterangan_pengaduan').html(d.keterangan);
 
+         peng_lat = d.lat;
+         peng_lng = d.lng;
+         
+         frame(url_satupeta+'?lokasi='+peng_lat+','+peng_lng);
          task_assign_log(d.task_id);
       });  
   }
 
-  // Pengaduan
+  // Task Assign Log
   function task_assign_log(task_id='') { 
     $('#status_timeline').html('');
     post('../backend/Api_pengaduan/peng_assign_log',"task_id="+task_id,{'Content-Type': 'application/x-www-form-urlencoded'})

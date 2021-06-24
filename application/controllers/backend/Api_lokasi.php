@@ -58,13 +58,28 @@ class Api_lokasi extends CI_Controller {
     public function get_priority()
     {
         $this->header();
+        $lokasi = [];
+        $lokasi_pengaduan = false;
         $id = $this->input->get('id');
-        if ($id != '') {
-            $q = $this->ml->get([['id','nama_lokasi','lat','lng','kategori_static','deskripsi'],['priority' => 1,'id' => $id]])->result();
-        }else{
-            $q = $this->ml->get([['id','nama_lokasi','lat','lng','kategori_static','deskripsi'],['priority' => 1]])->result();
+        
+        if ($this->input->get('lokasi_pengaduan') != '') {
+            $lokasi_pengaduan = explode(',',$this->input->get('lokasi_pengaduan'));
         }
 
-        echo json_encode($q);
+        if ($id != '') {
+            $lokasi = $this->ml->get([['id','nama_lokasi','lat','lng','kategori_static','deskripsi'],['priority' => 1,'id' => $id]])->result();
+        }else{
+            $q = $this->ml->get([['id','nama_lokasi','lat','lng','kategori_static','deskripsi'],['priority' => 1]])->result();
+            foreach ($q as $v => $k) {
+                $lokasi[$v] = $k;
+                if ($lokasi_pengaduan) {
+                    $lokasi[$v]->jarak = getDistanceFromLatLngInKm($k->lat,$k->lng,$lokasi_pengaduan[0],$lokasi_pengaduan[1]); 
+                }else{
+                    $lokasi[$v]->jarak = 0;
+                }
+            }
+        }
+
+        echo json_encode($lokasi);
     }
 }

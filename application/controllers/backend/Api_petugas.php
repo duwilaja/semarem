@@ -45,14 +45,29 @@ class Api_petugas extends CI_Controller {
     public function get()
     {
         $this->header();
+        $petugas = [];
+        $lokasi_pengaduan = false;
         $id = $this->input->get('id');
-        if ($id != '') {
-            $q = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit','p.instansi_id','p.unit_id'],['p.aktif' => 1,'p.id' => $id]])->result();
-        }else{
-            $q = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit'],['p.aktif' => 1]])->result();
+
+        if ($this->input->get('lokasi_pengaduan') != '') {
+            $lokasi_pengaduan = explode(',',$this->input->get('lokasi_pengaduan'));
         }
 
-        echo json_encode($q);
+        if ($id != '') {
+            $petugas = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit','p.instansi_id','p.unit_id'],['p.aktif' => 1,'p.id' => $id]])->result();
+        }else{
+            $q = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit'],['p.aktif' => 1]])->result();
+            foreach ($q as $v => $k) {
+                $petugas[$v] = $k;
+                if ($lokasi_pengaduan) {
+                    $petugas[$v]->jarak = getDistanceFromLatLngInKm($k->lat,$k->lng,$lokasi_pengaduan[0],$lokasi_pengaduan[1]); 
+                }else{
+                    $petugas[$v]->jarak = 0;
+                }
+            }
+        }
+        
+        echo json_encode($petugas);
     }
 
     public function in()
