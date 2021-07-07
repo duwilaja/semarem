@@ -721,4 +721,121 @@ class Api extends CI_Controller {
         }
        
     }
+
+    // Notifikasi
+
+    // Mengambil data task history petugas
+    public function notifikasi_petugas()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $jml= 0;
+            $msg = "Gagal mengambil notifikasi petugas";
+
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                        
+                        $this->load->model('MNotif','mn');
+                       
+                
+                        $q = $this->mn->get('id,info,msg,read,to_user as petugas_id,data_id as task_assign_id','',[
+                            'to_app' => 'APP_PETUGAS',
+                            'to_user' => $this->input->post('petugas_id'),
+                            'read' => $this->input->post('read')
+                        ]);
+                
+                        $data = $q->result();
+                        $jml = $q->num_rows();
+                        
+                        if ($q->num_rows() > 0 ) {
+                            $msg = "Berhasil mengambil data notifikasi petugas";
+                            $status = true; 
+                        }else{
+                            $msg = "Gagal mengambil data notifikasi petugas";
+                            $status = false;
+                        }
+                        
+                    }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'data' => $data,
+                'jml_data' => $jml,
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
+    // Baca notifikasi
+    public function read_notif()
+    {        
+        $this->header();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
+            $data = [];
+            $status = false;
+            $statusCode = 200;
+            $msg = "Gagal mengirimkan data";
+
+            // POST
+            $id = $this->input->post('id');
+
+            if (empty($this->input->post())) {
+                $msg = "Tidak ada data yang dikirim";
+                $statusCode = 410;
+            }else{
+                try {   
+                  if ($this->cek_token()) {
+                        if($id == ''){
+                            $msg = "ID tidak boleh kosong";
+                        }else{
+                                $this->load->model('MNotif','mn');
+                                
+                                $this->mn->up([
+                                    'read' => 1
+                                ],['id' => $id]);
+                        
+                                $x = $this->db->affected_rows();
+                                if ($x > 0) {
+                                    $msg = "Notifikasi telah dibaca";
+                                    $status = true;
+                                }else{
+                                    $msg = "Gagal membaca notifikasi atau notifikasi sudah dibaca sebelumnya";
+                                }
+                       }
+                    }else{
+                        $msg = "Token tidak valid";
+                    }
+                } catch (Exception $error) {
+                    $statusCode = 417;
+                    $msg = $error->getMessage();
+                }
+            }
+
+            $arr = [
+                'msg' => $msg,
+                'statusCode' => $statusCode,
+                'status' => $status
+            ];
+            
+            echo json_encode($arr);
+        }
+       
+    }
+
 }
