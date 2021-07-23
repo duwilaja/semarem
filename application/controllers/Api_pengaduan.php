@@ -17,7 +17,7 @@ class Api_pengaduan extends CI_Controller {
         $config = array(
             'upload_path'   => $path,
             'allowed_types' => $types,
-            'encrypt_name'  => false,
+            'encrypt_name'  => true,
             'max_size'      => 0,
             'max_width'     => 0,
             'max_height'    => 0,                   
