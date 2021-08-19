@@ -613,7 +613,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
          peng_lat = d.lat;
          peng_lng = d.lng;
          
-         frame(url_satupeta+'?lokasi='+peng_lat+','+peng_lng);
+         frame(url_satupeta+'?lokasi='+peng_lat+','+peng_lng+'&nopol=');
          task_assign_log(d.task_id);
       });  
   }

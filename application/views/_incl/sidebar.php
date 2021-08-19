@@ -1,14 +1,14 @@
 <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="<?=$template;?>assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="<?=$template;?>assets/images/logo/logo_dark.png" alt=""></a>
+            <div class="logo-wrapper" style="text-align: center;"><a href="#" style="font-size: 18px;font-weight:bold;">INTAN</a>
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                 </div>
-            <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="<?=$template;?>assets/images/logo/logo-icon.png" alt=""></a></div>
+            <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid" src="<?=$template;?>assets/images/logo/logo-icon.png" alt=""></a></div>
             <nav class="sidebar-main">
               <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
               <div id="sidebar-menu">
                 <ul class="sidebar-links" id="simple-bar">
-                  <li class="back-btn"><a href="index.html"><img class="img-fluid" src="<?=$template;?>assets/images/logo/logo-icon.png" alt=""></a>
+                  <li class="back-btn"><a href="#"><img class="img-fluid" src="<?=$template;?>assets/images/logo/logo-icon.png" alt=""></a>
                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                   </li>
                   <li class="mb-4 mt-3 d-flex justify-content-center">

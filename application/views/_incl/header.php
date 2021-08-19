@@ -26,7 +26,7 @@
               <li>
                 <div class="mode"><i class="fa fa-moon-o"></i></div>
               </li>
-              <li class="onhover-dropdown">
+              <!-- <li class="onhover-dropdown">
                 <div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">4                                </span></div>
                 <ul class="notification-dropdown onhover-show-div">
                   <li><i data-feather="bell"></i>
@@ -46,7 +46,7 @@
                   </li>
                   <li><a class="btn btn-primary" href="#">Check all notification</a></li>
                 </ul>
-              </li>
+              </li> -->
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0 me-0">
                 <div class="media profile-media"><img class="b-r-10" src="<?=$template;?>assets/images/dashboard/profile.jpg" alt="">
@@ -55,9 +55,9 @@
                   </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
-                  <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
+                  <!-- <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
                   <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                  <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
+                  <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li> -->
                   <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
                   <li><a href="<?= site_url('Auth/logout');?>"><i data-feather="log-out"> </i><span>Log out</span></a></li>
                 </ul>
