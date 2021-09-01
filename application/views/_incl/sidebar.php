@@ -1,6 +1,6 @@
 <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper" style="text-align: center;"><a href="#" style="font-size: 18px;font-weight:bold;">INTAN</a>
+            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="<?=base_url();?>/my/img/intan.png" alt="" style="width: 100px; margin: -20px 10px 100px 50px;"><img class="img-fluid for-dark" src="<?=$template;?>assets/images/logo/intan.png" alt=""></a>
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                 </div>
             <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid" src="<?=$template;?>assets/images/logo/logo-icon.png" alt=""></a></div>
