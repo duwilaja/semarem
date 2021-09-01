@@ -40,7 +40,7 @@
         <div class="col-xl-5 p-0">
           <div class="login-card">
             <div>
-              <div><a class="logo text-start" href="#"><img class="img-fluid for-light" src="<?=base_url();?>template/cuba/assets/images/logo/login.png" alt="looginpage"><img class="img-fluid for-dark" src="<?=base_url();?>template/cuba/assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
+              <div><a class="logo text-start" href="#"><img class="img-fluid for-light" src="<?=base_url();?>template/cuba/assets/images/logo/intan.png" alt="looginpage" style="width: 150px; margin-left:150px;"><img class="img-fluid for-dark" src="<?=base_url();?>template/cuba/assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
               <div class="login-main"> 
                 <form class="theme-form" action="<?=site_url('Auth/proses_login');?>" method="post">
                   <h4>Sign in to account</h4>
