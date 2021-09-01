@@ -9,7 +9,7 @@ class MDashboard extends CI_Model {
         $get_masuk =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->from("pengaduan")->count_all_results();
         $get_konfirmasi =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 0) ->from("pengaduan")->count_all_results();
         $get_proses =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 2) ->from("pengaduan")->count_all_results();
-        $get_selesai =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 4) ->from("pengaduan")->count_all_results();
+        $get_selesai =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 3) ->from("pengaduan")->count_all_results();
 
         $res_array = array(
             'masuk' => $get_masuk,

@@ -705,27 +705,14 @@ function pengaduan() {
 		(d) => {
 			$("#judul").text(d.judul);
 			$("#kategori").text("#" + d.peng_kategori);
-			$("#status").text(d.status_static);
+			$("#status").html(d.status_static);
 			$("#tanggal_pengaduan").html(d.tanggal + " " + d.ctdtime);
 			$("#kategori_pengaduan").text(d.peng_kategori);
 			$("#nama_pelapor").text(d.nama_pelapor);
 			$("#task_id").text(d.task_id);
 			$("#keterangan_pengaduan").html(d.keterangan);
 
-  // Pengaduan
-  function pengaduan() { 
-    post('../backend/Api_pengaduan/pengaduan/'+$('#pengaduan_id').val())
-      .then(d => {
-         $('#judul').text(d.judul);
-         $('#kategori').text('#'+d.peng_kategori);
-         $('#status').html(d.status_static);
-         $('#tanggal_pengaduan').html(d.tanggal+' '+d.ctdtime);
-         $('#kategori_pengaduan').text(d.peng_kategori);
-         $('#nama_pelapor').text(d.nama_pelapor);
-         $('#task_id').text(d.task_id);
-         $('#keterangan_pengaduan').html(d.keterangan);
-
-			frame(
+      frame(
 				url_satupeta +
 					"?lokasi=" +
 					peng_lat +
@@ -744,6 +731,7 @@ function pengaduan() {
 // Task Assign Log
 function task_assign_log(task_id = "") {
 	$("#status_timeline").html("");
+
 	post("../backend/Api_pengaduan/peng_assign_log", "task_id=" + task_id, {
 		"Content-Type": "application/x-www-form-urlencoded",
 	}).then((d) => {
