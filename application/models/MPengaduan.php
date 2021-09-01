@@ -116,7 +116,7 @@ class MPengaduan extends CI_Model{
                   $dt->nama_pelapor,
                   setStatusPengaduan2($dt->status),
                   tgl_indo($dt->ctddate),
-                  '<button class="btn btn-sm btn-info btn-xs" type="button" onclick="eksekusi('.$dt->id.')" data-original-title="btn btn-danger btn-xs" title="Eksekusi Pengaduan">Eksekusi</button>'
+                  $this->change_button($dt)
               );
           }
   
@@ -129,6 +129,16 @@ class MPengaduan extends CI_Model{
   
           // Output to JSON format
           return json_encode($output);
+    }
+
+
+    private function change_button($dt)
+    {
+        if ($dt->status == 3) {
+            return '<a href="'.site_url('Pengaduan/eksekusi?id='.$dt->id).'" class="btn btn-sm btn-secondary" type="button"  data-original-title="btn btn-danger btn-xs" title="Detail Pengaduan">Detail</a>';
+        }else{
+            return '<a class="btn btn-sm btn-info" type="button" onclick="eksekusi('.$dt->id.')" data-original-title="btn btn-danger btn-xs" title="Eksekusi Pengaduan">Eksekusi</a>';
+        }
     }
 
     public function set_dt_kasus($judul='',$kategori_peng_id='',$kategori_peng_static='')

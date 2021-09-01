@@ -256,12 +256,12 @@ if (!function_exists('secondstoTime')) {
     if (!function_exists('setStatusPengaduan2')) {
         function setStatusPengaduan2($s='')
         {
-            if ($s == 0){ return "Menuggu Konfirmasi";}
-            else if ($s == 1){ return "Sudah di Konfirmasi";}
-            else if ($s == 2){ return "Ditangani"; }
-            else if ($s == 3){ return "Selesai"; }
-            else if ($s == 4){ return "Batal"; }
-            else{ return "Menunggu Konfirmasi"; }
+            if ($s == 0){ return "<span class='badge badge-light text-secondary'>Menuggu Konfirmasi</span>";}
+            else if ($s == 1){ return "<span class='badge badge-light text-secondary'>Sudah di Konfirmasi</span>";}
+            else if ($s == 2){ return "<span class='badge badge-light text-secondary'>Ditangani</span>"; }
+            else if ($s == 3){ return "<span class='badge badge-success text-white'>Selesai</span>"; }
+            else if ($s == 4){ return "<span class='badge badge-light text-secondary'>Batal</span>"; }
+            else{ return "<span class='badge badge-light text-secondary'>Menunggu Konfirmasi</span>"; }
         }
     }
     

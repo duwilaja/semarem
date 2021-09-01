@@ -251,7 +251,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
   }
 
   //Detail detail
-  function detail(type,id) {
+  function detail(type,task_assign_id,petugas_id) {
     $('#detail').modal('show'); // show modal
     $('#content-detail').html('');
     if (type == 'petugas') {
@@ -421,12 +421,16 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
     });
     }
     if (type == "peng_assign_log") {
-      // $.ajax({
-      //   type: "GET",
-      //   url: "../backend/Api_petugas/get?id="+id,
-      //   dataType: "json",
-      //   success: function (r) {
-      //       r.forEach(v => {
+      $.ajax({
+        type: "POST",
+        url: "../Api/detail_task_history_petugas",
+        headers: {"token": "5b3dac76aaee24d14185cbc3d010fd20"},
+        data : {
+          petugas_id : petugas_id,
+          task_assign_id : task_assign_id
+        },
+        dataType: "json",
+        success: function (r) {
             $('#content-detail').append(`
               <div class="row">
                 <div class="col-5">
@@ -436,32 +440,29 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
                   <p>:</p>
                 </div>
                 <div class="col-6">
-                  <p class="badge badge-secondary">Kecelakaan</p>
+                  <p class="badge badge-secondary">${r.data.judul}</p>
                 </div>
               </div>
               <span class="text-muted">
-                <i class="fa fa-clock-o text-success"></i>&nbsp;&nbsp;10 Juni 2021
+                <i class="fa fa-clock-o text-success"></i>&nbsp;&nbsp;${r.data.tanggal}
               </span>
               <br>
               <span class="text-muted">
-                <i class="fa fa-map-marker text-success"></i>&nbsp;&nbsp;Jl. blabla
+                <i class="fa fa-map-marker text-success"></i>&nbsp;&nbsp;${r.data.alamat}
               </span>
               <br>
               <br>
               <div class="mb-3">
                 <label for="Pelapor" class="form-label">Pelapor</label>
                 <div class="p-2" style="background-color:#E0EE92;">
-                  Yudi
-                  <br> 082144556754
+                ${r.data.nama_pelapor}
+                  <br> ${r.data.telp}
                 </div>
               </div>
               <div class="mb-3">
                 <label for="buktiPelapor" class="form-label">Bukti Pelapor</label>
-                <div class="row my-gallery gallery" id="" >
-                  <figure class="col-md-3 col-6 img-hover hover-1" ><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" data-size="1600x950">
-                      <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" alt="Image description"></div></a>
-                    <figcaption>Image caption  1</figcaption>
-                  </figure>
+                <div class="row my-gallery gallery" id="list_img_pelapor">
+                 
                 </div>
               </div>
               <div class="mb-3">
@@ -474,7 +475,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
                     <p>:</p>
                   </div>
                   <div class="col-6">
-                    <p class="badge badge-success">Selesai</p>
+                    <p class="badge badge-success">${r.data.status_name}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -485,46 +486,77 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
                     <p>:</p>
                   </div>
                   <div class="col-6">
-                    <p class="badge badge-warning">23 detik</p>
+                    <p class="badge badge-warning">${r.data.penanganan.calc} menit</p>
                   </div>
                 </div>
               </div>
               <div class="mb-3">
                 <label for="buktiPenanganan" class="form-label">Bukti Penanganan</label>
-                <div class="row my-gallery gallery" id="" >
-                  <figure class="col-md-3 col-6 img-hover hover-1" ><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" data-size="1600x950">
-                      <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" alt="Image description"></div></a>
-                    <figcaption>Image caption  1</figcaption>
-                  </figure>
+                <div class="row my-gallery gallery" id="list_img_pengaduan">
                 </div>
               </div>
               <div class="mb-3">
                 <label for="Penyebab" class="form-label">Penyebab</label>
-                <div>
-                -
+                <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
+                ${r.data.task_done.penyebab}
                 </div>
               </div>
               <div class="mb-3">
                 <label for="Tindakan" class="form-label">Tindakan</label>
-                <div>
-                -
+                <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
+                ${r.data.task_done.tindakan}
                 </div>
               </div>
               <div class="mb-3">
                 <label for="Keterangan" class="form-label">Keterangan</label>
-                <div>
-                -
+                <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
+                ${r.data.task_done.keterangan}
                 </div>
               </div>
             `);
-      //       });
-      //     }
-      // });
+
+            setTimeout(() => {
+              create_show_img(r.data.img_task_done);
+              create_show_img(r.data.img_pengaduan,false);
+            }, 300);
+
+          }
+      });
       let imported = document.createElement('script');
       imported.src = `${base_url}template/cuba/assets/js/photoswipe/photoswipe.js`;
       document.head.appendChild(imported);
     }
   }
+
+  function  create_show_img(data,done=true) {
+    if (done) {
+      $('#list_img_pengaduan').html('');
+        data.forEach(e => {
+          debugger;
+          $('#list_img_pengaduan').append(`<figure class="col-md-3 col-6 img-hover hover-1" ><a href="${e.full_file}" data-size="1600x950">
+              <div><img src="${e.full_file}" alt="Gambar Penanganan"></div></a>
+            <figcaption>Foto Bukti Penanganan</figcaption>
+          </figure>`);
+        }); 
+    }else{
+      $('#list_img_pelapor').html('');
+      if (data.length > 0 ) {
+        data.forEach(e => {
+          $('#list_img_pelapor').append(`<figure class="col-md-3 col-6 img-hover hover-1" ><a href="${e.full_file}" data-size="1600x950">
+              <div><img src="${e.full_file}" alt="Gambar Penanganan"></div></a>
+            <figcaption>Foto Bukti Penanganan</figcaption>
+          </figure>`);
+        }); 
+      }else{
+        $('#list_img_pelapor').html(`<figure class="col-md-3 col-6 img-hover hover-1" ><a href="${base_url}template/cuba/assets/images/big-lightgallry/08.jpg" data-size="1600x950">
+                <div><img src="${base_url}template/cuba/assets/images/lightgallry/08.jpg" alt="Image description"></div></a>
+              <figcaption>Image caption  1</figcaption>
+            </figure>`);
+      }
+      
+    }
+
+   }
 
   // Update pengaduan
   function up_pengaduan() {
@@ -603,7 +635,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
       .then(d => {
          $('#judul').text(d.judul);
          $('#kategori').text('#'+d.peng_kategori);
-         $('#status').text(d.status_static);
+         $('#status').html(d.status_static);
          $('#tanggal_pengaduan').html(d.tanggal+' '+d.ctdtime);
          $('#kategori_pengaduan').text(d.peng_kategori);
          $('#nama_pelapor').text(d.nama_pelapor);
@@ -627,7 +659,7 @@ async function post(url = '', data = {},headers = {'Content-Type': 'application/
               $('#status_timeline').append(`<div class="media">
               <div class="activity-line"></div>
               <div class="activity-dot-secondary"></div>
-              <a href="javascript:void(0);" onclick="detail('peng_assign_log','')" class="media-body" style="color:black;"><span>${e.nama_instansi} - ${e.nama_petugas}</span>
+              <a href="javascript:void(0);" onclick="detail('peng_assign_log',${e.task_assign_id},${e.petugas_id})" class="media-body" style="color:black;"><span>${e.nama_instansi} - ${e.nama_petugas}</span>
                   <p class="font-roboto mb-0">${e.status_static}</p>
                   <p class="font-roboto">${e.tanggal} - ${e.ctdtime}</p>
               </a>

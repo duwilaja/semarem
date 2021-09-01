@@ -85,7 +85,7 @@
                                         <div class="name" id="judul">-</div>
                                         <div>
                                             <span class="badge badge-danger" id="kategori">-</span>
-                                            <span class="badge badge-light text-secondary" id="status"></span>
+                                            <span id="status"></span>
                                         </div>
                                     </div>
                                     <ul class="list-inline float-start float-sm-end chat-menu-icons">
@@ -143,7 +143,6 @@
                                 <div class="tab-pane fade show active" id="info-home" role="tabpanel" aria-labelledby="info-home-tab">
                                     <div class="people-list">
                                         <ul class="list" id="list_assign">
-                                            
                                         </ul>
                                     </div>
                                 </div>
