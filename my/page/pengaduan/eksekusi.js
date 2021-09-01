@@ -563,19 +563,19 @@ function filter_instansi(v) {
               <div class="mb-3">
                 <label for="Penyebab" class="form-label">Penyebab</label>
                 <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
-                ${r.data.task_done.penyebab}
+                ${!r.data.task_done ? '' : r.data.task_done.penyebab}
                 </div>
               </div>
               <div class="mb-3">
                 <label for="Tindakan" class="form-label">Tindakan</label>
                 <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
-                ${r.data.task_done.tindakan}
+                ${!r.data.task_done ? '' : r.data.task_done.tindakan}
                 </div>
               </div>
               <div class="mb-3">
                 <label for="Keterangan" class="form-label">Keterangan</label>
                 <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
-                ${r.data.task_done.keterangan}
+                ${!r.data.task_done ? '' :  r.data.task_done.keterangan}
                 </div>
               </div>
             `);
