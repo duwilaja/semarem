@@ -304,7 +304,7 @@ function filter_instansi(v) {
     if (type == 'petugas') {
       $.ajax({
         type: "GET",
-        url: "../backend/Api_petugas/get?id="+id,
+        url: "../backend/Api_petugas/get?id="+task_assign_id,
         dataType: "json",
         success: function (r) {
             r.forEach(v => {
@@ -354,13 +354,13 @@ function filter_instansi(v) {
 		});
 	}
 	if (type == "car") {
-		console.log(id);
+		console.log(task_assign_id);
 		getData("../indicar/Api/get_token").then((key) => {
 			indicarKey = key;
-			data = `nopols=${id}`;
+			data = `nopols=${task_assign_id}`;
 			postData(
 				"https://www.indicar.id/platform/public/index.php/sysapi/vehicles/detailbynopol",
-				{ nopols: id }
+				{ nopols: task_assign_id }
 			).then((data) => {
 				arr_realtime_car = [];
 				arr_realtime_car = data.dataset;
@@ -442,7 +442,7 @@ function filter_instansi(v) {
 	if (type == "assign") {
 		$.ajax({
 			type: "GET",
-			url: "../backend/Api_pengaduan/peng_assign_where?id=" + id,
+			url: "../backend/Api_pengaduan/peng_assign_where?id=" + task_assign_id,
 			dataType: "json",
 			success: function (r) {
 				r.data.forEach((v) => {
@@ -597,7 +597,6 @@ function filter_instansi(v) {
     if (done) {
       $('#list_img_pengaduan').html('');
         data.forEach(e => {
-          debugger;
           $('#list_img_pengaduan').append(`<figure class="col-md-3 col-6 img-hover hover-1" ><a href="${e.full_file}" data-size="1600x950">
               <div><img src="${e.full_file}" alt="Gambar Penanganan"></div></a>
             <figcaption>Foto Bukti Penanganan</figcaption>
