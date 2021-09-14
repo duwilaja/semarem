@@ -73,7 +73,8 @@
                             </div>
                         </div>
                         </div>
-                        <div class="col-lg-5 col-xl-5 " style="background-color: #f7f7f7;">
+                        <!-- <div class="col-lg-5 col-xl-5 " style="background-color: #f7f7f7;"> -->
+                        <div class="col-lg-5 col-xl-5">
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-input" role="tabpanel" aria-labelledby="pills-input-tab">
                                 <form class="theme-form" action="javascript:void(0);" method="post">
