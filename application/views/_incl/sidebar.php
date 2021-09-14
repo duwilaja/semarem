@@ -1,6 +1,6 @@
 <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper text-center"><a href="#"><b><span style="background:#FFF; padding:0 10px;">SMART MANAGEMENT</span><br><span style="background:#FFF; padding:0 10px;">EMERGENCY</span></b></a>
+            <div class="logo-wrapper text-center"><a href="#"><b>SMART MANAGEMENT<br>EMERGENCY</span></b></a>
             <!-- <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="<?=base_url();?>/my/img/Smart Management Emergency .png" alt="" style="width: 100px; margin: -20px 10px 100px 50px;"><img class="img-fluid for-dark" src="<?=$template;?>assets/images/logo/Smart Management Emergency .png" alt=""></a> -->
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
                 </div>
