@@ -160,14 +160,14 @@
                                             <div class="icon-wrapper"><i class="icofont icofont-pencil-alt-5"></i></div> -->
                                         </div>
                                         <div class="text-center mt-2">
-                                            <h6 id="tanggal_pengaduan" style="font-size: 14px;">-</h6>
+                                            <h6 id="tanggal_pengaduan" style="font-size: 14px; color:#999;">-</h6>
                                         </div>
                                         <div class="user-content text-center">
                                             <h5 class="text-uppercase"><span class="badge badge-secondary" id="kategori_pengaduan">-</span></h5>
-                                            <h6 class="text-uppercase text-muted" id="nama_pelapor">-</h6>
+                                            <h6 class="text-uppercase text-muted" id="nama_pelapor" style="color:#999 !important;">-</h6>
                                             <hr>
                                             <div class="text-center" style="height: 10hv;height: 300px;overflow: auto;">
-                                                <p id="keterangan_pengaduan" class="mb-4" style="font-size:14px;">-</p>
+                                                <p id="keterangan_pengaduan" class="mb-4" style="font-size:14px;color:#999;">-</p>
                                             </div>
                                         </div>
                                     </div>

@@ -690,7 +690,7 @@ function list_assign() {
 			$("#list_assign")
 				.append(`<li class="clearfix mt-2 mb-2"><img class="rounded-circle user-image" src="../template/cuba/assets/images/user/12.png" alt="">
               <a href="javascript:void(0);" class="about" onclick="detail('assign','${e.tid}')">
-                  <div class="name">${e.nama_instansi} - ${e.nama_petugas}</div>
+                  <div class="name" style="color:#555;">${e.nama_instansi} - ${e.nama_petugas}</div>
                   <div class="status"><i class="fa fa-share font-success"></i>  ${e.status_static}</div>
               </a>
           </li>`);
@@ -737,10 +737,10 @@ function task_assign_log(task_id = "") {
 		d.data.forEach((e) => {
 			$("#status_timeline").append(`<div class="media">
               <div class="activity-line"></div>
-              <div class="activity-dot-secondary"></div>
-              <a href="javascript:void(0);" onclick="detail('peng_assign_log',${e.task_assign_id},${e.petugas_id})" class="media-body" style="color:#FFF;"><span>${e.nama_instansi} - ${e.nama_petugas}</span>
-                  <p class="font-roboto mb-0">${e.status_static}</p>
-                  <p class="font-roboto">${e.tanggal} - ${e.ctdtime}</p>
+              <div class="activity-dot-secondary" style="background-color: #FFF;"></div>
+              <a href="javascript:void(0);" onclick="detail('peng_assign_log',${e.task_assign_id},${e.petugas_id})" class="media-body" style="color:black;"><span>${e.nama_instansi} - ${e.nama_petugas}</span>
+                  <p class="font-roboto mb-0" style="color:#444;">${e.status_static}</p>
+                  <p class="font-roboto" style="color:#444;">${e.tanggal} - ${e.ctdtime}</p>
               </a>
           </div>`);
 		});
