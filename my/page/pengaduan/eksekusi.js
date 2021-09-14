@@ -130,7 +130,7 @@ function realtime_car() {
 											e.speed > 0 ? "online" : "offline"
 										}"></div>
                     <div class="row">
-                        <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car','${
+                        <a href="javascript:void(0)" class="col-8" style="color:#FFF;" onclick="detail('car','${
 													e.nopol
 												}')">
                             <div class="name">${e.vehiclename}</div>
@@ -158,7 +158,7 @@ function filter_realtime_car(v) {
 							e.speed > 0 ? "online" : "offline"
 						}"></div>
             <div class="row">
-                <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('car','${
+                <a href="javascript:void(0)" class="col-8" style="color:#FFF;" onclick="detail('car','${
 									e.nopol
 								}')">
                     <div class="name">${e.vehiclename}</div>
@@ -188,7 +188,7 @@ function petugas() {
 										e.activity == 0 ? "online" : "offline"
 									}"></div>
                   <div class="row">
-                      <a href="javascript:void(0)" style="color:black;" onclick="detail('petugas',${
+                      <a href="javascript:void(0)" style="color:#FFF;" onclick="detail('petugas',${
 												e.id
 											})" class="${e.activity == 0 ? "col-8" : "col-12"}">
                           <div class="name">${e.nama_instansi} - ${
@@ -225,7 +225,7 @@ function filter_petugas(v) {
 					e.activity == 0 ? "online" : "offline"
 				}"></div>
         <div class="row">
-            <a href="javascript:void(0)" class="col-8" style="color:black;" onclick="detail('petugas',${
+            <a href="javascript:void(0)" class="col-8" style="color:#FFF;" onclick="detail('petugas',${
 							e.id
 						})">
                 <div class="name">${e.nama_petugas}</div>
@@ -738,7 +738,7 @@ function task_assign_log(task_id = "") {
 			$("#status_timeline").append(`<div class="media">
               <div class="activity-line"></div>
               <div class="activity-dot-secondary"></div>
-              <a href="javascript:void(0);" onclick="detail('peng_assign_log',${e.task_assign_id},${e.petugas_id})" class="media-body" style="color:black;"><span>${e.nama_instansi} - ${e.nama_petugas}</span>
+              <a href="javascript:void(0);" onclick="detail('peng_assign_log',${e.task_assign_id},${e.petugas_id})" class="media-body" style="color:#FFF;"><span>${e.nama_instansi} - ${e.nama_petugas}</span>
                   <p class="font-roboto mb-0">${e.status_static}</p>
                   <p class="font-roboto">${e.tanggal} - ${e.ctdtime}</p>
               </a>
