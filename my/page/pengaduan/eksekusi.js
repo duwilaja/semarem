@@ -176,7 +176,7 @@ function filter_realtime_car(v) {
 function petugas() {
 	$("#list_petugas").html("");
 	getData(
-		"../backend/Api_petugas/get?lokasi_pengaduan=" + peng_lat + "," + peng_lng
+		"../backend/Api_petugas/get?lokasi=" + peng_lat + "," + peng_lng
 	).then((data) => {
 		arr_petugas = [];
 		data.sort((a, b) => a.jarak - b.jarak);
@@ -244,7 +244,7 @@ function filter_petugas(v) {
 // Instansi
 function instansi() {
 	getData(
-		"../backend/Api_lokasi/get_priority?lokasi_pengaduan=" +
+		"../backend/Api_lokasi/get_priority?lokasi=" +
 			peng_lat +
 			"," +
 			peng_lng
