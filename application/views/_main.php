@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="id">
   <?php $this->load->view('_incl/head',['template' => $template]);?>
-  <body>
+  <body class="dark-only">
     <!-- tap on top starts-->
     <div class="tap-top"><i data-feather="chevrons-up"></i></div>
     <!-- tap on tap ends-->
