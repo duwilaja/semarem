@@ -9,7 +9,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="<?=base_url();?>template/cuba/assets/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="<?=base_url();?>template/cuba/assets/images/favicon.png" type="image/x-icon">
-    <title>Login Intan</title>
+    <title>Login Smart Management Emergency </title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
         <div class="col-xl-5 p-0">
           <div class="login-card">
             <div>
-              <div><a class="logo text-start" href="#"><img class="img-fluid for-light" src="<?=base_url();?>/my/img/intan.png" alt="looginpage" style="width: 150px; margin-left:150px;"><img class="img-fluid for-dark" src="<?=base_url();?>template/cuba/assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
+              <div><a class="logo text-start" href="#"><img class="img-fluid for-light" src="<?=base_url();?>/my/img/Smart Management Emergency .png" alt="looginpage" style="width: 150px; margin-left:150px;"><img class="img-fluid for-dark" src="<?=base_url();?>template/cuba/assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
               <div class="login-main"> 
                 <form class="theme-form" action="<?=site_url('Auth/proses_login');?>" method="post">
                   <h4>Sign in to account</h4>

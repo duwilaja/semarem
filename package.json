@@ -1,5 +1,5 @@
 {
-  "name": "intan",
+  "name": "Smart Management Emergency ",
   "version": "1.0.0",
   "description": "Intelegent Traffic Analytic",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sahrulrizal/intan.git"
+    "url": "git+https://github.com/sahrulrizal/Smart Management Emergency .git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sahrulrizal/intan/issues"
+    "url": "https://github.com/sahrulrizal/Smart Management Emergency /issues"
   },
-  "homepage": "https://github.com/sahrulrizal/intan#readme",
+  "homepage": "https://github.com/sahrulrizal/Smart Management Emergency #readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",

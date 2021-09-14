@@ -138,7 +138,7 @@ class Api_pengaduan extends CI_Controller {
                         'from_user' => @$this->session->userdata('id'),
                         'to_user' => $petugas_id,
                         'from_app' => 'SM',
-                        'to_app' => 'INTAN',
+                        'to_app' => 'Smart Management Emergency ',
                         'ctddate' => date('Y-m-d'),
                         'ctdtime' => date('H:i:s'),
                         'read' => 0

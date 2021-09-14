@@ -130,7 +130,7 @@ class Api_pengaduan extends CI_Controller {
                         'lng' => $lng,
                         'alamat' => $alamat,
                         'status' => 0,
-                        'vendor_id' => 3, // vendor_id bisa dilihat dari database db_intan tabel vendor
+                        'vendor_id' => 3, // vendor_id bisa dilihat dari database db_Smart Management Emergency  tabel vendor
                         'via' => 'Aplikasi'
                     ];
                     // Insert gambar 
