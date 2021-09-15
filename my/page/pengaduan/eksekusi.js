@@ -519,7 +519,7 @@ function filter_instansi(v) {
               <br>
               <div class="mb-3">
                 <label for="Pelapor" class="form-label">Pelapor</label>
-                <div class="p-2" style="background-color:#E0EE92;">
+                <div class="p-2" style="background-color:#E0EE92;border-radius:10px;color:#000;">
                 ${r.data.nama_pelapor}
                   <br> ${r.data.telp}
                 </div>
@@ -562,19 +562,19 @@ function filter_instansi(v) {
               </div>
               <div class="mb-3">
                 <label for="Penyebab" class="form-label">Penyebab</label>
-                <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
+                <div style="padding:10px;border: solid 2px #EEE;color: #FFF;font-size: 12px;border-radius: 20px;">
                 ${!r.data.task_done ? '' : r.data.task_done.penyebab}
                 </div>
               </div>
               <div class="mb-3">
                 <label for="Tindakan" class="form-label">Tindakan</label>
-                <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
+                <div style="padding:10px;border: solid 2px #EEE;color: #FFF;font-size: 12px;border-radius: 20px;">
                 ${!r.data.task_done ? '' : r.data.task_done.tindakan}
                 </div>
               </div>
               <div class="mb-3">
                 <label for="Keterangan" class="form-label">Keterangan</label>
-                <div style="padding:10px;border: solid 2px #EEE;color: #555;font-size: 12px;border-radius: 20px;">
+                <div style="padding:10px;border: solid 2px #EEE;color: #FFF;font-size: 12px;border-radius: 20px;">
                 ${!r.data.task_done ? '' :  r.data.task_done.keterangan}
                 </div>
               </div>

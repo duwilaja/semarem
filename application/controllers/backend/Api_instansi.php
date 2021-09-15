@@ -69,9 +69,9 @@ class Api_instansi extends CI_Controller {
             }else{
                 try {
                     // if ($this->cek_token()) {   
-                        $nama_Smart Management Emergency si = $this->input->post('nama_instansi');
+                        $intan = $this->input->post('nama_instansi');
                         $obj = [
-                            'nama_instansi' => $nama_Smart Management Emergency si
+                            'nama_instansi' => $intan
                         ];
                         $q = $this->mi->in($obj);
                         if($q){
@@ -113,9 +113,9 @@ class Api_instansi extends CI_Controller {
                 try {
                     // if ($this->cek_token()) {  
                         $id = $this->input->post('id'); 
-                        $nama_Smart Management Emergency si = $this->input->post('nama_instansi');
+                        $intan = $this->input->post('nama_instansi');
                         $obj = [
-                            'nama_instansi' => $nama_Smart Management Emergency si
+                            'nama_instansi' => $intan
                         ];
                         $up = $this->mi->up($obj,['id' => $id]);
                         if($up){

@@ -12,6 +12,9 @@
         #mapid {
             height: 100%;
         }
+        .geocoder-control-suggestions{
+            color:#000 !important;
+        }
         #mapSearchContainer{
         position:fixed;
         top:20px;
