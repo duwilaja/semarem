@@ -185,9 +185,9 @@ class MPengaduan extends CI_Model{
             'ctdby' => $this->session->userdata('id'),
             'status' => 0
         );
-        var_dump($data);
-        // $this->db->insert('pengaduan',$data);
-        // return ($this->db->affected_rows() != 1) ? false : true;
+        // var_dump($data);
+        $this->db->insert('pengaduan',$data);
+        return ($this->db->affected_rows() != 1) ? false : true;
     }
 
     public function in($arr=[])
