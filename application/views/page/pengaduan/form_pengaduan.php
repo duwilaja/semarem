@@ -82,9 +82,9 @@
                                 <div class="tab-pane fade show active" id="pills-input" role="tabpanel" aria-labelledby="pills-input-tab">
                                 <form class="theme-form" action="javascript:void(0);" method="post">
                                 <div class="mb-3 draggable">
-                                    <label for="select-1">Kategori Kasus</label>
-                                    <select class="form-control btn-square" id="i_kasus" name="i_kasus">
-                                        <option value="-Pilih-">-Pilih-</option>
+                                    <label for="select-1">Kategori Laporan</label>
+                                    <select class="form-control btn-square" id="i_kasus" name="i_kasus" >
+                                      <option value="-Pilih-">-Pilih-</option>
                                     </select>
                                     <!-- <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
@@ -107,6 +107,14 @@
                                     <input class="form-control btn-square" type="hidden" id="i_lng" name="i_lng" placeholder="Longtitude">
                                     <p class="help-block">Wajib Diisi (*)</p> -->
                                     </div>
+                                    <hr>
+                                    <label for="select-1">Input Pengaduan</label>
+                                    <select class="form-control btn-square" id="i_peng" name="i_peng">
+                                        <option value="-Pilih-">-Pilih-</option>
+                                        <option value="cctv">CCTV</option>
+                                        <option value="masyarakat">Masyarakat</option>
+                                        <option value="sosmed">Sosmed</option>
+                                    </select>
                                     <hr>
                                     <div class="mb-3 draggable">
                                     <label for="i_alamat">Alamat&Detail (*)</label>

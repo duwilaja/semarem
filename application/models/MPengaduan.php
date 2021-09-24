@@ -169,8 +169,11 @@ class MPengaduan extends CI_Model{
     public function insert_pengaduan()
     {
         date_default_timezone_set("Asia/Jakarta");
+        // var_dump($this->input->post('pengaduan'));
+        // die();
         $data = array(
             'kategori_peng_id' => $this->input->post('kasus'),
+            'input_peng' => $this->input->post('pengaduan'),
             'nama_pelapor' => $this->input->post('pelapor'),
             'telp' => $this->input->post('nohp'),
             'keterangan' => $this->input->post('ket'),
@@ -182,8 +185,9 @@ class MPengaduan extends CI_Model{
             'ctdby' => $this->session->userdata('id'),
             'status' => 0
         );
-        $this->db->insert('pengaduan',$data);
-        return ($this->db->affected_rows() != 1) ? false : true;
+        var_dump($data);
+        // $this->db->insert('pengaduan',$data);
+        // return ($this->db->affected_rows() != 1) ? false : true;
     }
 
     public function in($arr=[])

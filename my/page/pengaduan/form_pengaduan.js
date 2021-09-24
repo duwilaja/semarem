@@ -115,6 +115,7 @@ function inp_pengaduan() {
     var i_lat = $("#i_lat").val();
     var i_lng = $("#i_lng").val();
     var i_pelapor = $("#i_pelapor").val();
+    var i_peng = $("#i_peng").val();
     var i_nohp = $("#i_nohp").val();
     var i_ket = $("#i_ket").val();
     var postData = {
@@ -123,11 +124,12 @@ function inp_pengaduan() {
         "lat": i_lat,
         "lng": i_lng,
         "pelapor": i_pelapor,
+        "pengaduan": i_peng,
         "nohp": i_nohp,
         "ket": i_ket
     };
    
-    if (i_kasus == "" || i_alamat == "" || i_lat =="" ||  i_lng == "" ||i_pelapor == "" || i_nohp == "" ||i_ket == "" ) {
+    if (i_kasus == "" || i_alamat == "" || i_lat =="" ||  i_lng == "" ||i_pelapor == "" ||i_peng == ""  || i_nohp == "" ||i_ket == "" ) {
         notif_peringatan(title='Input Pengaduan Gagal!', message='Silahkan Lengkapi Field Yang Masih Kosong',type='danger')
     }else{
         swal({

@@ -1,16 +1,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 col-xl-3 col-lg-6">
-        <div class="card o-hidden">
-            <div class="bg-secondary b-r-4 card-body" data-toggle="tooltip" data-placement="top" title="Total Pengaduan Masuk">
-            <div class="media static-top-widget">
-                <div class="align-self-center text-center"><i data-feather="inbox"></i></div>
-                <div class="media-body"><span class="m-0">Masuk</span>
-                <h4 class="mb-0 counter" id="masuk"></h4><i class="icon-bg" data-feather="inbox"></i>
-                </div>
-            </div>
-            </div>
-        </div>
+        <a rel="stylesheet" href="<?= site_url('Pengaduan/list_pengaduan')?>">
+          <div class="card o-hidden">
+              <div class="bg-secondary b-r-4 card-body" data-toggle="tooltip" data-placement="top" title="Total Pengaduan Masuk">
+              <div class="media static-top-widget">
+                  <div class="align-self-center text-center"><i data-feather="inbox"></i></div>
+                  <div class="media-body"><span class="m-0">Masuk</span>
+                  <h4 class="mb-0 counter" id="masuk"></h4><i class="icon-bg" data-feather="inbox"></i>
+                  </div>
+              </div>
+              </div>
+          </div>
+        </a>
         </div>
         <div class="col-sm-6 col-xl-3 col-lg-6">
         <div class="card o-hidden">
@@ -120,7 +122,7 @@
                         <div class="row border-top m-0">
                           <div class="col-xl-4 ps-0 col-md-6 col-sm-6">
                             <div class="media p-0">
-                              <div class="media-left"><i class="icofont icofont-crown"></i></div>
+                              <a rel="stylesheet" href="<?= base_url('Pengaduan/list_pengaduan');?>"><div class="media-left"><i class="icofont icofont-crown"></i></div></a> 
                               <div class="media-body">
                                 <h6>Solo Destination</h6>
                                 <p id="vend_1"></p>
@@ -138,7 +140,7 @@
                           </div>
                           <div class="col-xl-3 col-md-12 pe-0">
                             <div class="media p-0">
-                              <div class="media-left"><i class="icofont icofont-cur-dollar"></i></div>
+                              <a rel="stylesheet" href="<?= base_url('Form/form_pengaduan');?>"><div class="media-left"><i class="icofont icofont-ui-user"></i></div></a>
                               <div class="media-body">
                                 <h6>Backoffice</h6>
                                 <p id="vend_0"></p>
