@@ -600,14 +600,14 @@ class Api extends CI_Controller {
                 try {   
                   if ($this->cek_token()) {
                         $q = $this->mt->task_assign([
-                            'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.nama_pelapor,p.telp,p.mail,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status',
+                            'ta.id,ta.task_id,ta.pengaduan_id,ta.petugas_id,p.lat,p.lng,p.judul,p.nama_pelapor,p.telp,p.mail,p.alamat,p.ctddate,p.ctdtime,ta.pengaduan_id,ta.status,ta.task_kategori_id',
                             ['ta.id' => $this->input->post('task_assign_id'),'ta.petugas_id' => $this->input->post('petugas_id')],
                             ['ta.status' => ['4','5']]
                         ]);
                         if($q->num_rows() > 0){
                                 $data = $q->row();
                                 $data->tanggal = tgl_indo($data->ctddate);
-
+                                $data->task_kategori = $this->mt->task_kategori('task_kategori',$data->task_kategori_id,true);
                                 $data->status_name = setStatusPengaduan($data->status);
                                 $data->lat = (float)$data->lat;
                                 $data->lng = (float)$data->lng;

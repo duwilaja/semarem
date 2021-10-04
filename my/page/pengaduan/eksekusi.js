@@ -297,6 +297,31 @@ function filter_instansi(v) {
 	});
 }
 
+// update assign ptugas
+function update_peng_assign(status, task_assign_id){
+  $.ajax({
+    type: "post",
+    url: "../backend/Api_pengaduan/update_peng_assign",
+    data : {
+      'status' : status,
+      'task_assign_id' : task_assign_id 
+    },
+    dataType: "json",
+    success: function (r) {
+          if(r.status){
+              swal({
+                  title:'Berhasil',
+                  text:r.msg,
+                  icon:'success'
+                });
+
+                list_assign();
+                pengaduan();
+                petugas();
+          }
+      }
+  });
+}
   //Detail detail
   function detail(type,task_assign_id,petugas_id) {
     $('#detail').modal('show'); // show modal
@@ -477,7 +502,15 @@ function filter_instansi(v) {
                     <p>:</p>
                   </div>
                   <div class="col-6">
-                    <p>${v.status_static}</p>
+                      <select name="status" onchange="update_peng_assign(this.value,${task_assign_id})" class="form-control" id="status_petugas" required>
+                          <option value="">--Pilih Status--</option>
+                          <option ${v.status == 0 ? 'selected' : ''} value="0">Menuggu Konfirmasi</option>
+                          <option ${v.status == 1 ? 'selected' : ''} value="1">Sudah dikonfirmasi</option>
+                          <option ${v.status == 2 ? 'selected' : ''} value="2">Tiba dilokasi</option>
+                          <option ${v.status == 3 ? 'selected' : ''} value="3">Ditangani</option>
+                          <option ${v.status == 4 ? 'selected' : ''} value="4">Selesai</option>
+                          <option ${v.status == 5 ? 'selected' : ''} value="5">Batal</option>
+                      </select>
                   </div>
                 </div>
               `);
@@ -505,7 +538,7 @@ function filter_instansi(v) {
                   <p>:</p>
                 </div>
                 <div class="col-6">
-                  <p class="badge badge-secondary">${r.data.judul}</p>
+                  <p class="badge badge-secondary">${r.data.task_kategori}</p>
                 </div>
               </div>
               <span class="text-muted">

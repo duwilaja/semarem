@@ -73,7 +73,7 @@ class MPengaduan extends CI_Model{
           // Set searchable column fields
           $CI->dt->column_search = ['judul','nama_pelapor'];
           // Set select column fields
-          $CI->dt->select = 'p.id,judul,kategori_peng_id,nama_pelapor,p.status,p.ctddate,p.keterangan,p.kategori_peng_static';
+          $CI->dt->select = 'p.id,judul,kategori_peng_id,nama_pelapor,p.status,p.ctddate,p.keterangan,p.kategori_peng_static,p.input_peng';
           // Set default order
           $CI->dt->order = ['p.id' => 'desc'];
 
@@ -109,6 +109,7 @@ class MPengaduan extends CI_Model{
           $i = @$this->input->post('start');
           foreach ($dataTabel as $dt) {
               $i++;
+              // untuk menampilkan data di datatable, harus berurut dengan data tablenya
               $data[] = array(
                   $i,
                   $this->set_dt_kasus($dt->judul,$dt->kategori_peng_id,$dt->kategori_peng_static),
@@ -116,6 +117,7 @@ class MPengaduan extends CI_Model{
                   $dt->nama_pelapor,
                   setStatusPengaduan2($dt->status),
                   tgl_indo($dt->ctddate),
+                  $dt->input_peng,
                   $this->change_button($dt)
               );
           }
@@ -135,7 +137,10 @@ class MPengaduan extends CI_Model{
     private function change_button($dt)
     {
         if ($dt->status == 3) {
-            return '<a href="'.site_url('Pengaduan/eksekusi?id='.$dt->id).'" class="btn btn-sm btn-secondary" type="button"  data-original-title="btn btn-danger btn-xs" title="Detail Pengaduan">Detail</a>';
+            // return '<a href="'.site_url('Pengaduan/eksekusi?id='.$dt->id).'" class="btn btn-sm btn-secondary" type="button"  data-original-title="btn btn-danger btn-xs" title="Detail Pengaduan">Detail</a>';
+            
+            return '<a href="'.site_url('Pengaduan/detail').'" class="btn btn-sm btn-secondary" type="button"  data-original-title="btn btn-danger btn-xs" title="Detail Pengaduan">Detail</a>';
+
         }else{
             return '<a class="btn btn-sm btn-info" type="button" onclick="eksekusi('.$dt->id.')" data-original-title="btn btn-danger btn-xs" title="Eksekusi Pengaduan">Eksekusi</a>';
         }
@@ -230,4 +235,79 @@ class MPengaduan extends CI_Model{
         return $bool;
     }
 
+
+    public function dt_detail_peng($filter=[])
+    {
+          // Definisi
+          $condition = [];
+          $data = [];
+  
+          $CI = &get_instance();
+          $CI->load->model('DataTable', 'dt');
+          // Set table name
+          $CI->dt->table = 'task_assign as ta';
+          // Set orderable column fields
+          $CI->dt->column_order = [null,'nama_petugas',null,'assign_from',null,null];
+          // Set searchable column fields
+          $CI->dt->column_search = ['nama_petugas'];
+          // Set select column fields
+          $CI->dt->select = 'p.nama_petugas, ta.status, ta.assign_from, ta.id, ta.petugas_id,ta.ctddate';
+          // Set default order
+          $CI->dt->order = ['ta.id' => 'ASC'];
+
+          // if (isset($filter['kategori']) && $filter['kategori'] != '' ) {
+          //       $con = ['where_in','kategori_peng_id',$filter['kategori']];
+          //       array_push($condition,$con);              
+          // }
+          
+          // if (isset($filter['start_date']) && isset($filter['end_date'])) {
+          //   $con = ['where','ctddate >=',$filter['start_date']];
+          //   array_push($condition,$con);   
+            
+          //   $con = ['where','ctddate <=',$filter['end_date']];
+          //   array_push($condition,$con);   
+          // }
+
+          // if (isset($filter['status']) && $filter['status'] != '' ) {
+          //   $con = ['where_in','status',$filter['status']];
+          //   array_push($condition,$con);              
+          // }
+
+          // if (isset($filter['operator']) && $filter['operator'] != '' ) {
+          //   $con = ['where','operator',$filter['operator']];
+          //   array_push($condition,$con);              
+          // }
+
+          //join table
+          $con = ['join','petugas p','p.id = ta.petugas_id','inner'];
+          array_push($condition,$con);
+
+          // Fetch member's records
+          $dataTabel = $this->dt->getRows(@$_POST, $condition);
+  
+          $i = @$this->input->post('start');
+          foreach ($dataTabel as $dt) {
+              $i++;
+              $data[] = array(
+                  $i,
+                  $dt->nama_petugas,
+                  // ($dt->activity == 0) ? 'Siap Bertugas' : (($dt->activity == 1) ? 'Istirahat' : (($dt->activity == 2) ? 'Sedang Menerima Tugas' : '')),
+                  ($dt->status == 0 ? 'Menuggu Konfirmasi' : ($dt->status == 1 ? 'Sudah di konfirmasi': ($dt->status == 2 ? 'Tiba dilokasi' : ($dt->status == 3 ? 'ditangani' : 'Selesai')))),
+                  $dt->assign_from,
+                  tgl_indo($dt->ctddate),
+                  $dt->id,
+                  '<button class="btn btn-primary" onclick="modal_detail('.$dt->id.')">Detail</button>'
+              );
+          }
+  
+          $output = array(
+              "draw" => @$this->input->post('draw'),
+              "recordsTotal" => $this->dt->countAll($condition),
+              "recordsFiltered" => $this->dt->countFiltered(@$this->input->post(), $condition),
+              "data" => $data,
+          );
+  
+          // Output to JSON format
+          return json_encode($output);
+    }
 }

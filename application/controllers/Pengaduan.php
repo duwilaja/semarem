@@ -9,6 +9,7 @@ class Pengaduan extends CI_Controller {
         if (!$this->session->userdata('id')) {
             redirect('Auth/login');
 		}
+    $this->load->model('MPengaduan','mp');
 	}
 
     public function list_pengaduan()
@@ -36,4 +37,43 @@ class Pengaduan extends CI_Controller {
         }
     }
 
+    public function detail()
+    {
+        $id = $this->input->get('id');
+        if ($id == '') {
+            $d = [
+                'title' => 'Detail pengaduan',
+                'header' => 'Detail',
+                'js' => 'page/pengaduan/detail.js',
+                'link_view' => 'pengaduan/detail'
+            ];
+            $this->load->view('_main', $d);
+        }
+    }
+
+    public function dt_detail_peng()
+    {
+      echo $this->mp->dt_detail_peng();
+    }
+    
+    public function api_detail_petugas($ta_id='')
+    {
+       
+      $this->db->select('ptgs.nama_petugas, ta.status, assign_from, ta.id, ta.petugas_id,ta.ctddate');
+ 
+      $this->db->join('pengaduan p', 'p.id = ta.pengaduan_id', 'inner'); 
+      $this->db->join('petugas ptgs', 'ptgs.id = ta.petugas_id', 'inner');   
+
+      $this->db->where('ta.id',$ta_id);
+      $q = $this->db->get('task_assign ta');
+      echo json_encode($q->row());
+    }
+
+    public function api_detail_gambar_petugas($id_gambar='')
+    {
+      $this->db->select('id');
+      $this->db->where('id',$id_gambar);
+      $q = $this->db->get('task_img');
+      echo json_encode($q->row());
+    }
 }

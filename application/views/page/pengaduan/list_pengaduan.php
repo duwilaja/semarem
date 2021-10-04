@@ -44,6 +44,7 @@
                   <th>Pelapor</th>
                   <th>Status</th>
                   <th>Tanggal</th>
+                  <th>Pengaduan</th>  <!-- (cctv, masyarakat, sosmed)-->
                   <th>Action</th>
                 </tr>
               </thead>

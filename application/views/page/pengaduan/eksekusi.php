@@ -93,7 +93,7 @@
                                         <li class="list-inline-item"><a href="#"><i class="icon-clip"></i></a></li>
                                         <li class="list-inline-item"><a href="#"><i class="icon-video-camera"></i></a></li> -->
                                         <li class="list-inline-item me-4"><a href="#" data-bs-toggle="modal" data-bs-target="#updateModal" class="btn btn-warning">Update</a></li>
-                                        <li class="list-inline-item me-4"><a href="#" onclick="list_detail()"><i class="icon-menu"></i></a></li>
+                                        <li class="list-inline-item me-4"><a href="#" onclick="list_detail()"><button class="btn btn-danger">DETAIL</button></a></li>
                                     </ul>
                                 </div>
                                 <!-- chat-header end-->
@@ -135,7 +135,7 @@
                                 <li class="nav-item"><a class="nav-link" id="profile-info-tab" data-bs-toggle="tab" href="#info-profile" role="tab" aria-selected="false">STATUS</a>
                                     <div class="material-border"></div>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" id="contact-info-tab" data-bs-toggle="tab" href="#info-contact" role="tab" aria-selected="false">DETAIL</a>
+                                <li class="nav-item"><a class="nav-link" id="contact-info-tab" data-bs-toggle="tab" href="#info-contact" role="tab" aria-selected="false">INFO</a>
                                     <div class="material-border"></div>
                                 </li>
                             </ul>
@@ -194,8 +194,10 @@
         <form action="" method="post" id="form_update">
         <input type="hidden" name="pengaduan_id" id="" value="<?=$this->input->get('id');?>">
             <div class="mb-3">
+                <!-- Untuk update tiket -->
                 <label for="Status" class="form-label">Status</label>
-                <select name="status" class="form-control" id="ustatus" required>
+                <!-- <select name="status" class="form-control" id="ustatus" required> -->
+                <select name="status" class="form-control" id="status" required>
                     <option value="">--Pilih Status--</option>
                     <option value="0">Menunggu Konfirmasi</option>
                     <option value="1">Sudah Dikonfirmasi</option>

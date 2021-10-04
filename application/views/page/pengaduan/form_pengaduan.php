@@ -112,7 +112,7 @@
                                     <select class="form-control btn-square" id="i_peng" name="i_peng">
                                         <option value="-Pilih-">-Pilih-</option>
                                         <option value="cctv">CCTV</option>
-                                        <option value="masyarakat">Masyarakat</option>
+                                        <option value="masyarakat">Masyarakat</option>  
                                         <option value="sosmed">Sosmed</option>
                                     </select>
                                     <hr>

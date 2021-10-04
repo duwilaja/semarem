@@ -92,6 +92,7 @@ class MTask extends CI_Model{
         $this->db->select($select);
         $this->db->join('petugas p', 'p.id = ta.petugas_id', 'left');
         $this->db->join('instansi i', 'i.id = p.instansi_id', 'left');
+        $this->db->join('task_kategori tk', 'i.id = p.instansi_id', 'left');
         $q = $this->db->get_where('task_assign ta', $where);
         return $q;
     }
@@ -224,7 +225,7 @@ class MTask extends CI_Model{
 
         return $q;
     }
-
+    
     public function lama_penanganan($task_assign_id='')
     {
         $rsp = [

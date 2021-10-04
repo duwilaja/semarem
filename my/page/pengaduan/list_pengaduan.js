@@ -23,7 +23,8 @@ function get_kategori_pengaduan() {
     get('../backend/Api_kategori/get')
     .then(data => {
         data.forEach(e => {
-            $('#f_kategori_peng').append('<option value="'+e.id+'">'+e.peng_kategori+'</option>');
+            // $('#f_kategori_peng').append('<option selected="selected">Kecelakaan</option>');
+            $('#f_kategori_peng').append('<option '+(e.priority == '1' ? 'selected' : '')+'  value="'+e.id+'">'+e.peng_kategori+'</option>');
         });
     })
 }
@@ -97,6 +98,7 @@ function dt() {
             "data" : {
                 'f_status' : $('#f_status').val(),
                 'f_kategori_peng' : $('#f_kategori_peng').val(),
+                'i_peng' : $('#i_peng').val(),
                 'f_date_interval' : $('#f_date_interval').val(),
                 'operator' : $('#operator').val()
             }

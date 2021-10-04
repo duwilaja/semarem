@@ -69,6 +69,7 @@ function add() {
             r.forEach(v => {
                 $('#nama_petugas').val(v.nama_petugas);
                 $('#hp').val(v.hp);
+                $('#activity').val(v.activity);
                 get_instansi(v.instansi_id,'#e_instansi_id');
                 get_unit(v.instansi_id,v.unit_id,'#e_unit_id');
             });
@@ -76,6 +77,10 @@ function add() {
                 dropdownParent: $('#edit')
             });
             $('#e_unit_id').select2({
+                dropdownParent: $('#edit')
+            });
+            $('#activity').select2({
+                // status petugas
                 dropdownParent: $('#edit')
             });
         }

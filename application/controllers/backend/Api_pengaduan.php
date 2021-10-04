@@ -16,6 +16,7 @@ class Api_pengaduan extends CI_Controller {
         $date = explode('-',$this->input->post('f_date_interval'));
         $filter = [
             'kategori' => $this->input->post('f_kategori_peng'),
+            'input_peng' => $this->input->post('i_peng'),
             'start_date' => date("Y-m-d", strtotime($date[0])),
             'end_date' => date("Y-m-d", strtotime($date[1])),
             'status' => $this->input->post('f_status'),
@@ -189,6 +190,27 @@ class Api_pengaduan extends CI_Controller {
         echo json_encode($rsp);
     }
 
+    public function update_peng_assign()
+    {
+      $rsp = [
+        'status' => false,
+        'msg' => 'Gagal edit data'
+      ];
+
+      $status = $this->input->post('status');
+      $task_assign_id = $this->input->post('task_assign_id');
+      
+      $q = $this->db->update('task_assign', ['status' => $status],['id' => $task_assign_id]);
+      
+      
+      $cek = $this->db->affected_rows();
+      if ($cek > 0) {
+        $rsp['msg'] = "Berhasil";
+        $rsp['status'] = true;
+      }
+
+      echo json_encode($rsp);
+    }
     public function peng_assign_where()
     { 
         $id = $this->input->get('id');

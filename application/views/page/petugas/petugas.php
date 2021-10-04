@@ -129,6 +129,17 @@
                   </select>
                 </div>
             </div>
+            <div class="row">
+              <div class="col-md-6 mb3">
+                <label for="instansi" class="form-label">Activity<sup class="text-danger">*</sup></label>
+                <select name="activity" id="activity" class="form-control" required>
+                    <option value="">--Activity--</option>
+                    <option value="0">Siap bertugas</option>                    
+                    <option value="1">Istirahat</option>                    
+                    <option value="2">Sedang menerima tugas</option>                    
+                </select>
+              </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button>

@@ -153,6 +153,7 @@ class Api_petugas extends CI_Controller {
         }
     }
 
+    // Untuk edit petugas
     public function up()
     {
         $this->header();
@@ -173,12 +174,15 @@ class Api_petugas extends CI_Controller {
                         $hp = $this->input->post('hp');
                         $instansi_id = $this->input->post('instansi_id');
                         $unit_id = $this->input->post('unit_id');
+                        // status activity petugas
+                        $activity = $this->input->post('activity');
 
                         $obj = [
                             'nama_petugas' => $nama_petugas,
                             'hp' => $hp,
                             'instansi_id' => $instansi_id,
                             'unit_id' => $unit_id,
+                            'activity' => $activity,
                         ];
                         $up = $this->mp->up($obj,['id' => $id]);
                         if($up){
