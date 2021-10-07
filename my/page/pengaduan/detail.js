@@ -1,4 +1,5 @@
 // A $( document ).ready() block.
+const pengaduan_id = $('#pengaduan_id').val()
 $( document ).ready(function() {
   // $('#f_status').select2({
   //     placeholder: "Select Status",
@@ -15,6 +16,7 @@ $( document ).ready(function() {
   // });
   // get_kategori_pengaduan();
   // get_status_pengaduan();
+  set_detail();
   dt();
 });
 
@@ -79,6 +81,8 @@ $('#form-filter').submit(function (e) {
   dt();
 });
 
+
+// ====== detail keterangan pengaduan (Pengaduan/detail/ ) ini data tablenya =======
 function dt() {
   $('#tabel').DataTable({
       // Processing indicator
@@ -93,11 +97,12 @@ function dt() {
       "order": [],
       // Load data from an Ajax source
       "ajax": {
-          "url": 'dt_detail_peng',
+          "url": '../dt_detail_peng',
           "type": "POST",
           "data" : {
               'f_status' : $('#f_status').val(),
               'f_kategori_peng' : $('#f_kategori_peng').val(),
+              'pengaduan_id' : pengaduan_id,
               'f_date_interval' : $('#f_date_interval').val(),
               'operator' : $('#operator').val()
           }
@@ -109,6 +114,8 @@ function dt() {
       }]
   });
 }
+// ===================================================================================
+
 
 // function eksekusi(id='') {
 //   swal({
@@ -133,22 +140,124 @@ function modal_pengaduan() {
   });
 }
 
-function modal_detail(ta_id)
-{
-    // $('#form_edit')[0].reset(); // reset form on modals
+// ================== Modal Detail Pengaduan/detail/ =================================
+function modal_detail(task_assign_id,petugas_id){
     $('#detail').modal('show'); // show bootstrap modal
-    // $('#id').val(task_assign_id,petugas_id);
-    $.ajax({
-        type: "GET",
-        url: "api_detail_petugas/"+ta_id,
+    $('#content-detail').html('');
+  $.ajax({
+        type: "POST",
+        url: "../../Api/detail_task_history_petugas/"+pengaduan_id,
+        headers: {"token": "5b3dac76aaee24d14185cbc3d010fd20"},
+        data : {
+          petugas_id : petugas_id,
+          task_assign_id : task_assign_id
+        },
         dataType: "json",
         success: function (r) {
-          $('#nama_petugas').text(r.nama_petugas);
-          // foto bukti bertugas
-          
-          //  ...
-          $('#id').text(r.id);
-          $('#status').text((r.status == 0 ? 'Menunggu konfirmasi' : r.status == 1 ? 'Sudah konfirmasi' : r.status == 2 ? 'Tiba dilokasi' : r.status == 3 ? 'ditangani' : 'Selesai' ));
+          // console.log(r)
+          // document.getElementById("#judul_pengaduan").innerHTML = r.data.task_kategori;
+           $('#content-detail').append(`
+                  <div class="row">
+                    <div class="col-5">
+                      <span>Kategori</span>
+                    </div>
+                    <div class="col-1">
+                      <p>:</p>
+                    </div>
+                    <div class="col-6">
+                      <p class="badge badge-secondary">${r.data.task_kategori}</p>
+                    </div>
+                  </div>
+                  <span class="text-muted">
+                    <i class="fa fa-clock-o text-success"></i>&nbsp;&nbsp;${r.data.tanggal}
+                  </span>
+                  <br>
+                  <span class="text-muted">
+                    <i class="fa fa-map-marker text-success"></i>&nbsp;&nbsp;${r.data.alamat}
+                  </span>
+                  <br>
+                  <br>
+                  <div class="mb-3">
+                    <label for="Pelapor" class="form-label">Pelapor</label>
+                    <div class="p-2" style="background-color:#E0EE92;border-radius:10px;color:#000;">
+                    ${r.data.nama_pelapor}
+                      <br> ${r.data.telp}
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="buktiPelapor" class="form-label">Bukti Pelapor</label>
+                    <div class="row my-gallery gallery" id="list_img_pelapor">
+                 
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Penanganan" class="form-label">Penanganan</label>
+                    <div class="row">
+                      <div class="col-5">
+                        <span class="text-muted">Status</span>
+                      </div>
+                      <div class="col-1">
+                        <p>:</p>
+                      </div>
+                      <div class="col-6">
+                        <p class="badge badge-success">${r.data.status_name}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-5">
+                        <span class="text-muted">Lama Penanganan</span>
+                      </div>
+                      <div class="col-1">
+                        <p>:</p>
+                      </div>
+                      <div class="col-6">
+                        <p class="badge badge-warning">${r.data.penanganan.calc} menit</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="buktiPenanganan" class="form-label">Bukti Penanganan</label>
+                    <div class="row my-gallery gallery" id="list_img_pengaduan">
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Penyebab" class="form-label">Penyebab</label>
+                    <div style="padding:10px;border: solid 2px #EEE;color: #FFF;font-size: 12px;border-radius: 20px;">
+                    ${!r.data.task_done ? '' : r.data.task_done.penyebab}
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Tindakan" class="form-label">Tindakan</label>
+                    <div style="padding:10px;border: solid 2px #EEE;color: #FFF;font-size: 12px;border-radius: 20px;">
+                    ${!r.data.task_done ? '' : r.data.task_done.tindakan}
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Keterangan" class="form-label">Keterangan</label>
+                    <div style="padding:10px;border: solid 2px #EEE;color: #FFF;font-size: 12px;border-radius: 20px;">
+                    ${!r.data.task_done ? '' :  r.data.task_done.keterangan}
+                    </div>
+                  </div>
+            `);
         }
     });
 }
+// =======================================================================
+
+// ============ Keterangan di Detail Pengaduan ===========================
+function set_detail(){
+  $.ajax({
+    type: "GET",
+    url: "../detail_pengaduan/"+pengaduan_id,
+    headers: {"token": "5b3dac76aaee24d14185cbc3d010fd20"},
+    dataType: "json",
+      success: function (r) {
+        console.log(r);
+        $('#keterangan').text(r.keterangan);
+        $('#nama_pelapor').text(r.nama_pelapor);
+        // $('#mail').text(r.mail);
+        $('#telp').text(r.telp);
+      }
+  });
+}
+// =========================================================================

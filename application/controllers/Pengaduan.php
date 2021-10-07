@@ -43,7 +43,7 @@ class Pengaduan extends CI_Controller {
         if ($id == '') {
             $d = [
                 'title' => 'Detail pengaduan',
-                'header' => 'Detail',
+                'header' => 'Detail Pengaduan',
                 'js' => 'page/pengaduan/detail.js',
                 'link_view' => 'pengaduan/detail'
             ];
@@ -53,7 +53,7 @@ class Pengaduan extends CI_Controller {
 
     public function dt_detail_peng()
     {
-      echo $this->mp->dt_detail_peng();
+      echo $this->mp->dt_detail_pengaduan();
     }
     
     public function api_detail_petugas($ta_id='')
@@ -76,4 +76,14 @@ class Pengaduan extends CI_Controller {
       $q = $this->db->get('task_img');
       echo json_encode($q->row());
     }
+    
+    // ======== Keterangan detail pengaduan (Pengaduan/detail/) =====
+      public function detail_pengaduan($ta_id)
+      {
+        $this->db->select('keterangan,nama_pelapor,mail,telp');
+        $this->db->where('ta.id',$ta_id);
+        $q = $this->db->get('pengaduan ta');
+        echo json_encode($q->row());
+      }
+    // ==============================================================
 }

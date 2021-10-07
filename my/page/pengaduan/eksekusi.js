@@ -742,14 +742,13 @@ function pengaduan() {
 			$("#kategori_pengaduan").text(d.peng_kategori);
 			$("#nama_pelapor").text(d.nama_pelapor);
 			$("#task_id").text(d.task_id);
-			$("#keterangan_pengaduan").html(d.keterangan);
-
+			$("#keterangan_pengaduan").html(d.keterangan);  
       frame(
 				url_satupeta +
 					"?lokasi=" +
-					peng_lat +
+					d.lat +
 					"," +
-					peng_lng +
+					d.lng +
 					"&nama=" +
 					d.peng_kategori +
 					"&nopol="

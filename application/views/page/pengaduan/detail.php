@@ -3,39 +3,35 @@
   eksekusi di list pengaduan akan berubah 
   menjadi detail. Jika di klik akan ke halaman ini.
  --> 
+<!-- ==================== Untuk Pengaduan detail ================================== -->
+  <input type="hidden" id="pengaduan_id" value="<?= $this->uri->segment(3)?>"></input>
+<!-- ============================================================================== -->
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <!-- <div class="card-header">
-          <form action="javascript:void();" id="form-filter">
-              <div class="row g-3 select2-drpdwn">
-                  <div class="col-md-4">
-                      <label class="form-label" for="f_kategori_peng">Kategori</label>
-                      <select class="js-example-placeholder-multiple col-sm-12" id="f_kategori_peng" multiple="multiple">
-                      </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label" for="f_date_interval">Rentan Waktu</label>
-                    <input class="form-control" id="f_date_interval" type="text" name="f_date_interval" value="<?=date('Y/m/d').' - '.date('Y/m/d') ?>">
-                  </div>
-                  <div class="col-md-4">
-                      <label class="form-label" for="f_status">Status</label>
-                      <select class="js-example-placeholder-multiple col-sm-12" id="f_status" multiple="multiple">
-                        <option value="AL">Alabama</option>
-                        <option value="WY">Wyoming</option>
-                        <option value="WY">Coming</option>
-                        <option value="WY">Hanry Die</option>
-                        <option value="WY">John Doe</option>
-                      </select>
-                  </div>
-                  <div class="col-md-12">
-                    <button type="reset" class="btn btn-light">Reset</button>
-                    <button type="submit" class="btn btn-danger">Filter</button>
-                  </div>
-              </div>
-          </form>
-        </div> -->
+        <div class="card-header">
+          <!-- keterangan -->
+          <h5>Keterangan</h5>
+          <br>
+
+          <div class="row">
+            <div class="col">
+              <label>Nama Pelapor :<p id="nama_pelapor"></p></label>
+            </div>
+            <div class="col">
+              <label>Nomer telepon :<p id="telp"></p></label>
+            </div>
+            <div class="col">
+              <label>Keterangan Pengaduan :<p id="keterangan"></p> </label>
+            </div>
+            <!-- <div class="col">
+              <label>Mail :<p id="mail"></p></label>
+            </div> -->
+          </div>
+          
+        </div>
         <div class="card-body">
           <div class="table-responsive product-table">
             <table class="display" id="tabel">
@@ -94,7 +90,7 @@
 </div> -->
 
 <!-- Modal Detail petugas dari laporan yang di eksekusi operator(gambar bukti petugas yang menangani) -->
-<div class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -122,7 +118,6 @@
           </div>
           <div class="col-6">
             <p id="status"></p>
-            <!-- <p>Selesai</p> -->
           </div>
         </div>
         <div class="row">
@@ -133,16 +128,29 @@
             :
           </div>
           <div class="col-1">
-            <!-- bukti foto bertugas/ pengaduan/detail -->
             <div class="row my-gallery gallery" id="bukti_foto_bertugas">
               
             </div>
           </div>
           <div class="col-6">
-            <!-- <p id="id"></p> -->
-            <!-- <img src="" alt=""> -->
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Modal Detail-->
+<div class="modal fade" id="detail" tabindex="-1" aria-labelledby="detailLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailLabel">Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div id="content-detail">
+          </div>
       </div>
     </div>
   </div>
