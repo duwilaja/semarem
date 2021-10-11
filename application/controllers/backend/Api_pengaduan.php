@@ -312,7 +312,6 @@ class Api_pengaduan extends CI_Controller {
         
         $pengaduan_id = $this->input->post('pengaduan_id');
         $status = $this->input->post('status');
-
         $tw = $this->mt->task_where([
             'pengaduan_id' => $pengaduan_id
         ]);
@@ -321,9 +320,74 @@ class Api_pengaduan extends CI_Controller {
             
             $this->mp->up(['status' => $status],['id' => $pengaduan_id]);
             $this->db->update('task',['status' => $status],['pengaduan_id' => $pengaduan_id]);
-                $rsp['status'] = true;
-                $rsp['msg'] = "Berhasil update status";
+            $rsp['status'] = true;
+            $rsp['msg'] = "Berhasil update status";
+            $send = $this->send_message($status,$pengaduan_id);
+            $rsp['Whatsapp'] = $send;
+                
         }
         echo json_encode($rsp);
     } 
+
+    public function send_message($status='',$pengaduan_id='')
+    {
+        $get_pengaduan = $this->db->get_where('pengaduan',array('id'=>$pengaduan_id))->result();
+        $username ="";
+        $telepon = "";
+        $status = "";
+        foreach ($get_pengaduan as $key) {
+            $username = $key->nama_pelapor;
+            $telepon = $key->telp;
+            $status = $key->status;
+        }
+        if ($status == 0) {
+            $message = "Halo ".$username." Laporan Anda Sedang Di konfirmasi";
+        }   
+        if ($status == 1) {
+            $message = "Halo ".$username." Laporan Anda Sudah Di konfirmasi";
+        }
+        if ($status == 2) {
+            $message = "Halo ".$username." Laporan Anda Sedang Kami tangani";
+        }
+        if ($status == 3) {
+            $message = "Halo ".$username." Laporan Anda Telah Kami tangani";
+        }
+        if ($status == 4) {
+            $message = "Halo ".$username." Laporan Anda Telah Kami Tolak!";
+        }
+
+        if (!$this->session->userdata('id')) {
+            $data = [
+                'status_pesan' => 'gagal mengirim pesan',
+                'error' => 'session Tidak Valid',
+            ];
+        }else{
+            if ($telepon != "") {
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://app.ruangwa.id/api/send_message',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => 'token=E78TL6be6JYFIt3Zb7MMDGqbdcxxYZvjCH8F8eAC4s5kMUYQJo&number='.$telepon.'&message='.$message.'',
+                ));
+                $response = curl_exec($curl);    
+                curl_close($curl);
+                $data = [
+                    'status_pesan' => 'Berhasil mengirim pesan',
+                    'error' => 'Null',
+                ]; 
+            }else{
+                $data = [
+                    'status_pesan' => 'Gagal mengirim pesan',
+                    'error' => 'Nomor Telepon Tidak Ada/Terdaftar',
+                ]; 
+            }
+        }          
+        return $data;
+    }
 }
