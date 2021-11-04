@@ -69,6 +69,7 @@ function add() {
             r.forEach(v => {
                 $('#nama_petugas').val(v.nama_petugas);
                 $('#hp').val(v.hp);
+                $('#backoff').val(v.backoff);
                 $('#activity').val(v.activity);
                 get_instansi(v.instansi_id,'#e_instansi_id');
                 get_unit(v.instansi_id,v.unit_id,'#e_unit_id');
