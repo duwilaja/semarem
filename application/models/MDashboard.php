@@ -3,14 +3,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MDashboard extends CI_Model {
 
+	private function mywhere(){
+		if(!$this->session->userdata('instansi')){
+			return array();
+		}else{
+			$w=array(
+				"instansi_id" => $this->session->userdata('instansi')
+			);
+			return $w;
+		}
+	}
+	
     public function get_total($start='',$end='')
     {
-        // $get_masuk = $this->db->get_where('pengaduan',array('ctddate >=' => $start, 'ctddate <=' => $end))->();
-        $get_masuk =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->from("pengaduan")->count_all_results();
-        $get_konfirmasi =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 0) ->from("pengaduan")->count_all_results();
-        $get_proses =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 2) ->from("pengaduan")->count_all_results();
-        $get_selesai =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 3) ->from("pengaduan")->count_all_results();
-
+		$where=$this->mywhere();
+		if(count($where)==0){ //select all
+			// $get_masuk = $this->db->get_where('pengaduan',array('ctddate >=' => $start, 'ctddate <=' => $end))->();
+			$get_masuk =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->from("pengaduan")->count_all_results();
+			$get_konfirmasi =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 0) ->from("pengaduan")->count_all_results();
+			$get_proses =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 2) ->from("pengaduan")->count_all_results();
+			$get_selesai =  $this->db->where('ctddate >=',$start)->where('ctddate <=', $end)->where('status ', 3) ->from("pengaduan")->count_all_results();
+		}else{
+			// $get_masuk = $this->db->get_where('pengaduan',array('ctddate >=' => $start, 'ctddate <=' => $end))->();
+			$where = array_merge($where,
+				array('p.ctddate >=' => $start, 'p.ctddate <=' => $end)
+			);
+			$get_masuk = $this->db->distinct()->select('pengaduan_id')->where($where)->from("task_assign t")->join('pengaduan p','p.id=t.pengaduan_id')->join('petugas g','g.id=t.petugas_id')->count_all_results();
+			$get_konfirmasi = $this->db->distinct()->select('pengaduan_id')->where($where)->where('p.status ', 0)->from("task_assign t")->join('pengaduan p','p.id=t.pengaduan_id')->join('petugas g','g.id=t.petugas_id')->count_all_results();
+			$get_proses = $this->db->distinct()->select('pengaduan_id')->where($where)->where('p.status ', 2)->from("task_assign t")->join('pengaduan p','p.id=t.pengaduan_id')->join('petugas g','g.id=t.petugas_id')->count_all_results();
+			$get_selesai = $this->db->distinct()->select('pengaduan_id')->where($where)->where('p.status ', 3)->from("task_assign t")->join('pengaduan p','p.id=t.pengaduan_id')->join('petugas g','g.id=t.petugas_id')->count_all_results();
+		}
         $res_array = array(
             'masuk' => $get_masuk,
             'konfirmasi' => $get_konfirmasi,

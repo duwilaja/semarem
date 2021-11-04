@@ -54,7 +54,7 @@ class Api_petugas extends CI_Controller {
         }
 
         if ($id != '') {
-            $petugas = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit','p.instansi_id','p.unit_id'],['p.aktif' => 1,'p.id' => $id]])->result();
+            $petugas = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit','p.instansi_id','p.unit_id','backoff'],['p.aktif' => 1,'p.id' => $id]])->result();
         }else{
             $q = $this->mp->get([['p.id','lat','lng','nama_petugas','hp','activity','nama_instansi','unit'],['p.aktif' => 1]])->result();
             foreach ($q as $v => $k) {
@@ -176,6 +176,7 @@ class Api_petugas extends CI_Controller {
                         $unit_id = $this->input->post('unit_id');
                         // status activity petugas
                         $activity = $this->input->post('activity');
+						$backoff = $this->input->post('backoff');
 
                         $obj = [
                             'nama_petugas' => $nama_petugas,
@@ -183,6 +184,7 @@ class Api_petugas extends CI_Controller {
                             'instansi_id' => $instansi_id,
                             'unit_id' => $unit_id,
                             'activity' => $activity,
+							'backoff' => $backoff
                         ];
                         $up = $this->mp->up($obj,['id' => $id]);
                         if($up){

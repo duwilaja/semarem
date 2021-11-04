@@ -139,6 +139,13 @@
                     <option value="2">Sedang menerima tugas</option>                    
                 </select>
               </div>
+			  <div class="col-md-6 mb3">
+                <label for="instansi" class="form-label">Back Office?<sup class="text-danger">*</sup></label>
+                <select name="backoff" id="backoff" class="form-control" required>
+                    <option value="Y">Yes</option>                    
+                    <option value="N">No</option>                    
+                </select>
+              </div>
             </div>
         </div>
         <div class="modal-footer">
